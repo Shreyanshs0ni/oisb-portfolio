@@ -8,6 +8,9 @@
 // 3D Background
 export { ThreeBackground } from "./ThreeBackground";
 
+// Sections
+export { HeroSection } from "./HeroSection";
+
 // Export components here as they are created
 // export { Header } from "./Header";
 // export { Footer } from "./Footer";
