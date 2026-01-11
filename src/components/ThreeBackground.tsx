@@ -51,7 +51,7 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     const positions = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 10;     // x
+      positions[i] = (Math.random() - 0.5) * 10; // x
       positions[i + 1] = (Math.random() - 0.5) * 10; // y
       positions[i + 2] = (Math.random() - 0.5) * 10; // z
     }
@@ -62,7 +62,7 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     );
 
     const particlesMaterial = new THREE.PointsMaterial({
-      color: 0xffa500, // Orange accent
+      color: 0xff6d2e, // Orange accent
       size: 0.02,
       transparent: true,
       opacity: 0.6,
@@ -75,7 +75,7 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     // Create wireframe icosahedron (subtle geometric shape)
     const icoGeometry = new THREE.IcosahedronGeometry(1.5, 1);
     const icoMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffa500,
+      color: 0xff6d2e,
       wireframe: true,
       transparent: true,
       opacity: 0.15,
@@ -97,15 +97,25 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     // Create connecting lines (subtle grid effect)
     const linesGeometry = new THREE.BufferGeometry();
     const linePositions = new Float32Array([
-      -5, 0, -2, 5, 0, -2,  // horizontal line
-      0, -5, -2, 0, 5, -2,  // vertical line
+      -5,
+      0,
+      -2,
+      5,
+      0,
+      -2, // horizontal line
+      0,
+      -5,
+      -2,
+      0,
+      5,
+      -2, // vertical line
     ]);
     linesGeometry.setAttribute(
       "position",
       new THREE.BufferAttribute(linePositions, 3)
     );
     const linesMaterial = new THREE.LineBasicMaterial({
-      color: 0xffa500,
+      color: 0xff6d2e,
       transparent: true,
       opacity: 0.1,
     });
@@ -204,4 +214,3 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
 }
 
 export default ThreeBackground;
-

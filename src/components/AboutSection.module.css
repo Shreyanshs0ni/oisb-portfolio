@@ -203,8 +203,8 @@
   height: 100%;
   background: radial-gradient(
     circle,
-    rgba(255, 165, 0, 0.2) 0%,
-    rgba(255, 165, 0, 0.1) 40%,
+    rgba(255, 109, 46, 0.2) 0%,
+    rgba(255, 109, 46, 0.1) 40%,
     transparent 70%
   );
   z-index: 0;
@@ -270,7 +270,7 @@
   font-weight: 500;
   color: var(--accent);
   background: transparent;
-  border: 1px solid rgba(255, 165, 0, 0.4);
+  border: 1px solid rgba(255, 109, 46, 0.4);
   border-radius: 9999px;
   transition: all 0.25s ease;
   cursor: default;
@@ -281,7 +281,7 @@
   color: var(--black);
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 109, 46, 0.3);
 }
 
 /* === Stats Row === */

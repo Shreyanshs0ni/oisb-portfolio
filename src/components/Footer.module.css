@@ -40,7 +40,7 @@
 }
 
 .accent {
-  color: #FFA500;
+  color: #ff6d2e;
 }
 
 .tagline {
@@ -68,8 +68,8 @@
 }
 
 .socialLink:hover {
-  color: #FFA500;
-  border-color: #FFA500;
+  color: #ff6d2e;
+  border-color: #ff6d2e;
   transform: translateY(-2px);
 }
 
@@ -109,7 +109,7 @@
 
 .footerLink {
   font-size: 0.8125rem;
-  color: #FFA500;
+  color: #ff6d2e;
   text-decoration: none;
   transition: all 0.2s ease;
   padding: 0.25rem 0.5rem;
@@ -117,7 +117,7 @@
 }
 
 .footerLink:hover {
-  color: #FFA500;
+  color: #ff6d2e;
   opacity: 1;
 }
 
@@ -146,8 +146,8 @@
 }
 
 .backToTop:hover {
-  color: #FFA500;
-  border-color: #FFA500;
+  color: #ff6d2e;
+  border-color: #ff6d2e;
   transform: translateY(-50%) translateY(-2px);
 }
 
