@@ -5,6 +5,11 @@
  * Example: import { Header, Footer } from "@/components";
  */
 
+// Theme
+export { ThemeProvider, useTheme } from "./ThemeProvider";
+export { ThemeControls } from "./ThemeControls";
+export { ThemeWrapper } from "./ThemeWrapper";
+
 // 3D Background
 export { ThreeBackground } from "./ThreeBackground";
 

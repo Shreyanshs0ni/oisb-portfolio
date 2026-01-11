@@ -11,9 +11,10 @@
   align-items: center;
   justify-content: center;
   padding: 6rem 1.5rem;
-  background: var(--black);
+  background: var(--background);
   position: relative;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 /* Top border gradient */
@@ -59,7 +60,7 @@
 .heading {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--white);
+  color: var(--foreground);
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 }
@@ -203,8 +204,8 @@
   height: 100%;
   background: radial-gradient(
     circle,
-    rgba(255, 95, 31, 0.2) 0%,
-    rgba(255, 95, 31, 0.1) 40%,
+    var(--accent-glow) 0%,
+    var(--accent-glow) 40%,
     transparent 70%
   );
   z-index: 0;
@@ -233,7 +234,7 @@
 }
 
 .bioText strong {
-  color: var(--white);
+  color: var(--foreground);
   font-weight: 600;
 }
 
@@ -270,7 +271,7 @@
   font-weight: 500;
   color: var(--accent);
   background: transparent;
-  border: 1px solid rgba(255, 95, 31, 0.4);
+  border: 1px solid var(--border-strong);
   border-radius: 9999px;
   transition: all 0.25s ease;
   cursor: default;
@@ -278,10 +279,10 @@
 
 .tag:hover {
   background: var(--accent);
-  color: var(--black);
+  color: var(--background);
   border-color: var(--accent);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 95, 31, 0.3);
+  box-shadow: 0 4px 12px var(--accent-dim);
 }
 
 /* === Stats Row === */

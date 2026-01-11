@@ -7,9 +7,10 @@
   min-height: 100vh;
   padding: 8rem 2rem;
   position: relative;
-  background: var(--black);
+  background: var(--background);
   display: flex;
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
 .container {
@@ -33,15 +34,15 @@
   letter-spacing: 3px;
   margin-bottom: 1rem;
   padding: 0.5rem 1.25rem;
-  border: 1px solid rgba(255, 95, 31, 0.3);
+  border: 1px solid var(--border-visible);
   border-radius: 50px;
-  background: rgba(255, 95, 31, 0.05);
+  background: var(--card-overlay);
 }
 
 .heading {
   font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  color: var(--white);
+  color: var(--foreground);
   margin: 0 0 1.5rem;
   line-height: 1.1;
 }
@@ -92,7 +93,7 @@
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--white);
+  color: var(--foreground);
   margin-bottom: 0.5rem;
   text-transform: none;
   letter-spacing: 0.5px;
@@ -107,9 +108,9 @@
   padding: 1rem 1.25rem;
   font-size: 1rem;
   font-family: inherit;
-  color: var(--white);
+  color: var(--foreground);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--border-visible);
   border-radius: 8px;
   outline: none;
   transition: all 0.3s ease;
@@ -117,20 +118,20 @@
 
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-subtle);
 }
 
 .input:hover,
 .textarea:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.02);
+  border-color: var(--border-strong);
+  background: var(--card-bg-hover);
 }
 
 .input:focus,
 .textarea:focus {
   border-color: var(--accent);
-  background: rgba(255, 95, 31, 0.02);
-  box-shadow: 0 0 0 3px rgba(255, 95, 31, 0.15);
+  background: var(--card-bg-hover);
+  box-shadow: 0 0 0 3px var(--glow-color);
 }
 
 .textarea {
@@ -166,7 +167,7 @@
   font-size: 1rem;
   font-weight: 600;
   font-family: inherit;
-  color: var(--black);
+  color: var(--background);
   background: var(--accent);
   border: 2px solid var(--accent);
   border-radius: 8px;
@@ -188,7 +189,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    var(--shimmer-color),
     transparent
   );
   transition: left 0.5s ease;
@@ -200,7 +201,7 @@
 
 .submitBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 95, 31, 0.3);
+  box-shadow: 0 10px 30px var(--accent-dim);
 }
 
 .submitBtn:active {
@@ -213,7 +214,7 @@
 }
 
 .submitBtn.submitting {
-  background: rgba(255, 95, 31, 0.5);
+  background: var(--text-muted);
   pointer-events: none;
 }
 
@@ -226,8 +227,8 @@
 .spinner {
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-top-color: var(--black);
+  border: 2px solid var(--border-subtle);
+  border-top-color: var(--background);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -248,7 +249,7 @@
 .infoCard {
   padding: 2rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
   position: relative;
   overflow: hidden;
@@ -267,7 +268,7 @@
 .infoTitle {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--white);
+  color: var(--foreground);
   margin: 0 0 1rem;
 }
 
@@ -314,14 +315,14 @@
 .socialSection {
   padding: 1.5rem 2rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
 }
 
 .socialTitle {
   font-size: 0.75rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-subtle);
   text-transform: uppercase;
   letter-spacing: 3px;
   margin: 0 0 1.25rem;
@@ -341,9 +342,9 @@
   flex: 1;
   max-width: 56px;
   height: 50px;
-  color: var(--white);
+  color: var(--foreground);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-visible);
   border-radius: 10px;
   transition: all 0.3s ease;
   will-change: transform;
@@ -354,7 +355,7 @@
   background: transparent;
   border-color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 95, 31, 0.2);
+  box-shadow: 0 8px 20px var(--glow-color);
 }
 
 .socialLink svg {
@@ -384,7 +385,7 @@
 .patternDot {
   width: 8px;
   height: 8px;
-  background: rgba(255, 95, 31, 0.2);
+  background: var(--border-visible);
   border-radius: 50%;
   transition: all 0.3s ease;
 }
@@ -399,11 +400,11 @@
 
 @keyframes dotPulse {
   0%, 100% {
-    background: rgba(255, 95, 31, 0.2);
+    background: var(--border-visible);
     transform: scale(1);
   }
   50% {
-    background: rgba(255, 95, 31, 0.5);
+    background: var(--text-subtle);
     transform: scale(1.3);
   }
 }

@@ -138,10 +138,18 @@ export function HeroSection() {
         delay: 2, // Start after intro animation
       });
 
-      // Pulse glow effect on name (continuous)
+      // Pulse glow effect on name (continuous) - uses CSS custom properties
+      // The effect will use the current accent color via CSS variables
+      const computedStyle = getComputedStyle(document.documentElement);
+      const accentDim =
+        computedStyle.getPropertyValue("--accent-dim").trim() ||
+        "rgba(255, 255, 255, 0.6)";
+      const accentGlow =
+        computedStyle.getPropertyValue("--accent-glow").trim() ||
+        "rgba(255, 255, 255, 0.15)";
+
       gsap.to(nameRef.current, {
-        textShadow:
-          "0 0 30px rgba(255, 95, 31, 0.6), 0 0 60px rgba(255, 95, 31, 0.3)",
+        textShadow: `0 0 30px ${accentDim}, 0 0 60px ${accentGlow}`,
         duration: 1.5,
         ease: "sine.inOut",
         yoyo: true,

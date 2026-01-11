@@ -19,7 +19,7 @@ const projects = [
       "A modern web application built with React and Node.js featuring real-time data synchronization.",
     tags: ["React", "Node.js", "Socket.io"],
     image: "/projects/project-1.svg",
-    color: "#FF5F1F",
+    color: "#FFFFFF",
     link: "#",
   },
   {
@@ -169,10 +169,12 @@ function ProjectCard({ project }: ProjectCardProps) {
       });
     }
 
-    // Title color reset
+    // Title color reset - uses CSS variable
     if (title) {
+      const computedStyle = getComputedStyle(document.documentElement);
+      const foregroundColor = computedStyle.getPropertyValue('--foreground').trim() || '#ffffff';
       gsap.to(title, {
-        color: "#ffffff",
+        color: foregroundColor,
         duration: 0.3,
         ease: "power2.out",
       });

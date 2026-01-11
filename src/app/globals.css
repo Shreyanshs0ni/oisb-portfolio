@@ -2,22 +2,25 @@
 
 /**
  * Ultra-Minimal Color Palette
- * Only three colors: Black, White, Orange
+ * Default: Pure Black & White
+ * Orange Mode: Adds orange accent
+ * Light Mode: Inverts colors
  */
 :root {
   /* Core Colors */
   --black: #000000;
   --white: #FFFFFF;
-  --accent: #FF5F1F;
+  --orange: #FF5F1F;
   
-  /* Semantic Mappings */
+  /* Default: Pure Black & White (accent is white) */
+  --accent: var(--white);
   --background: var(--black);
   --foreground: var(--white);
   --primary: var(--accent);
   
-  /* Accent Variations (for subtle effects) */
-  --accent-dim: rgba(255, 95, 31, 0.6);
-  --accent-glow: rgba(255, 95, 31, 0.15);
+  /* Accent Variations (white by default) */
+  --accent-dim: rgba(255, 255, 255, 0.6);
+  --accent-glow: rgba(255, 255, 255, 0.15);
   
   /* Text Variations */
   --text-primary: var(--white);
@@ -27,6 +30,56 @@
   /* Borders & Dividers */
   --border-subtle: rgba(255, 255, 255, 0.1);
   --border-visible: rgba(255, 255, 255, 0.2);
+  --border-strong: rgba(255, 255, 255, 0.4);
+  
+  /* Card Backgrounds */
+  --card-bg: linear-gradient(180deg, rgba(20, 20, 20, 1) 0%, rgba(10, 10, 10, 1) 100%);
+  --card-bg-hover: rgba(255, 255, 255, 0.03);
+  --card-overlay: rgba(255, 255, 255, 0.08);
+  
+  /* Shadows & Glows */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --glow-color: rgba(255, 255, 255, 0.15);
+  --shimmer-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Orange Mode: Adds orange accent */
+:root.orange-mode {
+  --accent: var(--orange);
+  --accent-dim: rgba(255, 95, 31, 0.6);
+  --accent-glow: rgba(255, 95, 31, 0.15);
+}
+
+/* Light Mode: Inverts colors */
+:root.light-mode {
+  --background: var(--white);
+  --foreground: var(--black);
+  --accent: var(--black);
+  --text-primary: var(--black);
+  --text-muted: rgba(0, 0, 0, 0.7);
+  --text-subtle: rgba(0, 0, 0, 0.4);
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --border-visible: rgba(0, 0, 0, 0.2);
+  --border-strong: rgba(0, 0, 0, 0.4);
+  --accent-dim: rgba(0, 0, 0, 0.6);
+  --accent-glow: rgba(0, 0, 0, 0.15);
+  
+  /* Inverted Card Backgrounds */
+  --card-bg: linear-gradient(180deg, rgba(245, 245, 245, 1) 0%, rgba(235, 235, 235, 1) 100%);
+  --card-bg-hover: rgba(0, 0, 0, 0.03);
+  --card-overlay: rgba(0, 0, 0, 0.08);
+  
+  /* Inverted Shadows & Glows */
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --glow-color: rgba(0, 0, 0, 0.1);
+  --shimmer-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Light Mode + Orange Mode */
+:root.light-mode.orange-mode {
+  --accent: var(--orange);
+  --accent-dim: rgba(255, 95, 31, 0.6);
+  --accent-glow: rgba(255, 95, 31, 0.15);
 }
 
 /* Tailwind Theme Integration */
@@ -61,7 +114,7 @@ html {
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sf-pro), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -77,6 +130,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1;
+  /* Smooth theme transition */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Main content wrapper for sticky footer */
@@ -129,12 +184,12 @@ a:hover {
  */
 ::selection {
   background: var(--accent);
-  color: var(--black);
+  color: var(--background);
 }
 
 ::-moz-selection {
   background: var(--accent);
-  color: var(--black);
+  color: var(--background);
 }
 
 /**
@@ -146,7 +201,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--black);
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -178,7 +233,7 @@ a:hover {
 /* Background Utilities */
 .bg-accent {
   background-color: var(--accent);
-  color: var(--black);
+  color: var(--background);
 }
 
 .bg-accent-glow {
@@ -229,7 +284,7 @@ a:hover {
 /* Button Base Styles */
 .btn-primary {
   background: var(--accent);
-  color: var(--black);
+  color: var(--background);
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -254,7 +309,7 @@ a:hover {
 
 .btn-outline:hover {
   background: var(--accent);
-  color: var(--black);
+  color: var(--background);
 }
 
 /* Focus States (Accessibility) */

@@ -13,8 +13,9 @@
   justify-content: center;
   padding: 2rem 1.5rem;
   position: relative;
-  background: var(--black);
+  background: var(--background);
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 /* Subtle gradient overlay for depth */
@@ -24,7 +25,7 @@
   inset: 0;
   background: radial-gradient(
     ellipse at 50% 50%,
-    rgba(255, 95, 31, 0.03) 0%,
+    var(--card-bg-hover) 0%,
     transparent 70%
   );
   pointer-events: none;
@@ -76,7 +77,7 @@
   display: block;
   font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 700;
-  color: var(--white);
+  color: var(--foreground);
   line-height: 1.1;
   letter-spacing: -0.02em;
   will-change: transform, opacity;
@@ -87,8 +88,8 @@
   position: relative;
   display: inline-block;
   text-shadow: 
-    0 0 20px rgba(255, 95, 31, 0.4),
-    0 0 40px rgba(255, 95, 31, 0.2);
+    0 0 20px var(--accent-dim),
+    0 0 40px var(--accent-glow);
   will-change: transform, opacity, filter, text-shadow;
 }
 
@@ -160,7 +161,7 @@
   padding: 1rem 2rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--black);
+  color: var(--background);
   background: var(--accent);
   border: 2px solid var(--accent);
   border-radius: 9999px;
@@ -182,7 +183,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    var(--shimmer-color),
     transparent
   );
   transition: left 0.5s ease;
@@ -192,8 +193,8 @@
 .btnPrimary:hover {
   transform: translateY(-2px);
   box-shadow: 
-    0 10px 30px rgba(255, 95, 31, 0.3),
-    0 0 20px rgba(255, 95, 31, 0.2);
+    0 10px 30px var(--accent-dim),
+    0 0 20px var(--accent-glow);
 }
 
 .btnPrimary:hover::before {
@@ -205,7 +206,7 @@
 }
 
 .btnPrimary:focus-visible {
-  outline: 2px solid var(--white);
+  outline: 2px solid var(--foreground);
   outline-offset: 4px;
 }
 
@@ -242,9 +243,9 @@
 }
 
 .btnOutline:hover {
-  color: var(--black);
+  color: var(--background);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 95, 31, 0.2);
+  box-shadow: 0 10px 30px var(--accent-glow);
 }
 
 .btnOutline:hover::before {
@@ -402,7 +403,7 @@
 @media (prefers-color-scheme: light) {
   /* Force dark theme regardless of system preference */
   .hero {
-    background: var(--black);
+    background: var(--background);
   }
 }
 

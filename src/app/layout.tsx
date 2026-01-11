@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { ThemeWrapper } from "@/components";
 import "./globals.css";
 
 // Load local SF Pro font (variable font with multiple weights)
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${sfPro.variable}`}>
       <body className="antialiased">
-        {children}
+        <ThemeWrapper>
+          {children}
+        </ThemeWrapper>
       </body>
     </html>
   );

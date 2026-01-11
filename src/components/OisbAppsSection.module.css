@@ -8,8 +8,9 @@
 .oisbApps {
   min-height: 100vh;
   padding: 6rem 1.5rem;
-  background: var(--black);
+  background: var(--background);
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 /* Top border gradient */
@@ -54,7 +55,7 @@
 .heading {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--white);
+  color: var(--foreground);
   margin-bottom: 1rem;
   letter-spacing: -0.02em;
 }
@@ -102,12 +103,8 @@
 /* === App Card === */
 .appCard {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 20, 20, 1) 0%,
-    rgba(10, 10, 10, 1) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
   border-radius: 1.25rem;
   padding: 2rem;
   display: flex;
@@ -127,7 +124,7 @@
   bottom: 0;
   background: radial-gradient(
     ellipse at 50% -20%,
-    rgba(255, 95, 31, 0.1) 0%,
+    var(--card-overlay) 0%,
     transparent 60%
   );
   opacity: 0;
@@ -148,11 +145,11 @@
 }
 
 .appCard:hover {
-  border-color: rgba(255, 95, 31, 0.4);
+  border-color: var(--border-strong);
   transform: translateY(-10px) scale(1.02);
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(255, 95, 31, 0.12);
+    0 25px 50px var(--shadow-color),
+    0 0 40px var(--glow-color);
 }
 
 .appCard:hover::before {
@@ -183,16 +180,16 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--background);
   background: var(--accent);
   border-radius: 9999px;
-  box-shadow: 0 2px 10px rgba(255, 95, 31, 0.4);
+  box-shadow: 0 2px 10px var(--accent-dim);
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 2px 10px rgba(255, 95, 31, 0.4); }
-  50% { box-shadow: 0 2px 20px rgba(255, 95, 31, 0.6); }
+  0%, 100% { box-shadow: 0 2px 10px var(--accent-dim); }
+  50% { box-shadow: 0 2px 20px var(--accent-dim); }
 }
 
 /* === App Icon === */
@@ -201,10 +198,10 @@
   height: 80px;
   background: linear-gradient(
     135deg,
-    rgba(255, 95, 31, 0.15) 0%,
-    rgba(255, 95, 31, 0.03) 100%
+    var(--glow-color) 0%,
+    var(--card-bg-hover) 100%
   );
-  border: 1px solid rgba(255, 95, 31, 0.25);
+  border: 1px solid var(--border-visible);
   border-radius: 1.25rem;
   display: flex;
   align-items: center;
@@ -225,7 +222,7 @@
   background: linear-gradient(
     45deg,
     transparent 40%,
-    rgba(255, 255, 255, 0.1) 50%,
+    var(--shimmer-color) 50%,
     transparent 60%
   );
   transform: translateX(-100%);
@@ -236,8 +233,8 @@
   transform: scale(1.08) rotate(-5deg);
   border-color: var(--accent);
   box-shadow: 
-    0 0 25px rgba(255, 95, 31, 0.4),
-    inset 0 0 15px rgba(255, 95, 31, 0.1);
+    0 0 25px var(--accent-dim),
+    inset 0 0 15px var(--card-overlay);
 }
 
 .appCard:hover .appIconWrapper::before {
@@ -259,7 +256,7 @@
 .appName {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--white);
+  color: var(--foreground);
   margin: 0 0 0.625rem;
   transition: color 0.3s ease;
   letter-spacing: -0.01em;
@@ -283,7 +280,7 @@
   gap: 1rem;
   font-size: 0.8125rem;
   padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .appVersion {
@@ -292,7 +289,7 @@
   color: var(--accent);
   font-weight: 600;
   font-family: var(--font-mono);
-  background: rgba(255, 95, 31, 0.1);
+  background: var(--card-overlay);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 }
@@ -321,7 +318,7 @@
   padding: 0.875rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--black);
+  color: var(--background);
   background: var(--accent);
   border: 2px solid var(--accent);
   border-radius: 0.75rem;
@@ -342,7 +339,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.3),
+    var(--shimmer-color),
     transparent
   );
   transition: left 0.5s ease;
@@ -353,8 +350,8 @@
   color: var(--accent);
   transform: translateY(-3px);
   box-shadow: 
-    0 8px 25px rgba(255, 95, 31, 0.35),
-    0 0 15px rgba(255, 95, 31, 0.2);
+    0 8px 25px var(--accent-dim),
+    0 0 15px var(--accent-glow);
 }
 
 .downloadBtn:hover::before {
@@ -382,9 +379,9 @@
   padding: 0.875rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--white);
+  color: var(--foreground);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-visible);
   border-radius: 0.75rem;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -394,7 +391,7 @@
 .storeBtn:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(255, 95, 31, 0.08);
+  background: var(--card-overlay);
   transform: translateY(-3px);
 }
 
@@ -412,8 +409,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-subtle);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
+  background: var(--card-bg-hover);
+  border: 1px dashed var(--border-visible);
   border-radius: 0.75rem;
   cursor: not-allowed;
   transition: all 0.3s ease;
@@ -421,9 +418,9 @@
 
 .appCard.comingSoon:hover .notifyBtn {
   color: var(--accent);
-  border-color: rgba(255, 95, 31, 0.4);
+  border-color: var(--border-strong);
   border-style: solid;
-  background: rgba(255, 95, 31, 0.05);
+  background: var(--card-overlay);
 }
 
 /* === CTA Section === */
@@ -433,11 +430,11 @@
   padding: 3.5rem;
   background: linear-gradient(
     180deg,
-    rgba(255, 95, 31, 0.06) 0%,
-    rgba(255, 95, 31, 0.02) 50%,
+    var(--card-overlay) 0%,
+    var(--card-bg-hover) 50%,
     transparent 100%
   );
-  border: 1px solid rgba(255, 95, 31, 0.2);
+  border: 1px solid var(--border-visible);
   border-radius: 1.5rem;
   position: relative;
   overflow: hidden;
@@ -509,11 +506,11 @@
 }
 
 .ctaButton:hover {
-  color: var(--black);
+  color: var(--background);
   transform: translateY(-3px);
   box-shadow: 
-    0 15px 40px rgba(255, 95, 31, 0.35),
-    0 0 25px rgba(255, 95, 31, 0.2);
+    0 15px 40px var(--accent-dim),
+    0 0 25px var(--accent-glow);
 }
 
 .ctaButton:hover::before {
@@ -662,7 +659,7 @@
 }
 
 .appCard:focus-within {
-  border-color: rgba(255, 95, 31, 0.4);
+  border-color: var(--border-strong);
 }
 
 /* === Reduced Motion === */

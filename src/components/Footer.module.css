@@ -5,11 +5,12 @@
 
 .footer {
   padding: 2.5rem 2rem 1.75rem;
-  background: #000000;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--background);
+  border-top: 1px solid var(--border-subtle);
   position: relative;
   font-size: 0.8em;
   margin-top: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .container {
@@ -35,17 +36,17 @@
 .brandName {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--foreground);
   letter-spacing: -0.5px;
 }
 
 .accent {
-  color: #FF5F1F;
+  color: var(--accent);
 }
 
 .tagline {
   font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-subtle);
   margin: 0;
 }
 
@@ -61,15 +62,15 @@
   justify-content: center;
   width: 32px;
   height: 32px;
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-subtle);
+  border: 1px solid var(--border-subtle);
   border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .socialLink:hover {
-  color: #FF5F1F;
-  border-color: #FF5F1F;
+  color: var(--accent);
+  border-color: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -79,7 +80,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    var(--border-subtle),
     transparent
   );
   margin-bottom: 1.25rem;
@@ -96,7 +97,7 @@
 
 .copyright {
   font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-subtle);
   margin: 0;
 }
 
@@ -109,7 +110,7 @@
 
 .footerLink {
   font-size: 0.8125rem;
-  color: #FF5F1F;
+  color: var(--accent);
   text-decoration: none;
   transition: all 0.2s ease;
   padding: 0.25rem 0.5rem;
@@ -117,12 +118,12 @@
 }
 
 .footerLink:hover {
-  color: #FF5F1F;
+  color: var(--accent);
   opacity: 1;
 }
 
 .separator {
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--border-visible);
   margin: 0 0.25rem;
 }
 
@@ -137,17 +138,17 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-subtle);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-subtle);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .backToTop:hover {
-  color: #FF5F1F;
-  border-color: #FF5F1F;
+  color: var(--accent);
+  border-color: var(--accent);
   transform: translateY(-50%) translateY(-2px);
 }
 
