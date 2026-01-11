@@ -14,6 +14,7 @@ export { AboutSection } from "./AboutSection";
 export { ProjectsSection } from "./ProjectsSection";
 export { SkillsSection } from "./SkillsSection";
 export { OisbAppsSection } from "./OisbAppsSection";
+export { ContactSection } from "./ContactSection";
 
 // Export components here as they are created
 // export { Header } from "./Header";

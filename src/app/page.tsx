@@ -5,6 +5,7 @@ import {
   ProjectsSection,
   SkillsSection,
   OisbAppsSection,
+  ContactSection,
 } from "@/components";
 
 export default function Home() {
@@ -28,18 +29,8 @@ export default function Home() {
       {/* OisB Apps Section */}
       <OisbAppsSection />
 
-      {/* Contact placeholder */}
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center px-6"
-      >
-        <div className="text-center">
-          <h2 className="mb-4">
-            <span className="text-accent">Contact</span> Section
-          </h2>
-          <p className="text-muted">Coming soon...</p>
-        </div>
-      </section>
+      {/* Contact Section */}
+      <ContactSection />
     </>
   );
 }
