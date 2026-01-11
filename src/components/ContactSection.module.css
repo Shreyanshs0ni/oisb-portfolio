@@ -458,12 +458,17 @@
   .textarea {
     width: 100%;
     padding: 0.875rem 1rem;
-    font-size: 1rem;
+    /* Prevent zoom on focus (iOS) - minimum 16px */
+    font-size: 16px;
+    /* Adequate touch target */
+    min-height: 48px;
   }
   
   .submitBtn {
     width: 100%;
     padding: 1rem 1.5rem;
+    /* Adequate touch target */
+    min-height: 52px;
   }
   
   .infoCard {
@@ -481,8 +486,36 @@
   
   .socialLink {
     flex: 0 0 auto;
+    /* Minimum touch target 48px */
     width: 48px;
     height: 48px;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .contact {
+    padding: 4rem 1rem;
+  }
+  
+  .heading {
+    font-size: 1.75rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9375rem;
+  }
+  
+  .infoTitle {
+    font-size: 1.25rem;
+  }
+  
+  .infoText {
+    font-size: 0.9375rem;
+  }
+  
+  .availabilityBadge {
+    font-size: 0.8125rem;
   }
 }
 

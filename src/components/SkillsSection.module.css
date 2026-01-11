@@ -389,8 +389,9 @@
   }
 
   .categoryIcon {
-    width: 40px;
-    height: 40px;
+    /* Minimum touch target */
+    width: 44px;
+    height: 44px;
   }
 
   .categoryIcon svg {
@@ -418,6 +419,51 @@
   .quickTag {
     padding: 0.5rem 1rem;
     font-size: 0.75rem;
+    /* Minimum touch target */
+    min-height: 40px;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .skills {
+    padding: 4rem 1rem;
+  }
+  
+  .heading {
+    font-size: 1.75rem;
+  }
+  
+  .categoriesGrid {
+    gap: 1.5rem;
+  }
+  
+  .categoryCard {
+    padding: 1.25rem;
+  }
+  
+  .categoryHeader {
+    gap: 0.75rem;
+  }
+  
+  .categoryTitle {
+    font-size: 1rem;
+  }
+  
+  .skillName {
+    font-size: 0.875rem;
+  }
+  
+  .skillLevel {
+    font-size: 0.75rem;
+  }
+  
+  .skillBar {
+    height: 5px;
+  }
+  
+  .quickSkillsTitle {
+    font-size: 0.8125rem;
   }
 }
 

@@ -367,6 +367,51 @@
   .tags {
     justify-content: center;
   }
+  
+  .stats {
+    gap: 1.5rem;
+  }
+  
+  .statItem {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .about {
+    padding: 4rem 1rem;
+  }
+  
+  .heading {
+    font-size: 1.75rem;
+  }
+  
+  .imageContainer {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .bioText {
+    font-size: 0.9375rem;
+  }
+  
+  .tag {
+    padding: 0.4rem 0.875rem;
+    font-size: 0.75rem;
+    /* Adequate touch target */
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .statNumber {
+    font-size: 2rem;
+  }
+  
+  .statLabel {
+    font-size: 0.75rem;
+  }
 }
 
 /* === Reduced Motion === */

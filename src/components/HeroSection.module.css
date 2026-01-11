@@ -302,28 +302,99 @@
 }
 
 /* === Responsive Adjustments === */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .hero {
+    padding: 5rem 1.5rem;
+  }
+  
+  .content {
+    max-width: 100%;
+  }
+  
+  .subtitle {
+    padding: 0 1rem;
+  }
+}
+
+/* Mobile (640px and below) */
 @media (max-width: 640px) {
   .hero {
     padding: 4rem 1rem;
+    min-height: 100dvh;
+    justify-content: center;
   }
   
   .accentLine {
     width: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .heading {
+    margin-bottom: 1rem;
+  }
+  
+  .tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+  
+  .role {
+    font-size: 1.125rem;
   }
   
   .subtitle {
     margin-bottom: 2rem;
+    padding: 0;
+    font-size: 0.9375rem;
+  }
+  
+  .ctaContainer {
+    width: 100%;
+    max-width: 320px;
   }
   
   .btnPrimary,
   .btnOutline {
     width: 100%;
     min-width: unset;
-    max-width: 280px;
+    /* Ensure adequate touch target (48px minimum) */
+    min-height: 48px;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
   }
   
   .scrollIndicator {
     bottom: 1.5rem;
+  }
+  
+  .scrollText {
+    font-size: 0.6875rem;
+  }
+}
+
+/* Small phones (480px and below) */
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 1rem;
+  }
+  
+  .greeting {
+    font-size: 2rem;
+  }
+  
+  .role {
+    font-size: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  
+  .ctaContainer {
+    gap: 0.75rem;
   }
 }
 
