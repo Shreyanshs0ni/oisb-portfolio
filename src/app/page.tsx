@@ -3,6 +3,7 @@ import {
   HeroSection,
   AboutSection,
   ProjectsSection,
+  SkillsSection,
 } from "@/components";
 
 export default function Home() {
@@ -19,6 +20,9 @@ export default function Home() {
 
       {/* Projects Section */}
       <ProjectsSection />
+
+      {/* Skills Section */}
+      <SkillsSection />
 
       {/* Contact placeholder */}
       <section
