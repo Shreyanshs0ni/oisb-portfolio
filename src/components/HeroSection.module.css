@@ -1,0 +1,330 @@
+/**
+ * HeroSection Styles
+ * Ultra-minimal design with black/white/orange palette
+ */
+
+/* === Section Container === */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+  background: var(--black);
+  overflow: hidden;
+}
+
+/* Subtle gradient overlay for depth */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(255, 165, 0, 0.03) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* === Content Wrapper === */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 56rem; /* 896px */
+  width: 100%;
+  z-index: 1;
+}
+
+/* === Decorative Line === */
+.accentLine {
+  width: 4rem;
+  height: 1px;
+  margin-bottom: 2rem;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 50%,
+    transparent 100%
+  );
+  opacity: 0.7;
+}
+
+/* === Main Heading === */
+.heading {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  opacity: 0; /* Initial state for animation */
+}
+
+.tagline {
+  display: block;
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  font-weight: 400;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.greeting {
+  display: block;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.name {
+  color: var(--accent);
+  position: relative;
+  display: inline-block;
+  text-shadow: 
+    0 0 20px rgba(255, 165, 0, 0.4),
+    0 0 40px rgba(255, 165, 0, 0.2);
+}
+
+/* Animated underline on name */
+.name::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1em;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.heading:hover .name::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.role {
+  display: block;
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* === Subtitle === */
+.subtitle {
+  text-align: center;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 36rem;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+  opacity: 0; /* Initial state for animation */
+}
+
+.highlight {
+  color: var(--accent);
+  font-weight: 500;
+  position: relative;
+}
+
+/* === CTA Buttons Container === */
+.ctaContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .ctaContainer {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+}
+
+/* === Primary Button === */
+.btnPrimary {
+  position: relative;
+  min-width: 200px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--black);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 9999px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+/* Shine effect overlay */
+.btnPrimary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+  z-index: -1;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 30px rgba(255, 165, 0, 0.3),
+    0 0 20px rgba(255, 165, 0, 0.2);
+}
+
+.btnPrimary:hover::before {
+  left: 100%;
+}
+
+.btnPrimary:active {
+  transform: translateY(0);
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 4px;
+}
+
+/* === Outline Button === */
+.btnOutline {
+  position: relative;
+  min-width: 200px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 9999px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Fill effect on hover */
+.btnOutline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.btnOutline:hover {
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 165, 0, 0.2);
+}
+
+.btnOutline:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btnOutline:active {
+  transform: translateY(0);
+}
+
+.btnOutline:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* === Scroll Indicator === */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce 2s infinite;
+}
+
+.scrollText {
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.scrollIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+  stroke-width: 2;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-4px);
+  }
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 640px) {
+  .hero {
+    padding: 4rem 1rem;
+  }
+  
+  .accentLine {
+    width: 3rem;
+  }
+  
+  .subtitle {
+    margin-bottom: 2rem;
+  }
+  
+  .btnPrimary,
+  .btnOutline {
+    width: 100%;
+    min-width: unset;
+    max-width: 280px;
+  }
+  
+  .scrollIndicator {
+    bottom: 1.5rem;
+  }
+}
+
+/* === Dark mode adjustments (already dark, but for completeness) === */
+@media (prefers-color-scheme: light) {
+  /* Force dark theme regardless of system preference */
+  .hero {
+    background: var(--black);
+  }
+}
+

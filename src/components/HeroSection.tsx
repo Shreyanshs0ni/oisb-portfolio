@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
+import styles from "./HeroSection.module.css";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -47,80 +48,64 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="hero"
-      className="min-h-screen flex flex-col items-center justify-center px-6 relative"
+      className={styles.hero}
       aria-label="Hero section"
     >
-      {/* Decorative accent line */}
-      <div className="gradient-line w-16 mb-8 opacity-60" />
+      {/* Content wrapper */}
+      <div className={styles.content}>
+        {/* Decorative accent line */}
+        <div className={styles.accentLine} />
 
-      {/* Main heading */}
-      <h1
-        ref={headingRef}
-        className="text-center mb-6 max-w-4xl opacity-0"
-      >
-        <span className="block text-lg md:text-xl font-normal text-accent mb-4 tracking-widest uppercase">
-          🚀 Welcome to my space
-        </span>
-        <span className="block">
-          Hey! I&apos;m{" "}
-          <span className="text-accent text-glow-accent">[Your Name]</span>
-        </span>
-        <span className="block text-2xl md:text-4xl font-light mt-2 text-muted">
-          Developer & Designer
-        </span>
-      </h1>
+        {/* Main heading */}
+        <h1 ref={headingRef} className={styles.heading}>
+          <span className={styles.tagline}>🚀 Welcome to my space</span>
+          <span className={styles.greeting}>
+            Hey! I&apos;m <span className={styles.name}>Shreyansh</span>
+          </span>
+          <span className={styles.role}>Developer & Designer</span>
+        </h1>
 
-      {/* Subtitle / Role description */}
-      <p
-        ref={subtitleRef}
-        className="text-center text-lg md:text-xl max-w-2xl mb-12 opacity-0"
-      >
-        I craft{" "}
-        <span className="text-accent font-medium">beautiful digital experiences</span>{" "}
-        and turn wild ideas into{" "}
-        <span className="text-accent font-medium">awesome apps</span>.
-        <br className="hidden md:block" />
-        Let&apos;s build something amazing together! ✨
-      </p>
+        {/* Subtitle / Role description */}
+        <p ref={subtitleRef} className={styles.subtitle}>
+          I craft{" "}
+          <span className={styles.highlight}>
+            beautiful digital experiences
+          </span>{" "}
+          and turn wild ideas into{" "}
+          <span className={styles.highlight}>awesome apps</span>.
+          <br />
+          Let&apos;s build something amazing together! ✨
+        </p>
 
-      {/* CTA Buttons */}
-      <div
-        ref={ctaRef}
-        className="flex flex-col sm:flex-row items-center gap-4"
-      >
-        <button
-          onClick={() => scrollToSection("projects")}
-          className="btn-primary rounded-full min-w-[180px] text-base font-semibold 
-                     hover:scale-105 transition-transform duration-200
-                     focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black"
-          aria-label="View my projects"
-        >
-          View Projects
-        </button>
-        <button
-          onClick={() => scrollToSection("contact")}
-          className="btn-outline rounded-full min-w-[180px] text-base font-semibold
-                     hover:scale-105 transition-transform duration-200
-                     focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black"
-          aria-label="Contact me"
-        >
-          Contact Me
-        </button>
+        {/* CTA Buttons */}
+        <div ref={ctaRef} className={styles.ctaContainer}>
+          <button
+            onClick={() => scrollToSection("projects")}
+            className={styles.btnPrimary}
+            aria-label="View my projects"
+          >
+            View Projects
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className={styles.btnOutline}
+            aria-label="Contact me"
+          >
+            Contact Me
+          </button>
+        </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <span className="text-subtle text-sm tracking-wider uppercase">Scroll</span>
+      <div className={styles.scrollIndicator}>
+        <span className={styles.scrollText}>Scroll</span>
         <svg
-          width="24"
-          height="24"
+          className={styles.scrollIcon}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="text-accent"
           aria-hidden="true"
         >
           <path d="M12 5v14M19 12l-7 7-7-7" />
@@ -131,4 +116,3 @@ export function HeroSection() {
 }
 
 export default HeroSection;
-
