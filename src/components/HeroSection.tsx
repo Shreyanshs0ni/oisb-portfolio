@@ -6,33 +6,148 @@ import { gsap } from "gsap";
 import styles from "./HeroSection.module.css";
 
 export function HeroSection() {
+  // Refs for animation targets
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const accentLineRef = useRef<HTMLDivElement>(null);
+  const taglineRef = useRef<HTMLSpanElement>(null);
+  const greetingRef = useRef<HTMLSpanElement>(null);
+  const nameRef = useRef<HTMLSpanElement>(null);
+  const roleRef = useRef<HTMLSpanElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   // GSAP animations on mount
   useGSAP(
     () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      // Set initial states
+      gsap.set(
+        [
+          accentLineRef.current,
+          taglineRef.current,
+          greetingRef.current,
+          nameRef.current,
+          roleRef.current,
+          subtitleRef.current,
+          scrollIndicatorRef.current,
+        ],
+        { opacity: 0 }
+      );
 
-      tl.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1 }
-      )
+      // Create master timeline
+      const tl = gsap.timeline({
+        defaults: {
+          ease: "power3.out",
+          duration: 0.8,
+        },
+      });
+
+      // Animation sequence
+      tl
+        // 1. Accent line draws in from center
+        .fromTo(
+          accentLineRef.current,
+          { scaleX: 0, opacity: 1 },
+          { scaleX: 1, duration: 0.6, ease: "power2.inOut" }
+        )
+
+        // 2. Tagline fades in and slides down
+        .fromTo(
+          taglineRef.current,
+          { opacity: 0, y: -20 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          "-=0.2"
+        )
+
+        // 3. Greeting slides up
+        .fromTo(
+          greetingRef.current,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          "-=0.3"
+        )
+
+        // 4. Name pops in with scale and glow effect
+        .fromTo(
+          nameRef.current,
+          {
+            opacity: 0,
+            scale: 0.8,
+            filter: "blur(10px)",
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          },
+          "-=0.4"
+        )
+
+        // 5. Role slides up with slight delay
+        .fromTo(
+          roleRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          "-=0.2"
+        )
+
+        // 6. Subtitle fades in
         .fromTo(
           subtitleRef.current,
           { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.5"
+          { opacity: 1, y: 0, duration: 0.7 },
+          "-=0.3"
         )
+
+        // 7. CTA buttons stagger in from bottom
         .fromTo(
           ctaRef.current?.children || [],
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 },
-          "-=0.4"
+          {
+            opacity: 0,
+            y: 30,
+            scale: 0.9,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: "back.out(1.4)",
+          },
+          "-=0.3"
+        )
+
+        // 8. Scroll indicator fades in last
+        .fromTo(
+          scrollIndicatorRef.current,
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.5 },
+          "-=0.2"
         );
+
+      // Subtle floating animation for the name (continuous)
+      gsap.to(nameRef.current, {
+        y: -5,
+        duration: 2,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 2, // Start after intro animation
+      });
+
+      // Pulse glow effect on name (continuous)
+      gsap.to(nameRef.current, {
+        textShadow:
+          "0 0 30px rgba(255, 165, 0, 0.6), 0 0 60px rgba(255, 165, 0, 0.3)",
+        duration: 1.5,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+        delay: 2,
+      });
     },
     { scope: sectionRef }
   );
@@ -54,15 +169,22 @@ export function HeroSection() {
       {/* Content wrapper */}
       <div className={styles.content}>
         {/* Decorative accent line */}
-        <div className={styles.accentLine} />
+        <div ref={accentLineRef} className={styles.accentLine} />
 
         {/* Main heading */}
-        <h1 ref={headingRef} className={styles.heading}>
-          <span className={styles.tagline}>🚀 Welcome to my space</span>
-          <span className={styles.greeting}>
-            Hey! I&apos;m <span className={styles.name}>Shreyansh</span>
+        <h1 className={styles.heading}>
+          <span ref={taglineRef} className={styles.tagline}>
+            🚀 Welcome to my space
           </span>
-          <span className={styles.role}>Developer & Designer</span>
+          <span ref={greetingRef} className={styles.greeting}>
+            Hey! I&apos;m{" "}
+            <span ref={nameRef} className={styles.name}>
+              Shreyansh
+            </span>
+          </span>
+          <span ref={roleRef} className={styles.role}>
+            Developer & Designer
+          </span>
         </h1>
 
         {/* Subtitle / Role description */}
@@ -97,7 +219,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className={styles.scrollIndicator}>
+      <div ref={scrollIndicatorRef} className={styles.scrollIndicator}>
         <span className={styles.scrollText}>Scroll</span>
         <svg
           className={styles.scrollIcon}
