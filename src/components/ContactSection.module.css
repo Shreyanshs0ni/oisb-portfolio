@@ -70,9 +70,11 @@
 /* --- Content Wrapper --- */
 .contentWrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
   align-items: start;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* --- Form Styles --- */
@@ -106,29 +108,29 @@
   font-size: 1rem;
   font-family: inherit;
   color: var(--white);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
   outline: none;
   transition: all 0.3s ease;
 }
 
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .input:hover,
 .textarea:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .input:focus,
 .textarea:focus {
   border-color: var(--accent);
-  background: rgba(255, 165, 0, 0.03);
-  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
+  background: rgba(255, 165, 0, 0.02);
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.15);
 }
 
 .textarea {
@@ -160,19 +162,20 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   font-size: 1rem;
   font-weight: 600;
   font-family: inherit;
   color: var(--black);
   background: var(--accent);
   border: 2px solid var(--accent);
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  align-self: flex-start;
 }
 
 .submitBtn::before {
@@ -244,9 +247,9 @@
 
 .infoCard {
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
 }
@@ -256,9 +259,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--accent), transparent);
+  background: var(--accent);
 }
 
 .infoTitle {
@@ -310,46 +313,48 @@
 /* --- Social Section --- */
 .socialSection {
   padding: 1.5rem 2rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
 }
 
 .socialTitle {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   margin: 0 0 1.25rem;
+  text-align: center;
 }
 
 .socialLinks {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .socialLink {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  flex: 1;
+  max-width: 56px;
+  height: 50px;
   color: var(--white);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
   transition: all 0.3s ease;
   will-change: transform;
 }
 
 .socialLink:hover {
-  color: var(--black);
-  background: var(--accent);
+  color: var(--accent);
+  background: transparent;
   border-color: var(--accent);
-  transform: translateY(-4px) scale(1.1);
-  box-shadow: 0 10px 25px rgba(255, 165, 0, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 165, 0, 0.2);
 }
 
 .socialLink svg {
@@ -408,6 +413,7 @@
   .contentWrapper {
     grid-template-columns: 1fr;
     gap: 3rem;
+    max-width: 600px;
   }
   
   .contactInfo {
@@ -416,6 +422,14 @@
   
   .decorativePattern {
     display: none;
+  }
+  
+  .form {
+    width: 100%;
+  }
+  
+  .submitBtn {
+    align-self: stretch;
   }
 }
 
@@ -442,13 +456,14 @@
   
   .input,
   .textarea {
+    width: 100%;
     padding: 0.875rem 1rem;
-    font-size: 0.9375rem;
+    font-size: 1rem;
   }
   
   .submitBtn {
     width: 100%;
-    padding: 0.875rem 1.5rem;
+    padding: 1rem 1.5rem;
   }
   
   .infoCard {
@@ -459,9 +474,15 @@
     padding: 1.25rem 1.5rem;
   }
   
+  .socialLinks {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
   .socialLink {
-    width: 44px;
-    height: 44px;
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
   }
 }
 
