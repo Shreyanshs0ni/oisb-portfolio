@@ -33,9 +33,9 @@
   letter-spacing: 3px;
   margin-bottom: 1rem;
   padding: 0.5rem 1.25rem;
-  border: 1px solid rgba(255, 109, 46, 0.3);
+  border: 1px solid rgba(255, 95, 31, 0.3);
   border-radius: 50px;
-  background: rgba(255, 109, 46, 0.05);
+  background: rgba(255, 95, 31, 0.05);
 }
 
 .heading {
@@ -129,8 +129,8 @@
 .input:focus,
 .textarea:focus {
   border-color: var(--accent);
-  background: rgba(255, 109, 46, 0.02);
-  box-shadow: 0 0 0 3px rgba(255, 109, 46, 0.15);
+  background: rgba(255, 95, 31, 0.02);
+  box-shadow: 0 0 0 3px rgba(255, 95, 31, 0.15);
 }
 
 .textarea {
@@ -200,7 +200,7 @@
 
 .submitBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 109, 46, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 95, 31, 0.3);
 }
 
 .submitBtn:active {
@@ -213,7 +213,7 @@
 }
 
 .submitBtn.submitting {
-  background: rgba(255, 109, 46, 0.5);
+  background: rgba(255, 95, 31, 0.5);
   pointer-events: none;
 }
 
@@ -354,7 +354,7 @@
   background: transparent;
   border-color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 109, 46, 0.2);
+  box-shadow: 0 8px 20px rgba(255, 95, 31, 0.2);
 }
 
 .socialLink svg {
@@ -384,7 +384,7 @@
 .patternDot {
   width: 8px;
   height: 8px;
-  background: rgba(255, 109, 46, 0.2);
+  background: rgba(255, 95, 31, 0.2);
   border-radius: 50%;
   transition: all 0.3s ease;
 }
@@ -399,11 +399,11 @@
 
 @keyframes dotPulse {
   0%, 100% {
-    background: rgba(255, 109, 46, 0.2);
+    background: rgba(255, 95, 31, 0.2);
     transform: scale(1);
   }
   50% {
-    background: rgba(255, 109, 46, 0.5);
+    background: rgba(255, 95, 31, 0.5);
     transform: scale(1.3);
   }
 }

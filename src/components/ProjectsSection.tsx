@@ -19,7 +19,7 @@ const projects = [
       "A modern web application built with React and Node.js featuring real-time data synchronization.",
     tags: ["React", "Node.js", "Socket.io"],
     image: "/projects/project-1.svg",
-    color: "#ff6d2e",
+    color: "#FF5F1F",
     link: "#",
   },
   {

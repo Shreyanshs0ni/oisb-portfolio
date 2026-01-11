@@ -141,7 +141,7 @@ export function HeroSection() {
       // Pulse glow effect on name (continuous)
       gsap.to(nameRef.current, {
         textShadow:
-          "0 0 30px rgba(255, 109, 46, 0.6), 0 0 60px rgba(255, 109, 46, 0.3)",
+          "0 0 30px rgba(255, 95, 31, 0.6), 0 0 60px rgba(255, 95, 31, 0.3)",
         duration: 1.5,
         ease: "sine.inOut",
         yoyo: true,

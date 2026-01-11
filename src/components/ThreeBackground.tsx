@@ -62,7 +62,7 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     );
 
     const particlesMaterial = new THREE.PointsMaterial({
-      color: 0xff6d2e, // Orange accent
+      color: 0xff5f1f, // Orange accent
       size: 0.02,
       transparent: true,
       opacity: 0.6,
@@ -75,7 +75,7 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     // Create wireframe icosahedron (subtle geometric shape)
     const icoGeometry = new THREE.IcosahedronGeometry(1.5, 1);
     const icoMaterial = new THREE.MeshBasicMaterial({
-      color: 0xff6d2e,
+      color: 0xff5f1f,
       wireframe: true,
       transparent: true,
       opacity: 0.15,
@@ -115,7 +115,7 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
       new THREE.BufferAttribute(linePositions, 3)
     );
     const linesMaterial = new THREE.LineBasicMaterial({
-      color: 0xff6d2e,
+      color: 0xff5f1f,
       transparent: true,
       opacity: 0.1,
     });
