@@ -8,9 +8,6 @@
 // 3D Background
 export { ThreeBackground } from "./ThreeBackground";
 
-// Smooth Scroll Provider
-export { SmoothScroll } from "./SmoothScroll";
-
 // Sections
 export { HeroSection } from "./HeroSection";
 export { AboutSection } from "./AboutSection";
