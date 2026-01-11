@@ -14,17 +14,19 @@ interface SmoothScrollProps {
 
 export function SmoothScroll({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Initialize Lenis smooth scroll
+    // Initialize Lenis with optimized settings for snappy feel
     const lenis = new Lenis({
-      duration: 1.2, // Scroll duration (higher = smoother/slower)
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing function
-      orientation: "vertical", // Scroll direction
-      gestureOrientation: "vertical", // Gesture direction
-      smoothWheel: true, // Enable smooth wheel scrolling
-      touchMultiplier: 2, // Touch scroll multiplier
-      infinite: false, // Disable infinite scroll
+      duration: 0.8, // Faster scroll (lower = snappier)
+      easing: (t) => 1 - Math.pow(1 - t, 3), // Cubic ease-out (snappier)
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1, // Default wheel speed
+      touchMultiplier: 1.5, // Slightly faster touch
+      infinite: false,
     });
 
     lenisRef.current = lenis;
@@ -32,13 +34,12 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     // Integrate Lenis with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
 
-    // Add Lenis to GSAP ticker for smooth animation sync
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    // Disable GSAP's default lag smoothing for better Lenis integration
-    gsap.ticker.lagSmoothing(0);
+    // Use requestAnimationFrame for smooth updates
+    function raf(time: number) {
+      lenis.raf(time);
+      rafRef.current = requestAnimationFrame(raf);
+    }
+    rafRef.current = requestAnimationFrame(raf);
 
     // Handle anchor link clicks for smooth scrolling
     const handleAnchorClick = (e: MouseEvent) => {
@@ -53,7 +54,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
           if (targetElement) {
             lenis.scrollTo(targetElement as HTMLElement, {
               offset: 0,
-              duration: 1.5,
+              duration: 1, // Faster anchor scroll
             });
           }
         }
@@ -65,7 +66,9 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     // Cleanup on unmount
     return () => {
       document.removeEventListener("click", handleAnchorClick);
-      gsap.ticker.remove(lenis.raf);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
       lenis.destroy();
       lenisRef.current = null;
     };
