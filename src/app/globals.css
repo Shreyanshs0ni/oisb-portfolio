@@ -1,26 +1,281 @@
 @import "tailwindcss";
 
+/**
+ * Ultra-Minimal Color Palette
+ * Only three colors: Black, White, Orange
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core Colors */
+  --black: #000000;
+  --white: #FFFFFF;
+  --accent: #FFA500;
+  
+  /* Semantic Mappings */
+  --background: var(--black);
+  --foreground: var(--white);
+  --primary: var(--accent);
+  
+  /* Accent Variations (for subtle effects) */
+  --accent-dim: rgba(255, 165, 0, 0.6);
+  --accent-glow: rgba(255, 165, 0, 0.15);
+  
+  /* Text Variations */
+  --text-primary: var(--white);
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --text-subtle: rgba(255, 255, 255, 0.4);
+  
+  /* Borders & Dividers */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-visible: rgba(255, 255, 255, 0.2);
 }
 
+/* Tailwind Theme Integration */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-glow: var(--accent-glow);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/**
+ * CSS Reset - Minimal & Clean
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/**
+ * Typography
+ */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
+h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+
+p {
+  color: var(--text-muted);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+}
+
+/**
+ * Links & Interactive Elements
+ */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/**
+ * Selection Highlight
+ */
+::selection {
+  background: var(--accent);
+  color: var(--black);
+}
+
+::-moz-selection {
+  background: var(--accent);
+  color: var(--black);
+}
+
+/**
+ * Scrollbar Styling
+ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-dim);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/**
+ * Utility Classes
+ */
+
+/* Text Colors */
+.text-accent {
+  color: var(--accent);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-subtle {
+  color: var(--text-subtle);
+}
+
+/* Background Utilities */
+.bg-accent {
+  background-color: var(--accent);
+  color: var(--black);
+}
+
+.bg-accent-glow {
+  background-color: var(--accent-glow);
+}
+
+/* Border Utilities */
+.border-accent {
+  border-color: var(--accent);
+}
+
+.border-subtle {
+  border-color: var(--border-subtle);
+}
+
+/* Accent Glow Effect */
+.glow-accent {
+  box-shadow: 0 0 20px var(--accent-dim),
+              0 0 40px var(--accent-glow);
+}
+
+.text-glow-accent {
+  text-shadow: 0 0 10px var(--accent-dim),
+               0 0 20px var(--accent-glow);
+}
+
+/* Gradient Line (Orange to transparent) */
+.gradient-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 50%,
+    transparent 100%
+  );
+  height: 1px;
+}
+
+.gradient-line-vertical {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--accent) 50%,
+    transparent 100%
+  );
+  width: 1px;
+}
+
+/* Button Base Styles */
+.btn-primary {
+  background: var(--accent);
+  color: var(--black);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: var(--black);
+}
+
+/* Focus States (Accessibility) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Image Defaults */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Remove default list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Form Elements */
+input,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input,
+textarea {
+  background: transparent;
+  border: 1px solid var(--border-visible);
+  color: var(--foreground);
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-subtle);
 }
