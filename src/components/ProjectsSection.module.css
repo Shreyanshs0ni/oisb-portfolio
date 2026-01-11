@@ -1,6 +1,7 @@
 /**
  * ProjectsSection Styles
- * Responsive grid layout with hover effects
+ * Minimal grid layout with smooth hover effects
+ * Colors: Black background, White text, Orange accents
  */
 
 /* === Section Container === */
@@ -70,7 +71,7 @@
   transform-origin: center;
 }
 
-/* === Projects Grid === */
+/* === Responsive Projects Grid === */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -80,12 +81,15 @@
   margin: 0;
 }
 
+/* 2 columns on tablet */
 @media (min-width: 640px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 }
 
+/* 3 columns on desktop */
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
@@ -101,19 +105,34 @@
 /* === Project Card === */
 .card {
   position: relative;
-  background: #0a0a0a;
-  border: 1px solid var(--border-subtle);
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 1) 0%,
+    rgba(10, 10, 10, 1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1rem;
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
 }
 
 .card:hover {
-  border-color: rgba(255, 165, 0, 0.3);
-  transform: translateY(-8px);
+  border-color: rgba(255, 165, 0, 0.4);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 0 30px rgba(255, 165, 0, 0.1);
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(255, 165, 0, 0.15),
+    inset 0 1px 0 rgba(255, 165, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+.card:focus-within {
+  border-color: var(--accent);
+  outline: none;
 }
 
 /* === Image Section === */
@@ -123,8 +142,8 @@
   overflow: hidden;
   background: linear-gradient(
     135deg,
-    rgba(255, 165, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.8) 100%
+    rgba(255, 165, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.9) 100%
   );
 }
 
@@ -132,72 +151,89 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .card:hover .image {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
+/* Gradient overlay */
 .imageOverlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(0, 0, 0, 0.3) 60%,
-    rgba(0, 0, 0, 0.8) 100%
+    transparent 40%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(10, 10, 10, 1) 100%
   );
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
 }
 
 .card:hover .imageOverlay {
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
-/* View Button */
+/* View Project Button */
 .viewButton {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   color: var(--white);
   opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
+  transform: translateY(-15px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .card:hover .viewButton {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .viewButton:hover {
   background: var(--accent);
   color: var(--black);
   border-color: var(--accent);
+  transform: translateY(0) scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
+}
+
+.viewButton:focus-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* === Content Section === */
 .content {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .title {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--white);
-  margin-bottom: 0.75rem;
+  margin: 0;
   transition: color 0.3s ease;
+  line-height: 1.3;
 }
 
 .card:hover .title {
@@ -207,8 +243,8 @@
 .description {
   font-size: 0.9375rem;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  line-height: 1.65;
+  margin: 0.25rem 0 0.75rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -220,33 +256,41 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: auto;
 }
 
 .tag {
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--accent);
-  background: rgba(255, 165, 0, 0.1);
-  padding: 0.25rem 0.75rem;
+  background: rgba(255, 165, 0, 0.08);
+  padding: 0.375rem 0.75rem;
   border-radius: 9999px;
   border: 1px solid rgba(255, 165, 0, 0.2);
+  transition: all 0.25s ease;
 }
 
-/* === Card Accent Line === */
+.card:hover .tag {
+  background: rgba(255, 165, 0, 0.15);
+  border-color: rgba(255, 165, 0, 0.4);
+}
+
+/* === Animated Accent Line === */
 .cardAccent {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
   height: 3px;
-  transition: width 0.4s ease;
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .card:hover .cardAccent {
   width: 100%;
 }
 
-/* === View All Button === */
+/* === View All Projects Button === */
 .viewAll {
   display: flex;
   justify-content: center;
@@ -254,10 +298,11 @@
 }
 
 .viewAllButton {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 2rem;
+  padding: 1rem 2.5rem;
   font-size: 1rem;
   font-weight: 600;
   color: var(--accent);
@@ -265,14 +310,37 @@
   border: 2px solid var(--accent);
   border-radius: 9999px;
   text-decoration: none;
+  overflow: hidden;
   transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Button fill animation */
+.viewAllButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+}
+
+.viewAllButton:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .viewAllButton:hover {
-  background: var(--accent);
   color: var(--black);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 15px 35px rgba(255, 165, 0, 0.3),
+    0 0 20px rgba(255, 165, 0, 0.2);
 }
 
 .viewAllButton svg {
@@ -280,21 +348,55 @@
 }
 
 .viewAllButton:hover svg {
-  transform: translateX(4px);
+  transform: translateX(5px);
+}
+
+.viewAllButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 /* === Responsive Adjustments === */
 @media (max-width: 639px) {
   .projects {
-    padding: 4rem 1rem;
+    padding: 5rem 1rem;
   }
 
   .headingWrapper {
     margin-bottom: 3rem;
   }
 
+  .grid {
+    gap: 1.5rem;
+  }
+
   .content {
     padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+  }
+
+  .viewAll {
+    margin-top: 3rem;
+  }
+
+  .viewAllButton {
+    padding: 0.875rem 2rem;
+    font-size: 0.9375rem;
+  }
+}
+
+/* Large screens - 4 columns */
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
   }
 }
 
@@ -303,7 +405,9 @@
   .card,
   .image,
   .viewButton,
-  .cardAccent {
+  .cardAccent,
+  .viewAllButton,
+  .viewAllButton::before {
     transition: none;
   }
 
@@ -314,5 +418,34 @@
   .card:hover .image {
     transform: none;
   }
+
+  .viewAllButton:hover {
+    transform: none;
+  }
+
+  .viewAllButton:hover::before {
+    transform: scaleX(1);
+  }
 }
 
+/* === Card Hover Group Effect === */
+/* Dim non-hovered cards when one is hovered */
+.grid:hover .cardWrapper:not(:hover) .card {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+.grid:hover .cardWrapper:not(:hover) .card {
+  transition: 
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Reset when nothing is hovered */
+.cardWrapper .card {
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-color 0.3s ease,
+    box-shadow 0.4s ease,
+    opacity 0.3s ease;
+}
