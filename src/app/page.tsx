@@ -1,4 +1,4 @@
-import { ThreeBackground, HeroSection } from "@/components";
+import { ThreeBackground, HeroSection, AboutSection } from "@/components";
 
 export default function Home() {
   return (
@@ -8,6 +8,9 @@ export default function Home() {
 
       {/* Hero Section */}
       <HeroSection />
+
+      {/* About Section */}
+      <AboutSection />
 
       {/* Placeholder sections for navigation targets */}
       <section

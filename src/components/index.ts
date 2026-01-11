@@ -10,6 +10,7 @@ export { ThreeBackground } from "./ThreeBackground";
 
 // Sections
 export { HeroSection } from "./HeroSection";
+export { AboutSection } from "./AboutSection";
 
 // Export components here as they are created
 // export { Header } from "./Header";
