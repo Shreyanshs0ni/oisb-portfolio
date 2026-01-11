@@ -1,0 +1,36 @@
+<svg width="400" height="240" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="240" fill="#0a0a0a"/>
+  <defs>
+    <pattern id="grid5" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="240" fill="url(#grid5)"/>
+  
+  <!-- AI Brain representation -->
+  <circle cx="200" cy="100" r="50" fill="#FFA07A" opacity="0.1" stroke="#FFA07A" stroke-width="1"/>
+  <circle cx="200" cy="100" r="35" fill="#FFA07A" opacity="0.15"/>
+  
+  <!-- Neural network nodes -->
+  <circle cx="180" cy="85" r="6" fill="#FFA07A" opacity="0.8"/>
+  <circle cx="220" cy="85" r="6" fill="#FFA07A" opacity="0.8"/>
+  <circle cx="200" cy="115" r="6" fill="#FFA07A" opacity="0.8"/>
+  <circle cx="170" cy="105" r="4" fill="#FFA07A" opacity="0.6"/>
+  <circle cx="230" cy="105" r="4" fill="#FFA07A" opacity="0.6"/>
+  
+  <!-- Connections -->
+  <line x1="180" y1="85" x2="200" y2="115" stroke="#FFA07A" stroke-width="1" opacity="0.4"/>
+  <line x1="220" y1="85" x2="200" y2="115" stroke="#FFA07A" stroke-width="1" opacity="0.4"/>
+  <line x1="180" y1="85" x2="220" y2="85" stroke="#FFA07A" stroke-width="1" opacity="0.4"/>
+  <line x1="170" y1="105" x2="180" y2="85" stroke="#FFA07A" stroke-width="1" opacity="0.3"/>
+  <line x1="230" y1="105" x2="220" y2="85" stroke="#FFA07A" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Text/Chat bubbles -->
+  <rect x="60" y="160" width="120" height="30" rx="8" fill="#FFA07A" opacity="0.2"/>
+  <rect x="220" y="170" width="100" height="25" rx="8" fill="#FFA07A" opacity="0.15"/>
+  <rect x="80" y="168" width="80" height="6" rx="2" fill="#fff" opacity="0.2"/>
+  <rect x="235" y="178" width="60" height="6" rx="2" fill="#fff" opacity="0.15"/>
+  
+  <text x="200" y="220" text-anchor="middle" fill="#FFA07A" font-family="system-ui" font-size="10" opacity="0.5">PROJECT EPSILON</text>
+</svg>
+
