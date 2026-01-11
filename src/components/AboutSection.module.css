@@ -1,6 +1,7 @@
 /**
  * AboutSection Styles
- * Ultra-minimal design with black/white/orange palette
+ * Ultra-minimal two-column layout with circular image
+ * Colors: Black background, White text, Orange accents
  */
 
 /* === Section Container === */
@@ -15,7 +16,7 @@
   overflow: hidden;
 }
 
-/* Subtle gradient background */
+/* Top border gradient */
 .about::before {
   content: "";
   position: absolute;
@@ -29,7 +30,7 @@
     var(--accent) 50%,
     transparent 100%
   );
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .container {
@@ -38,7 +39,7 @@
   margin: 0 auto;
 }
 
-/* === Heading === */
+/* === Section Heading === */
 .headingWrapper {
   text-align: center;
   margin-bottom: 4rem;
@@ -52,6 +53,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
+  font-weight: 500;
 }
 
 .heading {
@@ -64,6 +66,19 @@
 
 .accent {
   color: var(--accent);
+  position: relative;
+}
+
+/* Underline accent for "Me" */
+.accent::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1em;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0.5;
 }
 
 .headingLine {
@@ -73,7 +88,7 @@
   margin: 0 auto;
 }
 
-/* === Content Grid === */
+/* === Two-Column Content Grid === */
 .content {
   display: grid;
   grid-template-columns: 1fr;
@@ -83,12 +98,18 @@
 
 @media (min-width: 768px) {
   .content {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: auto 1fr;
+    gap: 5rem;
   }
 }
 
-/* === Image Side === */
+@media (min-width: 1024px) {
+  .content {
+    gap: 6rem;
+  }
+}
+
+/* === Image Column (Circular) === */
 .imageWrapper {
   display: flex;
   justify-content: center;
@@ -97,67 +118,101 @@
 
 .imageContainer {
   position: relative;
-  width: 280px;
-  height: 280px;
+  width: 220px;
+  height: 220px;
+}
+
+@media (min-width: 640px) {
+  .imageContainer {
+    width: 260px;
+    height: 260px;
+  }
 }
 
 @media (min-width: 768px) {
   .imageContainer {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
   }
 }
 
+/* Circular image */
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 1rem;
+  border-radius: 50%; /* Circle shape */
   position: relative;
   z-index: 2;
-  filter: grayscale(20%);
-  transition: filter 0.3s ease;
+  filter: grayscale(30%);
+  transition: all 0.4s ease;
+  border: 3px solid transparent;
 }
 
 .imageContainer:hover .image {
   filter: grayscale(0%);
+  border-color: var(--accent);
+  transform: scale(1.02);
 }
 
-/* Decorative frame */
+/* Decorative circular frame (offset ring) */
 .imageFrame {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 0.75rem;
+  left: 0.75rem;
   width: 100%;
   height: 100%;
   border: 2px solid var(--accent);
-  border-radius: 1rem;
+  border-radius: 50%; /* Circle shape */
   z-index: 1;
-  transition: transform 0.3s ease;
+  opacity: 0.6;
+  transition: all 0.4s ease;
 }
 
 .imageContainer:hover .imageFrame {
+  opacity: 1;
   transform: translate(0.25rem, 0.25rem);
 }
 
-/* Glow effect */
+/* Rotating dashed ring */
+.imageFrame::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 1px dashed var(--accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Glow effect behind image */
 .imageGlow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
     circle,
-    rgba(255, 165, 0, 0.15) 0%,
+    rgba(255, 165, 0, 0.2) 0%,
+    rgba(255, 165, 0, 0.1) 40%,
     transparent 70%
   );
   z-index: 0;
-  filter: blur(30px);
+  filter: blur(40px);
+  border-radius: 50%;
 }
 
-/* === Bio Side === */
+/* === Bio Column === */
 .bioWrapper {
   will-change: transform, opacity;
 }
@@ -170,20 +225,23 @@
   font-size: clamp(1rem, 2vw, 1.125rem);
   color: var(--text-muted);
   line-height: 1.8;
-  margin-bottom: 1.25rem;
-}
-
-.bioText:last-of-type {
   margin-bottom: 1.5rem;
 }
 
+.bioText:last-of-type {
+  margin-bottom: 2rem;
+}
+
 .bioText strong {
+  color: var(--white);
   font-weight: 600;
 }
 
+/* Wave emoji animation */
 .wave {
   display: inline-block;
-  animation: wave 2s ease-in-out infinite;
+  font-size: 1.2em;
+  animation: wave 2.5s ease-in-out infinite;
   transform-origin: 70% 70%;
 }
 
@@ -194,33 +252,36 @@
   30% { transform: rotate(14deg); }
   40% { transform: rotate(-4deg); }
   50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
+  60%, 100% { transform: rotate(0deg); }
 }
 
-/* === Tags === */
+/* === Skills Tags === */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+  gap: 0.625rem;
+  margin-top: 0;
 }
 
 .tag {
   display: inline-block;
   padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--accent);
-  background: rgba(255, 165, 0, 0.1);
-  border: 1px solid rgba(255, 165, 0, 0.3);
+  background: transparent;
+  border: 1px solid rgba(255, 165, 0, 0.4);
   border-radius: 9999px;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  cursor: default;
 }
 
 .tag:hover {
   background: var(--accent);
   color: var(--black);
+  border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
 }
 
 /* === Stats Row === */
@@ -238,29 +299,32 @@
   .stats {
     flex-direction: row;
     justify-content: center;
-    gap: 3rem;
+    gap: 0;
   }
 }
 
 .statItem {
   text-align: center;
+  padding: 0 2.5rem;
   will-change: transform, opacity;
 }
 
 .statNumber {
   display: block;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
   margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .statLabel {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .statDivider {
@@ -271,15 +335,21 @@
   .statDivider {
     display: block;
     width: 1px;
-    height: 3rem;
-    background: var(--border-subtle);
+    height: 4rem;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      var(--accent) 50%,
+      transparent 100%
+    );
+    opacity: 0.4;
   }
 }
 
 /* === Responsive Adjustments === */
 @media (max-width: 767px) {
   .about {
-    padding: 4rem 1rem;
+    padding: 5rem 1.25rem;
   }
 
   .headingWrapper {
@@ -289,10 +359,29 @@
   .content {
     gap: 2.5rem;
   }
-
-  .imageContainer {
-    width: 240px;
-    height: 240px;
+  
+  .bioText {
+    text-align: center;
+  }
+  
+  .tags {
+    justify-content: center;
   }
 }
 
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  .wave {
+    animation: none;
+  }
+  
+  .imageFrame::before {
+    animation: none;
+  }
+  
+  .image,
+  .imageFrame,
+  .tag {
+    transition: none;
+  }
+}
