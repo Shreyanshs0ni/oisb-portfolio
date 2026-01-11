@@ -4,6 +4,7 @@ import {
   AboutSection,
   ProjectsSection,
   SkillsSection,
+  OisbAppsSection,
 } from "@/components";
 
 export default function Home() {
@@ -23,6 +24,9 @@ export default function Home() {
 
       {/* Skills Section */}
       <SkillsSection />
+
+      {/* OisB Apps Section */}
+      <OisbAppsSection />
 
       {/* Contact placeholder */}
       <section

@@ -13,6 +13,7 @@ export { HeroSection } from "./HeroSection";
 export { AboutSection } from "./AboutSection";
 export { ProjectsSection } from "./ProjectsSection";
 export { SkillsSection } from "./SkillsSection";
+export { OisbAppsSection } from "./OisbAppsSection";
 
 // Export components here as they are created
 // export { Header } from "./Header";

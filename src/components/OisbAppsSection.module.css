@@ -1,0 +1,439 @@
+/**
+ * OisbAppsSection Styles
+ * App showcase with download buttons
+ */
+
+/* === Section Container === */
+.oisbApps {
+  min-height: 100vh;
+  padding: 6rem 1.5rem;
+  background: var(--black);
+  position: relative;
+}
+
+/* Top border gradient */
+.oisbApps::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent) 50%,
+    transparent 100%
+  );
+  opacity: 0.4;
+}
+
+.container {
+  max-width: 72rem; /* 1152px */
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* === Section Heading === */
+.headingWrapper {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.heading {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.headingLine {
+  width: 4rem;
+  height: 2px;
+  background: var(--accent);
+  margin: 0 auto 1.5rem;
+  transform-origin: center;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* === Apps Grid === */
+.appsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .appsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .appsGrid {
+    gap: 2.5rem;
+  }
+}
+
+/* === App Card === */
+.appCard {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 20, 20, 1) 0%,
+    rgba(10, 10, 10, 1) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.appCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(255, 165, 0, 0.06) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.appCard:hover {
+  border-color: rgba(255, 165, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 165, 0, 0.1);
+}
+
+.appCard:hover::before {
+  opacity: 1;
+}
+
+/* Coming soon state */
+.appCard.comingSoon {
+  opacity: 0.7;
+}
+
+.appCard.comingSoon:hover {
+  opacity: 0.85;
+}
+
+/* === Status Badge === */
+.statusBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--accent);
+  border-radius: 9999px;
+}
+
+/* === App Icon === */
+.appIconWrapper {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 165, 0, 0.2) 0%,
+    rgba(255, 165, 0, 0.05) 100%
+  );
+  border: 1px solid rgba(255, 165, 0, 0.3);
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.appCard:hover .appIconWrapper {
+  transform: scale(1.05) rotate(-3deg);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(255, 165, 0, 0.3);
+}
+
+.appIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+/* === App Info === */
+.appInfo {
+  flex: 1;
+}
+
+.appName {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--white);
+  margin: 0 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.appCard:hover .appName {
+  color: var(--accent);
+}
+
+.appDescription {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+
+/* === App Meta === */
+.appMeta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8125rem;
+}
+
+.appVersion {
+  color: var(--accent);
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+
+.appDownloads {
+  color: var(--text-subtle);
+}
+
+/* === App Actions === */
+.appActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+/* Download APK Button */
+.downloadBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--black);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 0.625rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.downloadBtn:hover {
+  background: transparent;
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 165, 0, 0.3);
+}
+
+/* Play Store Button */
+.storeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--white);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.625rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.storeBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Notify Me Button (Coming Soon) */
+.notifyBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.625rem;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+.appCard.comingSoon:hover .notifyBtn {
+  color: var(--accent);
+  border-color: rgba(255, 165, 0, 0.3);
+}
+
+/* === CTA Section === */
+.cta {
+  margin-top: 4rem;
+  text-align: center;
+  padding: 3rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 165, 0, 0.05) 0%,
+    transparent 100%
+  );
+  border: 1px solid rgba(255, 165, 0, 0.15);
+  border-radius: 1.5rem;
+}
+
+.ctaText {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  margin: 0 0 1.5rem;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: transparent;
+  border: 2px solid var(--accent);
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: var(--accent);
+  color: var(--black);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);
+}
+
+.ctaButton svg {
+  transition: transform 0.3s ease;
+}
+
+.ctaButton:hover svg {
+  transform: translateX(4px);
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 639px) {
+  .oisbApps {
+    padding: 5rem 1rem;
+  }
+
+  .headingWrapper {
+    margin-bottom: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .appCard {
+    padding: 1.5rem;
+  }
+
+  .appIconWrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 1rem;
+  }
+
+  .appName {
+    font-size: 1.25rem;
+  }
+
+  .appDescription {
+    font-size: 0.875rem;
+  }
+
+  .appActions {
+    flex-direction: column;
+  }
+
+  .downloadBtn,
+  .storeBtn,
+  .notifyBtn {
+    width: 100%;
+  }
+
+  .cta {
+    padding: 2rem 1.5rem;
+    margin-top: 3rem;
+  }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  .appCard,
+  .appIconWrapper,
+  .downloadBtn,
+  .storeBtn,
+  .ctaButton {
+    transition: none;
+  }
+
+  .appCard:hover {
+    transform: none;
+  }
+
+  .appCard:hover .appIconWrapper {
+    transform: none;
+  }
+}
+
