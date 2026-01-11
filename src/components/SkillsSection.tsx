@@ -51,19 +51,43 @@ const skillCategories = [
   },
 ];
 
+// Quick skills list
+const quickSkills = [
+  "Redux",
+  "Zustand",
+  "Framer Motion",
+  "Sass",
+  "Webpack",
+  "Jest",
+  "Cypress",
+  "Firebase",
+  "Supabase",
+  "Linux",
+];
+
 // Simple icon components for visual interest
 const CategoryIcon = ({ category }: { category: string }) => {
   switch (category) {
     case "frontend":
       return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <rect x="3" y="3" width="18" height="18" rx="2" />
           <path d="M9 9l3 3-3 3M15 15h3" />
         </svg>
       );
     case "backend":
       return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M4 6h16M4 12h16M4 18h16" />
           <circle cx="8" cy="6" r="1" fill="currentColor" />
           <circle cx="8" cy="12" r="1" fill="currentColor" />
@@ -72,7 +96,12 @@ const CategoryIcon = ({ category }: { category: string }) => {
       );
     case "tools":
       return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
           <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
         </svg>
       );
@@ -87,13 +116,16 @@ export function SkillsSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const headingLineRef = useRef<HTMLDivElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
+  const quickSkillsRef = useRef<HTMLDivElement>(null);
+  const quickTagsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      // Set initial states
-      gsap.set([labelRef.current, headingRef.current, headingLineRef.current], {
-        opacity: 0,
-      });
+      // Set initial states for all elements
+      gsap.set(
+        [labelRef.current, headingRef.current, headingLineRef.current],
+        { opacity: 0 }
+      );
 
       // === Heading Timeline ===
       const headingTl = gsap.timeline({
@@ -123,47 +155,112 @@ export function SkillsSection() {
           "-=0.3"
         );
 
-      // === Category Cards Animation ===
+      // === Category Cards Pop-In Animation ===
       const categoryCards = categoriesRef.current?.querySelectorAll(
         `.${styles.categoryCard}`
       );
 
       if (categoryCards && categoryCards.length > 0) {
+        // Set initial state
+        gsap.set(categoryCards, {
+          opacity: 0,
+          scale: 0.5,
+          y: 60,
+          rotateX: -15,
+        });
+
+        gsap.to(categoryCards, {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "back.out(1.7)", // Bouncy pop-in effect
+          scrollTrigger: {
+            trigger: categoriesRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      }
+
+      // === Category Icons Spin-In ===
+      const categoryIcons = categoriesRef.current?.querySelectorAll(
+        `.${styles.categoryIcon}`
+      );
+
+      if (categoryIcons && categoryIcons.length > 0) {
         gsap.fromTo(
-          categoryCards,
-          { opacity: 0, y: 50, scale: 0.95 },
+          categoryIcons,
+          {
+            opacity: 0,
+            scale: 0,
+            rotation: -180,
+          },
           {
             opacity: 1,
-            y: 0,
             scale: 1,
-            duration: 0.7,
-            stagger: 0.15,
-            ease: "power3.out",
+            rotation: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "back.out(2)",
             scrollTrigger: {
               trigger: categoriesRef.current,
-              start: "top 80%",
+              start: "top 75%",
               toggleActions: "play none none reverse",
             },
           }
         );
       }
 
-      // === Skill Bars Animation ===
+      // === Skill Items Pop-In with Stagger ===
+      const skillItems = categoriesRef.current?.querySelectorAll(
+        `.${styles.skillItem}`
+      );
+
+      if (skillItems && skillItems.length > 0) {
+        gsap.fromTo(
+          skillItems,
+          {
+            opacity: 0,
+            scale: 0.8,
+            x: -30,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: 0.04, // Fast stagger for many items
+            ease: "back.out(1.4)",
+            scrollTrigger: {
+              trigger: categoriesRef.current,
+              start: "top 70%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+
+      // === Skill Progress Bars Animation ===
       const skillBars = categoriesRef.current?.querySelectorAll(
         `.${styles.skillProgress}`
       );
 
       if (skillBars && skillBars.length > 0) {
-        skillBars.forEach((bar) => {
+        skillBars.forEach((bar, index) => {
           const level = bar.getAttribute("data-level") || "0";
 
           gsap.fromTo(
             bar,
-            { width: "0%" },
+            { width: "0%", opacity: 0 },
             {
               width: `${level}%`,
-              duration: 1.2,
-              ease: "power3.out",
+              opacity: 1,
+              duration: 1.5,
+              delay: index * 0.03, // Slight delay between bars
+              ease: "power4.out",
               scrollTrigger: {
                 trigger: bar,
                 start: "top 90%",
@@ -174,24 +271,80 @@ export function SkillsSection() {
         });
       }
 
-      // === Skill Items Stagger ===
-      const skillItems = categoriesRef.current?.querySelectorAll(
-        `.${styles.skillItem}`
+      // === Skill Level Counter Animation ===
+      const skillLevels = categoriesRef.current?.querySelectorAll(
+        `.${styles.skillLevel}`
       );
 
-      if (skillItems && skillItems.length > 0) {
+      if (skillLevels && skillLevels.length > 0) {
+        skillLevels.forEach((levelEl) => {
+          const text = levelEl.textContent || "0%";
+          const targetNum = parseInt(text.replace("%", ""), 10);
+          const counter = { value: 0 };
+
+          ScrollTrigger.create({
+            trigger: levelEl,
+            start: "top 90%",
+            onEnter: () => {
+              gsap.to(counter, {
+                value: targetNum,
+                duration: 1.5,
+                ease: "power2.out",
+                onUpdate: () => {
+                  levelEl.textContent = `${Math.round(counter.value)}%`;
+                },
+              });
+            },
+            onLeaveBack: () => {
+              counter.value = 0;
+              levelEl.textContent = "0%";
+            },
+          });
+        });
+      }
+
+      // === Quick Skills Section Animation ===
+      if (quickSkillsRef.current) {
         gsap.fromTo(
-          skillItems,
-          { opacity: 0, x: -20 },
+          quickSkillsRef.current,
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
-            x: 0,
-            duration: 0.4,
-            stagger: 0.05,
+            y: 0,
+            duration: 0.6,
             ease: "power2.out",
             scrollTrigger: {
-              trigger: categoriesRef.current,
-              start: "top 75%",
+              trigger: quickSkillsRef.current,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+
+      // === Quick Tags Pop-In Animation ===
+      const quickTags = quickTagsRef.current?.querySelectorAll(
+        `.${styles.quickTag}`
+      );
+
+      if (quickTags && quickTags.length > 0) {
+        gsap.fromTo(
+          quickTags,
+          {
+            opacity: 0,
+            scale: 0.5,
+            y: 20,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.06,
+            ease: "back.out(2)",
+            scrollTrigger: {
+              trigger: quickTagsRef.current,
+              start: "top 90%",
               toggleActions: "play none none reverse",
             },
           }
@@ -259,21 +412,10 @@ export function SkillsSection() {
         </div>
 
         {/* Quick skills tags */}
-        <div className={styles.quickSkills}>
+        <div ref={quickSkillsRef} className={styles.quickSkills}>
           <h4 className={styles.quickSkillsTitle}>Also familiar with</h4>
-          <div className={styles.quickSkillsTags}>
-            {[
-              "Redux",
-              "Zustand",
-              "Framer Motion",
-              "Sass",
-              "Webpack",
-              "Jest",
-              "Cypress",
-              "Firebase",
-              "Supabase",
-              "Linux",
-            ].map((skill) => (
+          <div ref={quickTagsRef} className={styles.quickSkillsTags}>
+            {quickSkills.map((skill) => (
               <span key={skill} className={styles.quickTag}>
                 {skill}
               </span>
@@ -286,4 +428,3 @@ export function SkillsSection() {
 }
 
 export default SkillsSection;
-
