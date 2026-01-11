@@ -16,7 +16,9 @@ export { SkillsSection } from "./SkillsSection";
 export { OisbAppsSection } from "./OisbAppsSection";
 export { ContactSection } from "./ContactSection";
 
+// Layout Components
+export { Footer } from "./Footer";
+
 // Export components here as they are created
 // export { Header } from "./Header";
-// export { Footer } from "./Footer";
 

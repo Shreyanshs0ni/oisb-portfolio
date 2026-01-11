@@ -6,6 +6,7 @@ import {
   SkillsSection,
   OisbAppsSection,
   ContactSection,
+  Footer,
 } from "@/components";
 
 export default function Home() {
@@ -31,6 +32,9 @@ export default function Home() {
 
       {/* Contact Section */}
       <ContactSection />
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 }
