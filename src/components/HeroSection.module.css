@@ -13,9 +13,8 @@
   justify-content: center;
   padding: 2rem 1.5rem;
   position: relative;
-  background: var(--background);
+  background: transparent; /* Transparent to show Three.js */
   overflow: hidden;
-  transition: background-color 0.3s ease;
 }
 
 /* Subtle gradient overlay for depth */
@@ -399,11 +398,10 @@
   }
 }
 
-/* === Dark mode adjustments (already dark, but for completeness) === */
+/* === Theme adjustments === */
 @media (prefers-color-scheme: light) {
-  /* Force dark theme regardless of system preference */
   .hero {
-    background: var(--background);
+    background: transparent;
   }
 }
 

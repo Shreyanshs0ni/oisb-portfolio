@@ -111,10 +111,13 @@ html {
   /* Prevent font size inflation on mobile */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Background for Three.js to render on top of */
+  background-color: var(--background);
+  transition: background-color 0.3s ease;
 }
 
 body {
-  background-color: var(--background);
+  background-color: transparent; /* Transparent to show Three.js background */
   color: var(--foreground);
   font-family: var(--font-sf-pro), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
   line-height: 1.6;
@@ -131,7 +134,7 @@ body {
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1;
   /* Smooth theme transition */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 /* Main content wrapper for sticky footer */
@@ -201,7 +204,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {

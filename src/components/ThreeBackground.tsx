@@ -265,7 +265,8 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 -z-10 pointer-events-none ${className}`}
+      className={`fixed inset-0 pointer-events-none ${className}`}
+      style={{ zIndex: -1 }}
       aria-hidden="true"
     />
   );

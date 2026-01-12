@@ -8,9 +8,8 @@
 .skills {
   min-height: 100vh;
   padding: 6rem 1.5rem;
-  background: var(--background);
+  background: transparent; /* Transparent to show Three.js */
   position: relative;
-  transition: background-color 0.3s ease;
 }
 
 /* Top border gradient */
