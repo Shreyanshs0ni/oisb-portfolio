@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
 /**
- * Ultra-Minimal Color Palette
- * Default: Pure Black & White
- * Orange Mode: Adds orange accent
- * Light Mode: Inverts colors
+ * Color Palette
+ * Black background, white text, orange accent
  */
 :root {
   /* Core Colors */
@@ -12,15 +10,15 @@
   --white: #FFFFFF;
   --orange: #FF5F1F;
   
-  /* Default: Pure Black & White (accent is white) */
-  --accent: var(--white);
+  /* Theme Colors */
+  --accent: var(--orange);
   --background: var(--black);
   --foreground: var(--white);
   --primary: var(--accent);
   
-  /* Accent Variations (white by default) */
-  --accent-dim: rgba(255, 255, 255, 0.6);
-  --accent-glow: rgba(255, 255, 255, 0.15);
+  /* Accent Variations */
+  --accent-dim: rgba(255, 95, 31, 0.6);
+  --accent-glow: rgba(255, 95, 31, 0.15);
   
   /* Text Variations */
   --text-primary: var(--white);
@@ -39,47 +37,8 @@
   
   /* Shadows & Glows */
   --shadow-color: rgba(0, 0, 0, 0.5);
-  --glow-color: rgba(255, 255, 255, 0.15);
+  --glow-color: rgba(255, 95, 31, 0.15);
   --shimmer-color: rgba(255, 255, 255, 0.3);
-}
-
-/* Orange Mode: Adds orange accent */
-:root.orange-mode {
-  --accent: var(--orange);
-  --accent-dim: rgba(255, 95, 31, 0.6);
-  --accent-glow: rgba(255, 95, 31, 0.15);
-}
-
-/* Light Mode: Inverts colors */
-:root.light-mode {
-  --background: var(--white);
-  --foreground: var(--black);
-  --accent: var(--black);
-  --text-primary: var(--black);
-  --text-muted: rgba(0, 0, 0, 0.7);
-  --text-subtle: rgba(0, 0, 0, 0.4);
-  --border-subtle: rgba(0, 0, 0, 0.1);
-  --border-visible: rgba(0, 0, 0, 0.2);
-  --border-strong: rgba(0, 0, 0, 0.4);
-  --accent-dim: rgba(0, 0, 0, 0.6);
-  --accent-glow: rgba(0, 0, 0, 0.15);
-  
-  /* Inverted Card Backgrounds */
-  --card-bg: linear-gradient(180deg, rgba(245, 245, 245, 1) 0%, rgba(235, 235, 235, 1) 100%);
-  --card-bg-hover: rgba(0, 0, 0, 0.03);
-  --card-overlay: rgba(0, 0, 0, 0.08);
-  
-  /* Inverted Shadows & Glows */
-  --shadow-color: rgba(0, 0, 0, 0.15);
-  --glow-color: rgba(0, 0, 0, 0.1);
-  --shimmer-color: rgba(0, 0, 0, 0.2);
-}
-
-/* Light Mode + Orange Mode */
-:root.light-mode.orange-mode {
-  --accent: var(--orange);
-  --accent-dim: rgba(255, 95, 31, 0.6);
-  --accent-glow: rgba(255, 95, 31, 0.15);
 }
 
 /* Tailwind Theme Integration */
@@ -89,8 +48,9 @@
   --color-accent: var(--accent);
   --color-accent-dim: var(--accent-dim);
   --color-accent-glow: var(--accent-glow);
-  --font-sans: var(--font-sf-pro), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
-  --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-heading: var(--font-bodoni), Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 /**
@@ -108,33 +68,26 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent font size inflation on mobile */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  /* Background for Three.js to render on top of */
   background-color: var(--background);
-  transition: background-color 0.3s ease;
 }
 
 body {
-  background-color: transparent; /* Transparent to show Three.js background */
+  background-color: transparent;
   color: var(--foreground);
-  font-family: var(--font-sf-pro), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  font-family: var(--font-jost), system-ui, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
-  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  min-height: 100dvh;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  /* Improve touch scrolling on iOS */
   -webkit-overflow-scrolling: touch;
-  /* Better font rendering */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1, "liga" 1;
-  /* Smooth theme transition */
-  transition: color 0.3s ease;
 }
 
 /* Main content wrapper for sticky footer */
@@ -153,10 +106,11 @@ footer {
  * Typography
  */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bodoni), Georgia, serif;
   color: var(--text-primary);
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
@@ -263,7 +217,7 @@ a:hover {
                0 0 20px var(--accent-glow);
 }
 
-/* Gradient Line (Orange to transparent) */
+/* Gradient Line */
 .gradient-line {
   background: linear-gradient(
     90deg,
@@ -341,7 +295,6 @@ textarea,
 button {
   font-family: inherit;
   font-size: inherit;
-  /* Minimum touch target size (44px recommended by Apple/Google) */
   min-height: 44px;
 }
 
@@ -352,7 +305,6 @@ textarea {
   color: var(--foreground);
   padding: 0.75rem 1rem;
   transition: border-color 0.2s ease;
-  /* Prevent zoom on input focus (iOS) */
   font-size: 16px;
 }
 
@@ -377,12 +329,9 @@ textarea::placeholder {
 /* Touch-friendly interactive elements */
 a,
 button {
-  /* Ensure minimum touch target */
   min-height: 44px;
-  /* Prevent text selection on buttons */
   -webkit-user-select: none;
   user-select: none;
-  /* Remove tap highlight on mobile */
   -webkit-tap-highlight-color: transparent;
 }
 

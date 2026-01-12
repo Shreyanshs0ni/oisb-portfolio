@@ -10,19 +10,10 @@ interface ThreeBackgroundProps {
 // Color constants
 const ORANGE = 0xff5f1f;
 const WHITE = 0xffffff;
-const BLACK = 0x000000;
 
 export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const frameIdRef = useRef<number>(0);
-  const materialsRef = useRef<{
-    particles: THREE.PointsMaterial | null;
-    ico1: THREE.MeshBasicMaterial | null;
-    ico2: THREE.MeshBasicMaterial | null;
-    lines: THREE.LineBasicMaterial | null;
-  }>({ particles: null, ico1: null, ico2: null, lines: null });
 
   useEffect(() => {
     // SSR guard - only run on client
@@ -32,7 +23,6 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
 
     // Scene setup
     const scene = new THREE.Scene();
-    sceneRef.current = scene;
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
@@ -46,29 +36,14 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
-      alpha: true, // Transparent background
+      alpha: true,
     });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0); // Transparent
-    rendererRef.current = renderer;
+    renderer.setClearColor(0x000000, 0);
 
     // Append canvas to container
     container.appendChild(renderer.domElement);
-
-    // Helper to get current theme colors
-    const getThemeColors = () => {
-      const root = document.documentElement;
-      const isLightMode = root.classList.contains("light-mode");
-      const isOrangeMode = root.classList.contains("orange-mode");
-
-      const accentColor = isOrangeMode ? ORANGE : isLightMode ? BLACK : WHITE;
-      const secondaryColor = isLightMode ? BLACK : WHITE;
-
-      return { accentColor, secondaryColor, isLightMode };
-    };
-
-    const { accentColor, secondaryColor } = getThemeColors();
 
     // Create floating particles/points
     const particlesGeometry = new THREE.BufferGeometry();
@@ -76,9 +51,9 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     const positions = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 10; // x
-      positions[i + 1] = (Math.random() - 0.5) * 10; // y
-      positions[i + 2] = (Math.random() - 0.5) * 10; // z
+      positions[i] = (Math.random() - 0.5) * 10;
+      positions[i + 1] = (Math.random() - 0.5) * 10;
+      positions[i + 2] = (Math.random() - 0.5) * 10;
     }
 
     particlesGeometry.setAttribute(
@@ -87,97 +62,54 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     );
 
     const particlesMaterial = new THREE.PointsMaterial({
-      color: accentColor,
+      color: ORANGE,
       size: 0.02,
       transparent: true,
       opacity: 0.6,
       sizeAttenuation: true,
     });
-    materialsRef.current.particles = particlesMaterial;
 
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particles);
 
-    // Create wireframe icosahedron (subtle geometric shape)
+    // Create wireframe icosahedron
     const icoGeometry = new THREE.IcosahedronGeometry(1.5, 1);
     const icoMaterial = new THREE.MeshBasicMaterial({
-      color: accentColor,
+      color: ORANGE,
       wireframe: true,
       transparent: true,
       opacity: 0.15,
     });
-    materialsRef.current.ico1 = icoMaterial;
     const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
     scene.add(icosahedron);
 
-    // Create a second, smaller icosahedron rotating opposite
+    // Create a second, smaller icosahedron
     const icoGeometry2 = new THREE.IcosahedronGeometry(0.8, 1);
     const icoMaterial2 = new THREE.MeshBasicMaterial({
-      color: secondaryColor,
+      color: WHITE,
       wireframe: true,
       transparent: true,
       opacity: 0.08,
     });
-    materialsRef.current.ico2 = icoMaterial2;
     const icosahedron2 = new THREE.Mesh(icoGeometry2, icoMaterial2);
     scene.add(icosahedron2);
 
-    // Create connecting lines (subtle grid effect)
+    // Create connecting lines
     const linesGeometry = new THREE.BufferGeometry();
     const linePositions = new Float32Array([
-      -5,
-      0,
-      -2,
-      5,
-      0,
-      -2, // horizontal line
-      0,
-      -5,
-      -2,
-      0,
-      5,
-      -2, // vertical line
+      -5, 0, -2, 5, 0, -2, 0, -5, -2, 0, 5, -2,
     ]);
     linesGeometry.setAttribute(
       "position",
       new THREE.BufferAttribute(linePositions, 3)
     );
     const linesMaterial = new THREE.LineBasicMaterial({
-      color: accentColor,
+      color: ORANGE,
       transparent: true,
       opacity: 0.1,
     });
-    materialsRef.current.lines = linesMaterial;
     const lines = new THREE.LineSegments(linesGeometry, linesMaterial);
     scene.add(lines);
-
-    // Watch for theme changes
-    const updateColors = () => {
-      const { accentColor, secondaryColor } = getThemeColors();
-      if (materialsRef.current.particles) {
-        materialsRef.current.particles.color.setHex(accentColor);
-      }
-      if (materialsRef.current.ico1) {
-        materialsRef.current.ico1.color.setHex(accentColor);
-      }
-      if (materialsRef.current.ico2) {
-        materialsRef.current.ico2.color.setHex(secondaryColor);
-      }
-      if (materialsRef.current.lines) {
-        materialsRef.current.lines.color.setHex(accentColor);
-      }
-    };
-
-    // Observe class changes on html element
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          updateColors();
-        }
-      });
-    });
-
-    observer.observe(document.documentElement, { attributes: true });
 
     // Mouse interaction
     let mouseX = 0;
@@ -242,7 +174,6 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(frameIdRef.current);
-      observer.disconnect();
 
       // Dispose of Three.js resources
       particlesGeometry.dispose();

@@ -6,35 +6,24 @@ import { gsap } from "gsap";
 import styles from "./HeroSection.module.css";
 
 export function HeroSection() {
-  // Refs for animation targets
   const sectionRef = useRef<HTMLElement>(null);
-  const accentLineRef = useRef<HTMLDivElement>(null);
-  const taglineRef = useRef<HTMLSpanElement>(null);
   const greetingRef = useRef<HTMLSpanElement>(null);
-  const nameRef = useRef<HTMLSpanElement>(null);
-  const roleRef = useRef<HTMLSpanElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const role1Ref = useRef<HTMLSpanElement>(null);
+  const role2Ref = useRef<HTMLSpanElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
-  // GSAP animations on mount
   useGSAP(
     () => {
-      // Set initial states
       gsap.set(
         [
-          accentLineRef.current,
-          taglineRef.current,
           greetingRef.current,
-          nameRef.current,
-          roleRef.current,
-          subtitleRef.current,
+          role1Ref.current,
+          role2Ref.current,
           scrollIndicatorRef.current,
-        ],
+        ].filter(Boolean),
         { opacity: 0 }
       );
 
-      // Create master timeline
       const tl = gsap.timeline({
         defaults: {
           ease: "power3.out",
@@ -42,130 +31,40 @@ export function HeroSection() {
         },
       });
 
-      // Animation sequence
       tl
-        // 1. Accent line draws in from center
-        .fromTo(
-          accentLineRef.current,
-          { scaleX: 0, opacity: 1 },
-          { scaleX: 1, duration: 0.6, ease: "power2.inOut" }
-        )
-
-        // 2. Tagline fades in and slides down
-        .fromTo(
-          taglineRef.current,
-          { opacity: 0, y: -20 },
-          { opacity: 1, y: 0, duration: 0.6 },
-          "-=0.2"
-        )
-
-        // 3. Greeting slides up
+        // 1. Greeting fades in
         .fromTo(
           greetingRef.current,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.3"
-        )
-
-        // 4. Name pops in with scale and glow effect
-        .fromTo(
-          nameRef.current,
-          {
-            opacity: 0,
-            scale: 0.8,
-            filter: "blur(10px)",
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          },
-          "-=0.4"
-        )
-
-        // 5. Role slides up with slight delay
-        .fromTo(
-          roleRef.current,
           { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.6 },
+          { opacity: 1, y: 0, duration: 0.6 }
+        )
+
+        // 2. First role slides up
+        .fromTo(
+          role1Ref.current,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power4.out" },
           "-=0.2"
         )
 
-        // 6. Subtitle fades in
+        // 3. Second role slides up
         .fromTo(
-          subtitleRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7 },
-          "-=0.3"
+          role2Ref.current,
+          { opacity: 0, y: 60, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power4.out" },
+          "-=0.5"
         )
 
-        // 7. CTA buttons stagger in from bottom
-        .fromTo(
-          ctaRef.current?.children || [],
-          {
-            opacity: 0,
-            y: 30,
-            scale: 0.9,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-            stagger: 0.15,
-            ease: "back.out(1.4)",
-          },
-          "-=0.3"
-        )
-
-        // 8. Scroll indicator fades in last
+        // 4. Scroll indicator
         .fromTo(
           scrollIndicatorRef.current,
           { opacity: 0, y: -10 },
           { opacity: 1, y: 0, duration: 0.5 },
           "-=0.2"
         );
-
-      // Subtle floating animation for the name (continuous)
-      gsap.to(nameRef.current, {
-        y: -5,
-        duration: 2,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 2, // Start after intro animation
-      });
-
-      // Pulse glow effect on name (continuous) - uses CSS custom properties
-      // The effect will use the current accent color via CSS variables
-      const computedStyle = getComputedStyle(document.documentElement);
-      const accentDim =
-        computedStyle.getPropertyValue("--accent-dim").trim() ||
-        "rgba(255, 255, 255, 0.6)";
-      const accentGlow =
-        computedStyle.getPropertyValue("--accent-glow").trim() ||
-        "rgba(255, 255, 255, 0.15)";
-
-      gsap.to(nameRef.current, {
-        textShadow: `0 0 30px ${accentDim}, 0 0 60px ${accentGlow}`,
-        duration: 1.5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-        delay: 2,
-      });
     },
     { scope: sectionRef }
   );
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <section
@@ -186,75 +85,27 @@ export function HeroSection() {
         >
           <source src="/fluid.mp4" type="video/mp4" />
         </video>
-        <div className={styles.videoOverlay} />
       </div>
 
-      {/* Content wrapper */}
+      {/* Content */}
       <div className={styles.content}>
-        {/* Decorative accent line */}
-        <div ref={accentLineRef} className={styles.accentLine} />
+        <span ref={greetingRef} className={styles.greeting}>
+          Hey! I&apos;m Shreyansh
+        </span>
 
-        {/* Main heading */}
         <h1 className={styles.heading}>
-          <span ref={taglineRef} className={styles.tagline}>
-            🚀 Welcome to my space
+          <span ref={role1Ref} className={styles.role}>
+            FULL STACK DEVELOPER
           </span>
-          <span ref={greetingRef} className={styles.greeting}>
-            Hey! I&apos;m{" "}
-            <span ref={nameRef} className={styles.name}>
-              Shreyansh
-            </span>
-          </span>
-          <span ref={roleRef} className={styles.role}>
-            Developer & Designer
+          <span ref={role2Ref} className={styles.role}>
+            UI/UX DESIGNER
           </span>
         </h1>
-
-        {/* Subtitle / Role description */}
-        <p ref={subtitleRef} className={styles.subtitle}>
-          I craft{" "}
-          <span className={styles.highlight}>
-            beautiful digital experiences
-          </span>{" "}
-          and turn wild ideas into{" "}
-          <span className={styles.highlight}>awesome apps</span>.
-          <br />
-          Let&apos;s build something amazing together! ✨
-        </p>
-
-        {/* CTA Buttons */}
-        <div ref={ctaRef} className={styles.ctaContainer}>
-          <button
-            onClick={() => scrollToSection("projects")}
-            className={styles.btnPrimary}
-            aria-label="View my projects"
-          >
-            View Projects
-          </button>
-          <button
-            onClick={() => scrollToSection("contact")}
-            className={styles.btnOutline}
-            aria-label="Contact me"
-          >
-            Contact Me
-          </button>
-        </div>
       </div>
 
       {/* Scroll indicator */}
       <div ref={scrollIndicatorRef} className={styles.scrollIndicator}>
         <span className={styles.scrollText}>Scroll</span>
-        <svg
-          className={styles.scrollIcon}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M12 5v14M19 12l-7 7-7-7" />
-        </svg>
       </div>
     </section>
   );

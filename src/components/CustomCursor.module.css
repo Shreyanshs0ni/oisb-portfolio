@@ -65,26 +65,6 @@
   filter: blur(calc(var(--i, 0) * 0.5px));
 }
 
-/* Light mode */
-:global(.light-mode) .trail {
-  background: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.4) 40%,
-    transparent 70%
-  );
-}
-
-:global(.light-mode.orange-mode) .trail,
-:global(.orange-mode) .trail {
-  background: radial-gradient(
-    circle,
-    hsl(calc(20 + var(--i, 0) * 4), 100%, 50%) 0%,
-    hsl(calc(20 + var(--i, 0) * 4), 100%, 45%) 40%,
-    transparent 70%
-  );
-}
-
 /* Hide on pure touch devices */
 @media (hover: none) and (pointer: coarse) {
   .wrapper {

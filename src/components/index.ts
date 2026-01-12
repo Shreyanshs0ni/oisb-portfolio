@@ -5,10 +5,8 @@
  * Example: import { Header, Footer } from "@/components";
  */
 
-// Theme
-export { ThemeProvider, useTheme } from "./ThemeProvider";
-export { ThemeControls } from "./ThemeControls";
-export { ThemeWrapper } from "./ThemeWrapper";
+// Navigation
+export { Navbar } from "./Navbar";
 
 // 3D Background
 export { ThreeBackground } from "./ThreeBackground";
@@ -26,7 +24,3 @@ export { ContactSection } from "./ContactSection";
 
 // Layout Components
 export { Footer } from "./Footer";
-
-// Export components here as they are created
-// export { Header } from "./Header";
-

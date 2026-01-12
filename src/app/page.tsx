@@ -1,4 +1,5 @@
 import {
+  Navbar,
   ThreeBackground,
   CustomCursor,
   HeroSection,
@@ -15,6 +16,9 @@ export default function Home() {
     <>
       {/* Custom Cursor */}
       <CustomCursor />
+
+      {/* Navigation */}
+      <Navbar />
 
       {/* 3D Background */}
       <ThreeBackground />

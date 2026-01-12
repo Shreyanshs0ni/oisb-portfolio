@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ThemeWrapper } from "@/components";
+import { Jost, Bodoni_Moda } from "next/font/google";
 import "./globals.css";
 
-// Load local SF Pro font (variable font with multiple weights)
-const sfPro = localFont({
-  src: "../fonts/sfPro.ttf",
-  variable: "--font-sf-pro",
+// Jost - Main body font
+const jost = Jost({
+  subsets: ["latin"],
+  variable: "--font-jost",
   display: "swap",
-  weight: "100 900", // Variable font weight range
+});
+
+// Bodoni Moda - Headings font
+const bodoniModa = Bodoni_Moda({
+  subsets: ["latin"],
+  variable: "--font-bodoni",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -22,11 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${sfPro.variable}`}>
+    <html lang="en" className={`${jost.variable} ${bodoniModa.variable}`}>
       <body className="antialiased">
-        <ThemeWrapper>
-          {children}
-        </ThemeWrapper>
+        {children}
       </body>
     </html>
   );
