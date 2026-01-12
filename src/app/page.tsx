@@ -1,5 +1,6 @@
 import {
   ThreeBackground,
+  CustomCursor,
   HeroSection,
   AboutSection,
   ProjectsSection,
@@ -12,6 +13,9 @@ import {
 export default function Home() {
   return (
     <>
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       {/* 3D Background */}
       <ThreeBackground />
 

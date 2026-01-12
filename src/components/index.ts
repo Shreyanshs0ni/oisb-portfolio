@@ -13,6 +13,9 @@ export { ThemeWrapper } from "./ThemeWrapper";
 // 3D Background
 export { ThreeBackground } from "./ThreeBackground";
 
+// Custom Cursor
+export { CustomCursor } from "./CustomCursor";
+
 // Sections
 export { HeroSection } from "./HeroSection";
 export { AboutSection } from "./AboutSection";

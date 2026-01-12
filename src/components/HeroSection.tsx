@@ -174,6 +174,21 @@ export function HeroSection() {
       className={styles.hero}
       aria-label="Hero section"
     >
+      {/* Video Background */}
+      <div className={styles.videoWrapper}>
+        <video
+          className={styles.video}
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+        >
+          <source src="/fluid.mp4" type="video/mp4" />
+        </video>
+        <div className={styles.videoOverlay} />
+      </div>
+
       {/* Content wrapper */}
       <div className={styles.content}>
         {/* Decorative accent line */}

@@ -451,3 +451,16 @@ button {
     padding-bottom: calc(1.75rem + env(safe-area-inset-bottom));
   }
 }
+
+/**
+ * Custom Cursor - Hide default cursor on desktop devices
+ */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  a, button, input, textarea, select, [role="button"] {
+    cursor: none !important;
+  }
+}
