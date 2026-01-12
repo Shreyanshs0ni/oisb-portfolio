@@ -14,63 +14,74 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
-    title: "Project Alpha",
+    title: "Moddern",
     description:
       "A modern web application built with React and Node.js featuring real-time data synchronization.",
-    tags: ["React", "Node.js", "Socket.io"],
-    image: "/projects/project-1.svg",
-    color: "#FFFFFF",
-    link: "#",
+    tags: ["React", "GSAP", "Tailwind CSS"],
+    image: "/projects/Moddern.png",
+    color: "#FF6B35",
+    link: "https://moddern.vercel.app",
   },
   {
     id: 2,
-    title: "Project Beta",
+    title: "Golden Pour",
     description:
       "E-commerce platform with seamless checkout experience and inventory management system.",
-    tags: ["Next.js", "Stripe", "PostgreSQL"],
-    image: "/projects/project-2.svg",
+    tags: ["React.js", "GSAP", "Tailwind CSS", "FFmpeg"],
+    image: "/projects/GoldenPour.png",
     color: "#FF6B35",
-    link: "#",
+    link: "https://golden-pour.vercel.app",
   },
   {
     id: 3,
-    title: "Project Gamma",
+    title: "Nike (E-Commerce)",
     description:
       "Interactive data visualization dashboard for analytics and business intelligence.",
-    tags: ["D3.js", "TypeScript", "AWS"],
-    image: "/projects/project-3.svg",
-    color: "#FFB347",
-    link: "#",
+    tags: [
+      "React",
+      "Tailwind CSS",
+      "bcrypt",
+      "jsonwebtoken",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+      "Stripe",
+      "Cloudinary",
+    ],
+    image: "/projects/Nike.png",
+    color: "#FF6B35",
+    link: "https://nike-frontend-navy.vercel.app",
   },
   {
     id: 4,
-    title: "Project Delta",
+    title: "Iphone 15 Pro",
     description:
       "Mobile-first progressive web app with offline capabilities and push notifications.",
-    tags: ["PWA", "Service Workers", "IndexedDB"],
-    image: "/projects/project-4.svg",
-    color: "#FF8C00",
-    link: "#",
+    tags: ["React", "Tailwind CSS", "GSAP", "Three.js"],
+    image: "/projects/Iphone15pro.png",
+    color: "#FF6B35",
+    link: "https://apple-website-ruby.vercel.app",
   },
   {
     id: 5,
-    title: "Project Epsilon",
+    title: "Expense Tracker",
     description:
       "AI-powered content management system with natural language processing features.",
-    tags: ["Python", "TensorFlow", "FastAPI"],
-    image: "/projects/project-5.svg",
-    color: "#FFA07A",
-    link: "#",
+    tags: ["Next.js", "Clerk", "Neon DB", "Tailwind CSS", "Drizzle ORM"],
+    image: "/projects/Expense.png",
+    color: "#FF6B35",
+    link: "https://expense-tracker-alpha-lac.vercel.app",
   },
   {
     id: 6,
-    title: "Project Zeta",
+    title: "Three T-Shirt",
     description:
       "Real-time collaboration tool for remote teams with video conferencing integration.",
-    tags: ["WebRTC", "Redis", "Docker"],
-    image: "/projects/project-6.svg",
-    color: "#FF7F50",
-    link: "#",
+    tags: ["React", "Framer-motion", "Three.js", "Tailwind CSS", "Vercel"],
+    image: "/projects/tshirt.png",
+    color: "#FF6B35",
+    link: "https://tshirt-3js.vercel.app",
   },
 ];
 
@@ -172,7 +183,8 @@ function ProjectCard({ project }: ProjectCardProps) {
     // Title color reset - uses CSS variable
     if (title) {
       const computedStyle = getComputedStyle(document.documentElement);
-      const foregroundColor = computedStyle.getPropertyValue('--foreground').trim() || '#ffffff';
+      const foregroundColor =
+        computedStyle.getPropertyValue("--foreground").trim() || "#ffffff";
       gsap.to(title, {
         color: foregroundColor,
         duration: 0.3,
@@ -201,31 +213,28 @@ function ProjectCard({ project }: ProjectCardProps) {
   }, []);
 
   // Handle mouse move for tilt effect
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLElement>) => {
-      const card = cardRef.current;
-      if (!card) return;
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
 
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-      // Calculate rotation based on mouse position
-      const rotateX = ((y - centerY) / centerY) * -5; // Max 5 degrees
-      const rotateY = ((x - centerX) / centerX) * 5; // Max 5 degrees
+    // Calculate rotation based on mouse position
+    const rotateX = ((y - centerY) / centerY) * -5; // Max 5 degrees
+    const rotateY = ((x - centerX) / centerX) * 5; // Max 5 degrees
 
-      gsap.to(card, {
-        rotateX: rotateX,
-        rotateY: rotateY,
-        duration: 0.3,
-        ease: "power2.out",
-        transformPerspective: 1000,
-      });
-    },
-    []
-  );
+    gsap.to(card, {
+      rotateX: rotateX,
+      rotateY: rotateY,
+      duration: 0.3,
+      ease: "power2.out",
+      transformPerspective: 1000,
+    });
+  }, []);
 
   // Reset tilt on mouse leave
   const handleMouseLeaveWithTilt = useCallback(() => {
@@ -254,7 +263,9 @@ function ProjectCard({ project }: ProjectCardProps) {
       <div
         ref={glowRef}
         className={styles.cardGlow}
-        style={{ background: `radial-gradient(circle at 50% 50%, ${project.color}20 0%, transparent 70%)` }}
+        style={{
+          background: `radial-gradient(circle at 50% 50%, ${project.color}20 0%, transparent 70%)`,
+        }}
       />
 
       {/* Project image/preview */}
@@ -275,6 +286,8 @@ function ProjectCard({ project }: ProjectCardProps) {
         {/* View project button */}
         <a
           href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
           className={styles.viewButton}
           aria-label={`View ${project.title}`}
         >
@@ -322,22 +335,74 @@ function ProjectCard({ project }: ProjectCardProps) {
   );
 }
 
+// View All Button with slide animation
+function ViewAllButton() {
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const bgRef = useRef<HTMLSpanElement>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!bgRef.current) return;
+    // Reset to left and slide in from left
+    gsap.set(bgRef.current, { x: "-100%" });
+    gsap.to(bgRef.current, {
+      x: "0%",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!bgRef.current) return;
+    // Slide out to right
+    gsap.to(bgRef.current, {
+      x: "100%",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
+
+  return (
+    <a
+      ref={buttonRef}
+      href="https://github.com/Shreyanshs0ni?tab=repositories"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.viewAllButton}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span ref={bgRef} className={styles.viewAllButtonBg} />
+      <span className={styles.viewAllButtonText}>View All Projects</span>
+      <svg
+        className={styles.viewAllButtonIcon}
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </a>
+  );
+}
+
 export function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const headingLineRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLUListElement>(null);
 
   useGSAP(
     () => {
       // Set initial states
-      gsap.set(
-        [labelRef.current, headingRef.current, headingLineRef.current],
-        {
-          opacity: 0,
-        }
-      );
+      gsap.set([labelRef.current, headingRef.current], {
+        opacity: 0,
+      });
 
       // === Heading Timeline ===
       const headingTl = gsap.timeline({
@@ -359,12 +424,6 @@ export function ProjectsSection() {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
           "-=0.2"
-        )
-        .fromTo(
-          headingLineRef.current,
-          { opacity: 0, scaleX: 0 },
-          { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.inOut" },
-          "-=0.3"
         );
 
       // === Project Cards Scroll Animation ===
@@ -412,7 +471,6 @@ export function ProjectsSection() {
           <h2 ref={headingRef} className={styles.heading}>
             Featured <span className={styles.accent}>Projects</span>
           </h2>
-          <div ref={headingLineRef} className={styles.headingLine} />
         </div>
 
         {/* Projects grid */}
@@ -426,22 +484,7 @@ export function ProjectsSection() {
 
         {/* View all button */}
         <div className={styles.viewAll}>
-          <a href="#" className={styles.viewAllButton}>
-            View All Projects
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
+          <ViewAllButton />
         </div>
       </div>
     </section>

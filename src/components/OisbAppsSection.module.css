@@ -12,22 +12,6 @@
   position: relative;
 }
 
-/* Top border gradient */
-.oisbApps::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--accent) 50%,
-    transparent 100%
-  );
-  opacity: 0.4;
-}
 
 .container {
   max-width: 72rem; /* 1152px */

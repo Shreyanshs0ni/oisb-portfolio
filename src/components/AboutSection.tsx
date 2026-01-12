@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ThreeBackground } from "./ThreeBackground";
 import styles from "./AboutSection.module.css";
 
 // Register ScrollTrigger plugin
@@ -243,7 +244,9 @@ export function AboutSection() {
                   duration: 2,
                   ease: "power2.out",
                   onUpdate: () => {
-                    numEl.textContent = `${Math.round(counter.value)}${hasPlus ? "+" : ""}`;
+                    numEl.textContent = `${Math.round(counter.value)}${
+                      hasPlus ? "+" : ""
+                    }`;
                   },
                 });
               },
@@ -266,6 +269,11 @@ export function AboutSection() {
       className={styles.about}
       aria-label="About section"
     >
+      {/* Three.js Background - only for this section */}
+      <div className={styles.threeWrapper}>
+        <ThreeBackground contained />
+      </div>
+
       <div className={styles.container}>
         {/* Section heading */}
         <div className={styles.headingWrapper}>
@@ -275,7 +283,6 @@ export function AboutSection() {
           <h2 ref={headingRef} className={styles.heading}>
             About <span className={styles.accent}>Me</span>
           </h2>
-          <div ref={headingLineRef} className={styles.headingLine} />
         </div>
 
         {/* Content grid */}
@@ -283,18 +290,14 @@ export function AboutSection() {
           {/* Image side */}
           <div ref={imageRef} className={styles.imageWrapper}>
             <div className={styles.imageContainer}>
-              {/* Placeholder image - replace with actual photo */}
               <Image
-                src="/profile-placeholder.svg"
+                src="/PP1.jpg"
                 alt="Shreyansh - Developer & Designer"
                 width={400}
-                height={400}
+                height={500}
                 className={styles.image}
                 priority={false}
               />
-              {/* Decorative frame */}
-              <div className={styles.imageFrame} />
-              <div className={styles.imageGlow} />
             </div>
           </div>
 
@@ -302,22 +305,22 @@ export function AboutSection() {
           <div ref={bioRef} className={styles.bioWrapper}>
             <article className={styles.bio}>
               <p className={styles.bioText}>
-                <span className={styles.wave}>👋</span> Hey there! I&apos;m{" "}
+                Hey there! I&apos;m{" "}
                 <strong className={styles.accent}>Shreyansh</strong>, a
                 passionate developer and designer who loves turning creative
                 ideas into reality.
               </p>
               <p className={styles.bioText}>
                 With a keen eye for{" "}
-                <span className={styles.accent}>design</span> and a love for
-                clean <span className={styles.accent}>code</span>, I specialize
-                in building modern web applications that are not only functional
-                but also delightful to use.
+                <strong className={styles.accent}>design</strong> and a love for
+                clean <strong className={styles.accent}>code</strong>, I
+                specialize in building modern web/mobile applications that are
+                not only functional but also delightful to use.
               </p>
               <p className={styles.bioText}>
                 When I&apos;m not coding, you&apos;ll find me exploring new
                 technologies, contributing to open-source projects, or sipping
-                coffee while brainstorming the next big thing. ☕
+                coffee while brainstorming the next big thing.
               </p>
 
               {/* Skills/interests tags */}
@@ -341,13 +344,8 @@ export function AboutSection() {
           </div>
           <div className={styles.statDivider} />
           <div className={styles.statItem}>
-            <span className={styles.statNumber}>50+</span>
-            <span className={styles.statLabel}>Projects Completed</span>
-          </div>
-          <div className={styles.statDivider} />
-          <div className={styles.statItem}>
             <span className={styles.statNumber}>20+</span>
-            <span className={styles.statLabel}>Happy Clients</span>
+            <span className={styles.statLabel}>Projects Completed</span>
           </div>
         </div>
       </div>

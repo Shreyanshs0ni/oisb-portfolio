@@ -104,9 +104,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className={styles.divider} />
-
         {/* Bottom section with copyright and links */}
         <div className={styles.bottomSection}>
           <p className={styles.copyright}>

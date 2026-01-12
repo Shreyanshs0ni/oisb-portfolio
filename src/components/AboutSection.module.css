@@ -11,32 +11,55 @@
   align-items: center;
   justify-content: center;
   padding: 6rem 1.5rem;
-  background: transparent; /* Transparent to show Three.js */
+  background: #000000;
   position: relative;
   overflow: hidden;
 }
 
-/* Top border gradient */
+/* Top orange line */
 .about::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--accent) 50%,
-    transparent 100%
-  );
-  opacity: 0.4;
+  height: 0.5px;
+  opacity: 50%;
+  background: var(--accent);
+  z-index: 2;
+}
+
+/* Bottom orange line */
+.about::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 50%;
+  height: 0.5px;
+  background: var(--accent);
+  z-index: 2;
+}
+
+/* Three.js Background Wrapper - positioned right, half visible */
+.threeWrapper {
+  position: absolute;
+  top: 0;
+  right: -30%;
+  bottom: 0;
+  width: 80%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .container {
   max-width: 72rem; /* 1152px */
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* === Section Heading === */
@@ -49,7 +72,7 @@
 .label {
   display: inline-block;
   font-size: 0.875rem;
-  color: var(--accent);
+  color: #fff;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
@@ -65,27 +88,8 @@
 }
 
 .accent {
-  color: var(--accent);
+  color: #fff;
   position: relative;
-}
-
-/* Underline accent for "Me" */
-.accent::after {
-  content: "";
-  position: absolute;
-  bottom: 0.1em;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--accent);
-  opacity: 0.5;
-}
-
-.headingLine {
-  width: 4rem;
-  height: 2px;
-  background: var(--accent);
-  margin: 0 auto;
 }
 
 /* === Two-Column Content Grid === */
@@ -119,97 +123,28 @@
 .imageContainer {
   position: relative;
   width: 220px;
-  height: 220px;
+  height: 350px;
 }
 
 @media (min-width: 640px) {
   .imageContainer {
-    width: 260px;
-    height: 260px;
+    width: 320px;
+    height: 400px;
   }
 }
 
 @media (min-width: 768px) {
   .imageContainer {
-    width: 300px;
-    height: 300px;
+    width: 380px;
+    height: 480px;
   }
 }
 
-/* Circular image */
+/* Image - clean, no decorations */
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 50%; /* Circle shape */
-  position: relative;
-  z-index: 2;
-  filter: grayscale(30%);
-  transition: all 0.4s ease;
-  border: 3px solid transparent;
-}
-
-.imageContainer:hover .image {
-  filter: grayscale(0%);
-  border-color: var(--accent);
-  transform: scale(1.02);
-}
-
-/* Decorative circular frame (offset ring) */
-.imageFrame {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  width: 100%;
-  height: 100%;
-  border: 2px solid var(--accent);
-  border-radius: 50%; /* Circle shape */
-  z-index: 1;
-  opacity: 0.6;
-  transition: all 0.4s ease;
-}
-
-.imageContainer:hover .imageFrame {
-  opacity: 1;
-  transform: translate(0.25rem, 0.25rem);
-}
-
-/* Rotating dashed ring */
-.imageFrame::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  border: 1px dashed var(--accent);
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: rotate 20s linear infinite;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Glow effect behind image */
-.imageGlow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(
-    circle,
-    var(--accent-glow) 0%,
-    var(--accent-glow) 40%,
-    transparent 70%
-  );
-  z-index: 0;
-  filter: blur(40px);
-  border-radius: 50%;
+  object-fit: contain;
 }
 
 /* === Bio Column === */
@@ -223,7 +158,7 @@
 
 .bioText {
   font-size: clamp(1rem, 2vw, 1.125rem);
-  color: var(--text-muted);
+  color: #fff;
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
@@ -246,13 +181,29 @@
 }
 
 @keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60%, 100% { transform: rotate(0deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 /* === Skills Tags === */
@@ -272,8 +223,7 @@
   background: transparent;
   border: 1px solid var(--border-strong);
   border-radius: 9999px;
-  transition: all 0.25s ease;
-  cursor: default;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tag:hover {
@@ -313,7 +263,7 @@
   display: block;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--accent);
+  color: #fff;
   line-height: 1;
   margin-bottom: 0.5rem;
   font-variant-numeric: tabular-nums;
@@ -322,7 +272,7 @@
 .statLabel {
   display: block;
   font-size: 0.8125rem;
-  color: var(--text-muted);
+  color: #fff;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -359,19 +309,19 @@
   .content {
     gap: 2.5rem;
   }
-  
+
   .bioText {
     text-align: center;
   }
-  
+
   .tags {
     justify-content: center;
   }
-  
+
   .stats {
     gap: 1.5rem;
   }
-  
+
   .statItem {
     padding: 0 1.5rem;
   }
@@ -382,20 +332,20 @@
   .about {
     padding: 4rem 1rem;
   }
-  
+
   .heading {
     font-size: 1.75rem;
   }
-  
+
   .imageContainer {
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 280px;
   }
-  
+
   .bioText {
     font-size: 0.9375rem;
   }
-  
+
   .tag {
     padding: 0.4rem 0.875rem;
     font-size: 0.75rem;
@@ -404,11 +354,11 @@
     display: inline-flex;
     align-items: center;
   }
-  
+
   .statNumber {
     font-size: 2rem;
   }
-  
+
   .statLabel {
     font-size: 0.75rem;
   }
@@ -419,13 +369,7 @@
   .wave {
     animation: none;
   }
-  
-  .imageFrame::before {
-    animation: none;
-  }
-  
-  .image,
-  .imageFrame,
+
   .tag {
     transition: none;
   }

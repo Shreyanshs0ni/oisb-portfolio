@@ -5,13 +5,17 @@ import * as THREE from "three";
 
 interface ThreeBackgroundProps {
   className?: string;
+  contained?: boolean;
 }
 
 // Color constants
 const ORANGE = 0xff5f1f;
 const WHITE = 0xffffff;
 
-export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
+export function ThreeBackground({
+  className = "",
+  contained = false,
+}: ThreeBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const frameIdRef = useRef<number>(0);
 
@@ -24,14 +28,14 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     // Scene setup
     const scene = new THREE.Scene();
 
-    // Camera setup
+    // Camera setup - closer for bigger view
     const camera = new THREE.PerspectiveCamera(
       75,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.z = 5;
+    camera.position.z = 4;
 
     // Renderer setup
     const renderer = new THREE.WebGLRenderer({
@@ -72,24 +76,24 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particles);
 
-    // Create wireframe icosahedron
-    const icoGeometry = new THREE.IcosahedronGeometry(1.5, 1);
+    // Create wireframe icosahedron - larger size
+    const icoGeometry = new THREE.IcosahedronGeometry(2, 1);
     const icoMaterial = new THREE.MeshBasicMaterial({
       color: ORANGE,
       wireframe: true,
       transparent: true,
-      opacity: 0.15,
+      opacity: 0.2,
     });
     const icosahedron = new THREE.Mesh(icoGeometry, icoMaterial);
     scene.add(icosahedron);
 
-    // Create a second, smaller icosahedron
-    const icoGeometry2 = new THREE.IcosahedronGeometry(0.8, 1);
+    // Create a second icosahedron - also larger
+    const icoGeometry2 = new THREE.IcosahedronGeometry(1, 1);
     const icoMaterial2 = new THREE.MeshBasicMaterial({
       color: WHITE,
       wireframe: true,
       transparent: true,
-      opacity: 0.08,
+      opacity: 0.1,
     });
     const icosahedron2 = new THREE.Mesh(icoGeometry2, icoMaterial2);
     scene.add(icosahedron2);
@@ -196,8 +200,10 @@ export function ThreeBackground({ className = "" }: ThreeBackgroundProps) {
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 pointer-events-none ${className}`}
-      style={{ zIndex: -1 }}
+      className={`${
+        contained ? "absolute" : "fixed"
+      } inset-0 pointer-events-none ${className}`}
+      style={{ zIndex: contained ? 0 : -1 }}
       aria-hidden="true"
     />
   );

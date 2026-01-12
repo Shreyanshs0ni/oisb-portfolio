@@ -1,7 +1,8 @@
 import {
   Navbar,
-  ThreeBackground,
   CustomCursor,
+  MusicPlayer,
+  HoverSoundProvider,
   HeroSection,
   AboutSection,
   ProjectsSection,
@@ -17,11 +18,14 @@ export default function Home() {
       {/* Custom Cursor */}
       <CustomCursor />
 
+      {/* Hover Sound Effect */}
+      <HoverSoundProvider />
+
+      {/* Music Player */}
+      <MusicPlayer />
+
       {/* Navigation */}
       <Navbar />
-
-      {/* 3D Background */}
-      <ThreeBackground />
 
       {/* Hero Section */}
       <HeroSection />

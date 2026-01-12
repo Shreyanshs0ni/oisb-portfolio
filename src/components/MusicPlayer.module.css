@@ -1,0 +1,126 @@
+.musicButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.musicButton:hover {
+  border-color: var(--accent);
+  background: rgba(255, 95, 31, 0.1);
+  transform: scale(1.08);
+}
+
+.musicButton.playing {
+  border-color: var(--accent);
+}
+
+.iconWrapper {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Play icon */
+.playIcon {
+  width: 14px;
+  height: 14px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Pause icon - two bars */
+.pauseIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 14px;
+}
+
+.pauseBar {
+  width: 3px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Animated equalizer when playing */
+.equalizer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 14px;
+}
+
+.eqBar {
+  width: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  animation: eq 0.8s ease-in-out infinite;
+}
+
+.eqBar:nth-child(1) {
+  height: 6px;
+  animation-delay: 0s;
+}
+
+.eqBar:nth-child(2) {
+  height: 10px;
+  animation-delay: 0.2s;
+}
+
+.eqBar:nth-child(3) {
+  height: 4px;
+  animation-delay: 0.4s;
+}
+
+.eqBar:nth-child(4) {
+  height: 8px;
+  animation-delay: 0.1s;
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .musicButton {
+    width: 40px;
+    height: 40px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .iconWrapper {
+    width: 16px;
+    height: 16px;
+  }
+
+  .playIcon {
+    width: 12px;
+    height: 12px;
+  }
+}

@@ -14,6 +14,12 @@ export { ThreeBackground } from "./ThreeBackground";
 // Custom Cursor
 export { CustomCursor } from "./CustomCursor";
 
+// Music Player
+export { MusicPlayer } from "./MusicPlayer";
+
+// Hover Sound
+export { HoverSoundProvider } from "./HoverSoundProvider";
+
 // Sections
 export { HeroSection } from "./HeroSection";
 export { AboutSection } from "./AboutSection";

@@ -30,18 +30,20 @@ export function Navbar() {
   return (
     <nav ref={navRef} className={styles.navbar}>
       <div className={styles.container}>
-        <a
-          href="#hero"
-          className={styles.logo}
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("hero");
-          }}
-        >
-          Logo
-        </a>
-
+        <div></div>
         <div className={styles.links}>
+          <button
+            onClick={() => scrollToSection("hero")}
+            className={styles.link}
+          >
+            Home
+          </button>
+          <button
+            onClick={() => scrollToSection("about")}
+            className={styles.link}
+          >
+            About
+          </button>
           <button
             onClick={() => scrollToSection("projects")}
             className={styles.link}
