@@ -13,6 +13,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const [isComplete, setIsComplete] = useState(false);
   const preloaderRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
+  const progressContainerRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const progressTextRef = useRef<HTMLSpanElement>(null);
 
@@ -25,11 +26,13 @@ export function Preloader({ onComplete }: PreloaderProps) {
     );
 
     // Animate progress bar entrance
-    gsap.fromTo(
-      progressBarRef.current?.parentElement,
-      { opacity: 0, scaleX: 0 },
-      { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out", delay: 0.5 }
-    );
+    if (progressContainerRef.current) {
+      gsap.fromTo(
+        progressContainerRef.current,
+        { opacity: 0, scaleX: 0 },
+        { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.out", delay: 0.5 }
+      );
+    }
 
     // Simulate loading progress
     const startTime = Date.now();
@@ -86,15 +89,17 @@ export function Preloader({ onComplete }: PreloaderProps) {
     });
 
     // Progress bar fades
-    tl.to(
-      progressBarRef.current?.parentElement,
-      {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-      },
-      "-=0.3"
-    );
+    if (progressContainerRef.current) {
+      tl.to(
+        progressContainerRef.current,
+        {
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+        },
+        "-=0.3"
+      );
+    }
 
     // Progress text fades
     tl.to(
@@ -126,7 +131,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
         </div>
 
         {/* Progress bar */}
-        <div className={styles.progressContainer}>
+        <div ref={progressContainerRef} className={styles.progressContainer}>
           <div
             ref={progressBarRef}
             className={styles.progressBar}
