@@ -102,40 +102,9 @@
 
 .eqBar {
   width: 2px;
+  height: 6px;
   background: var(--accent);
   border-radius: 1px;
-  animation: eq 0.8s ease-in-out infinite;
-  transform-origin: bottom;
-}
-
-.eqBar:nth-child(1) {
-  height: 6px;
-  animation-delay: 0s;
-}
-
-.eqBar:nth-child(2) {
-  height: 10px;
-  animation-delay: 0.2s;
-}
-
-.eqBar:nth-child(3) {
-  height: 4px;
-  animation-delay: 0.4s;
-}
-
-.eqBar:nth-child(4) {
-  height: 8px;
-  animation-delay: 0.1s;
-}
-
-@keyframes eq {
-  0%,
-  100% {
-    transform: scaleY(0.4);
-  }
-  50% {
-    transform: scaleY(1);
-  }
 }
 
 /* Responsive */
@@ -168,7 +137,6 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .eqBar,
   .toastArrow {
     animation: none;
   }

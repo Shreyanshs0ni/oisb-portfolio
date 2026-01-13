@@ -10,6 +10,7 @@ export function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const toastRef = useRef<HTMLDivElement>(null);
+  const barsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     // Animate button entrance
@@ -42,6 +43,36 @@ export function MusicPlayer() {
       clearTimeout(hideTimer);
     };
   }, []);
+
+  // Animate equalizer bars with GSAP when playing
+  useEffect(() => {
+    if (isPlaying) {
+      const bars = barsRef.current.filter(Boolean);
+      const durations = [0.4, 0.5, 0.35, 0.45];
+      const minHeights = [3, 6, 4, 5];
+      const maxHeights = [12, 10, 12, 11];
+
+      bars.forEach((bar, i) => {
+        if (bar) {
+          gsap.to(bar, {
+            height: maxHeights[i],
+            duration: durations[i],
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+          // Start from different heights
+          gsap.set(bar, { height: minHeights[i] });
+        }
+      });
+
+      return () => {
+        bars.forEach((bar) => {
+          if (bar) gsap.killTweensOf(bar);
+        });
+      };
+    }
+  }, [isPlaying]);
 
   // Animate toast when it appears
   useEffect(() => {
@@ -97,10 +128,30 @@ export function MusicPlayer() {
         <div className={styles.iconWrapper}>
           {isPlaying ? (
             <div className={styles.equalizer}>
-              <span className={styles.eqBar} />
-              <span className={styles.eqBar} />
-              <span className={styles.eqBar} />
-              <span className={styles.eqBar} />
+              <span
+                ref={(el) => {
+                  barsRef.current[0] = el;
+                }}
+                className={styles.eqBar}
+              />
+              <span
+                ref={(el) => {
+                  barsRef.current[1] = el;
+                }}
+                className={styles.eqBar}
+              />
+              <span
+                ref={(el) => {
+                  barsRef.current[2] = el;
+                }}
+                className={styles.eqBar}
+              />
+              <span
+                ref={(el) => {
+                  barsRef.current[3] = el;
+                }}
+                className={styles.eqBar}
+              />
             </div>
           ) : (
             <svg
