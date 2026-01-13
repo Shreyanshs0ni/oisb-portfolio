@@ -4,17 +4,40 @@
 =========================================== */
 
 .footer {
-  padding: 1.5rem 2rem 1rem;
+  padding: 2rem 2rem;
   background: #0a0a0a;
   position: relative;
-  font-size: 0.8em;
+  font-size: 0.9em;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
+}
+
+/* --- Footer Content Layout --- */
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* --- Robot Wrapper --- */
+.robotWrapper {
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+  margin-top: -140px;
+  margin-bottom: -40px;
 }
 
 /* --- Top Section --- */
@@ -32,7 +55,7 @@
 }
 
 .brandName {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #ffffff;
   letter-spacing: -0.5px;
@@ -43,7 +66,7 @@
 }
 
 .tagline {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
@@ -94,7 +117,7 @@
 }
 
 .copyright {
-  font-size: 0.8125rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
@@ -125,43 +148,27 @@
   margin: 0 0.25rem;
 }
 
-/* --- Back to Top Button --- */
-.backToTop {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  color: rgba(255, 255, 255, 0.6);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  cursor: none;
-  transition: all 0.2s ease;
-}
-
-.backToTop:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-50%) translateY(-2px);
-}
-
-.backToTop svg {
-  transition: transform 0.3s ease;
-}
-
-.backToTop:hover svg {
-  transform: translateY(-2px);
-}
-
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
   .footer {
-    padding: 2.5rem 1.5rem 1.5rem;
+    padding: 1.5rem 1.5rem;
+  }
+
+  .footerContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .leftSection {
+    align-items: center;
+  }
+
+  .robotWrapper {
+    width: 200px;
+    height: 200px;
+    margin-top: -80px;
+    margin-bottom: -20px;
   }
 
   .topSection {
@@ -211,7 +218,7 @@
   .footerLink {
     font-size: 0.75rem;
   }
-  
+
   .tagline {
     font-size: 0.75rem;
   }
@@ -232,4 +239,3 @@
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-

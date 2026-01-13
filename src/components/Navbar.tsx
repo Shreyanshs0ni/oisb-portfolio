@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import styles from "./Navbar.module.css";
 
 export function Navbar() {
   const navRef = useRef<HTMLElement>(null);
+  const [isOverWhiteSection, setIsOverWhiteSection] = useState(false);
 
   useGSAP(
     () => {
@@ -20,6 +21,30 @@ export function Navbar() {
     { scope: navRef }
   );
 
+  // Detect when navbar is over the Projects section (white background)
+  useEffect(() => {
+    const handleScroll = () => {
+      const projectsSection = document.getElementById("projects");
+      if (!projectsSection || !navRef.current) return;
+
+      const navbarHeight = navRef.current.offsetHeight;
+      const projectsTop = projectsSection.offsetTop;
+      const projectsBottom = projectsTop + projectsSection.offsetHeight;
+      const scrollY = window.scrollY;
+
+      // Check if navbar is over the projects section
+      const navbarBottom = scrollY + navbarHeight;
+      const isOver = navbarBottom > projectsTop && scrollY < projectsBottom;
+      
+      setIsOverWhiteSection(isOver);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -28,7 +53,7 @@ export function Navbar() {
   };
 
   return (
-    <nav ref={navRef} className={styles.navbar}>
+    <nav ref={navRef} className={`${styles.navbar} ${isOverWhiteSection ? styles.dark : ""}`}>
       <div className={styles.container}>
         <div></div>
         <div className={styles.links}>

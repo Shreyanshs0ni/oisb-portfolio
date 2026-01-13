@@ -65,6 +65,19 @@
   width: 100%;
 }
 
+/* Dark mode - when over white background sections */
+.navbar.dark .link {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.navbar.dark .link:hover {
+  color: #000;
+}
+
+.navbar.dark .link::after {
+  background: #000;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .navbar {

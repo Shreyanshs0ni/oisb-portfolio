@@ -245,20 +245,10 @@
 .infoCard {
   padding: 1.25rem;
   background: transparent;
-  border: 1px solid var(--border-subtle);
+  border: none;
   border-radius: 12px;
   position: relative;
   overflow: hidden;
-}
-
-.infoCard::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background: var(--accent);
 }
 
 .infoTitle {
@@ -297,7 +287,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -311,7 +302,7 @@
 .socialSection {
   padding: 1rem 1.25rem;
   background: transparent;
-  border: 1px solid var(--border-subtle);
+  border: none;
   border-radius: 12px;
 }
 
@@ -340,7 +331,7 @@
   height: 42px;
   color: var(--foreground);
   background: transparent;
-  border: 1px solid var(--border-visible);
+  border: none;
   border-radius: 8px;
   transition: all 0.3s ease;
   will-change: transform;
@@ -349,9 +340,7 @@
 .socialLink:hover {
   color: var(--accent);
   background: transparent;
-  border-color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px var(--glow-color);
 }
 
 .socialLink svg {
@@ -395,7 +384,8 @@
 }
 
 @keyframes dotPulse {
-  0%, 100% {
+  0%,
+  100% {
     background: rgba(255, 95, 31, 0.4);
     transform: scale(1);
   }
@@ -412,19 +402,19 @@
     gap: 3rem;
     max-width: 600px;
   }
-  
+
   .contactInfo {
     order: -1;
   }
-  
+
   .decorativePattern {
     display: none;
   }
-  
+
   .form {
     width: 100%;
   }
-  
+
   .submitBtn {
     align-self: stretch;
   }
@@ -434,23 +424,23 @@
   .contact {
     padding: 3rem 1.5rem 2rem;
   }
-  
+
   .headingWrapper {
     margin-bottom: 1.5rem;
   }
-  
+
   .heading {
     font-size: 1.75rem;
   }
-  
+
   .subtitle {
     font-size: 0.9rem;
   }
-  
+
   .form {
     gap: 0.75rem;
   }
-  
+
   .input,
   .textarea {
     width: 100%;
@@ -460,27 +450,27 @@
     /* Adequate touch target */
     min-height: 44px;
   }
-  
+
   .submitBtn {
     width: 100%;
     padding: 1rem 1.5rem;
     /* Adequate touch target */
     min-height: 52px;
   }
-  
+
   .infoCard {
     padding: 1.5rem;
   }
-  
+
   .socialSection {
     padding: 1.25rem 1.5rem;
   }
-  
+
   .socialLinks {
     justify-content: center;
     gap: 0.5rem;
   }
-  
+
   .socialLink {
     flex: 0 0 auto;
     /* Minimum touch target 48px */
@@ -494,23 +484,23 @@
   .contact {
     padding: 4rem 1rem;
   }
-  
+
   .heading {
     font-size: 1.75rem;
   }
-  
+
   .subtitle {
     font-size: 0.9375rem;
   }
-  
+
   .infoTitle {
     font-size: 1.25rem;
   }
-  
+
   .infoText {
     font-size: 0.9375rem;
   }
-  
+
   .availabilityBadge {
     font-size: 0.8125rem;
   }
@@ -524,7 +514,7 @@
   .patternDot {
     animation: none;
   }
-  
+
   .socialLink,
   .submitBtn,
   .input,
@@ -541,4 +531,3 @@
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-

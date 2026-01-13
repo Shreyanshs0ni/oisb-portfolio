@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -10,31 +10,73 @@ import styles from "./OisbAppsSection.module.css";
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
+// CTA Button with slide animation
+function CtaButton() {
+  const bgRef = useRef<HTMLSpanElement>(null);
+
+  const handleMouseEnter = useCallback(() => {
+    if (!bgRef.current) return;
+    // Reset to left and slide in from left
+    gsap.set(bgRef.current, { x: "-100%" });
+    gsap.to(bgRef.current, {
+      x: "0%",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!bgRef.current) return;
+    // Slide out to right
+    gsap.to(bgRef.current, {
+      x: "100%",
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
+
+  return (
+    <a
+      href="#contact"
+      className={styles.ctaButton}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <span ref={bgRef} className={styles.ctaButtonBg} />
+      <span className={styles.ctaButtonText}>Let&apos;s Talk</span>
+      <svg
+        className={styles.ctaButtonIcon}
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="5" y1="12" x2="19" y2="12" />
+        <polyline points="12 5 19 12 12 19" />
+      </svg>
+    </a>
+  );
+}
+
 // OisB Apps data
 const oisbApps = [
   {
     id: 1,
-    name: "OisB Notes",
-    description:
-      "A minimal, distraction-free note-taking app with cloud sync and markdown support.",
-    icon: "/apps/oisb-notes.svg",
-    status: "available",
-    downloadUrl: "#",
-    playStoreUrl: "#",
-    version: "2.1.0",
-    downloads: "10K+",
-  },
-  {
-    id: 2,
-    name: "OisB Timer",
+    name: "OisB Pomodoro",
     description:
       "Pomodoro timer and productivity tracker to help you stay focused and get things done.",
     icon: "/apps/oisb-timer.svg",
-    status: "available",
-    downloadUrl: "#",
-    playStoreUrl: "#",
-    version: "1.5.2",
-    downloads: "5K+",
+  },
+  {
+    id: 2,
+    name: "OisB Calculator",
+    description:
+      "A clean, minimal calculator with advanced scientific functions and beautiful UI.",
+    icon: "/apps/oisb-wallet.svg",
   },
   {
     id: 3,
@@ -42,55 +84,15 @@ const oisbApps = [
     description:
       "Beautiful weather app with accurate forecasts, widgets, and minimal design.",
     icon: "/apps/oisb-weather.svg",
-    status: "available",
-    downloadUrl: "#",
-    playStoreUrl: "#",
-    version: "3.0.1",
-    downloads: "15K+",
   },
   {
     id: 4,
-    name: "OisB Wallet",
+    name: "OisB Notes",
     description:
-      "Track expenses, manage budgets, and visualize your spending habits effortlessly.",
-    icon: "/apps/oisb-wallet.svg",
-    status: "coming-soon",
-    downloadUrl: "#",
-    playStoreUrl: "#",
-    version: "1.0.0",
-    downloads: "-",
+      "A minimal, distraction-free note-taking app with cloud sync and markdown support.",
+    icon: "/apps/oisb-notes.svg",
   },
 ];
-
-// Download icon SVG
-const DownloadIcon = () => (
-  <svg
-    width="18"
-    height="18"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7 10 12 15 17 10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-// Play Store icon SVG
-const PlayStoreIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z" />
-  </svg>
-);
 
 export function OisbAppsSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -221,7 +223,8 @@ export function OisbAppsSection() {
             <span className={styles.accent}>OisB</span> Apps
           </h2>
           <p className={styles.subtitle}>
-            A collection of minimal, beautifully designed apps for your daily needs
+            A collection of minimal, beautifully designed apps for your daily
+            needs
           </p>
         </div>
 
@@ -230,14 +233,10 @@ export function OisbAppsSection() {
           {oisbApps.map((app) => (
             <article
               key={app.id}
-              className={`${styles.appCard} ${
-                app.status === "coming-soon" ? styles.comingSoon : ""
-              }`}
+              className={`${styles.appCard} ${styles.comingSoon}`}
             >
               {/* Status badge */}
-              {app.status === "coming-soon" && (
-                <span className={styles.statusBadge}>Coming Soon</span>
-              )}
+              <span className={styles.statusBadge}>Coming Soon</span>
 
               {/* App icon */}
               <div className={styles.appIconWrapper}>
@@ -254,44 +253,6 @@ export function OisbAppsSection() {
               <div className={styles.appInfo}>
                 <h3 className={styles.appName}>{app.name}</h3>
                 <p className={styles.appDescription}>{app.description}</p>
-
-                {/* App meta */}
-                <div className={styles.appMeta}>
-                  <span className={styles.appVersion}>v{app.version}</span>
-                  {app.status === "available" && (
-                    <span className={styles.appDownloads}>
-                      {app.downloads} downloads
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Download buttons */}
-              <div className={styles.appActions}>
-                {app.status === "available" ? (
-                  <>
-                    <a
-                      href={app.downloadUrl}
-                      className={styles.downloadBtn}
-                      aria-label={`Download ${app.name} APK`}
-                    >
-                      <DownloadIcon />
-                      <span>Download APK</span>
-                    </a>
-                    <a
-                      href={app.playStoreUrl}
-                      className={styles.storeBtn}
-                      aria-label={`Get ${app.name} on Play Store`}
-                    >
-                      <PlayStoreIcon />
-                      <span>Play Store</span>
-                    </a>
-                  </>
-                ) : (
-                  <button className={styles.notifyBtn} disabled>
-                    <span>Notify Me</span>
-                  </button>
-                )}
               </div>
             </article>
           ))}
@@ -302,22 +263,7 @@ export function OisbAppsSection() {
           <p className={styles.ctaText}>
             Want to see more apps or have an idea?
           </p>
-          <a href="#contact" className={styles.ctaButton}>
-            Let&apos;s Talk
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </a>
+          <CtaButton />
         </div>
       </div>
     </section>
@@ -325,4 +271,3 @@ export function OisbAppsSection() {
 }
 
 export default OisbAppsSection;
-

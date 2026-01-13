@@ -14,7 +14,7 @@
   z-index: 1;
 }
 
-/* Bottom black line only */
+/* Bottom accent line only */
 .projects::after {
   content: "";
   position: absolute;
@@ -58,7 +58,7 @@
 }
 
 .accent {
-  color: #000;
+  color: var(--accent);
 }
 
 /* === Responsive Projects Grid === */
@@ -315,7 +315,7 @@
 }
 
 .viewAllButton:hover {
-  color: var(--accent);
+  color: #fff;
   transform: translateY(-3px);
 }
 

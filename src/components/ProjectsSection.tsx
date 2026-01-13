@@ -16,7 +16,7 @@ const projects = [
     id: 1,
     title: "Moddern",
     description:
-      "A modern web application built with React and Node.js featuring real-time data synchronization.",
+      "A gaming website built with React and GSAP featuring cinematic animations, smooth transitions, and immersive visuals.",
     tags: ["React", "GSAP", "Tailwind CSS"],
     image: "/projects/Moddern.png",
     color: "#FF6B35",
@@ -26,7 +26,7 @@ const projects = [
     id: 2,
     title: "Golden Pour",
     description:
-      "E-commerce platform with seamless checkout experience and inventory management system.",
+      "A GSAP-animated website that uses AI to generate drink recipes through an interactive, aesthetic experience.",
     tags: ["React.js", "GSAP", "Tailwind CSS", "FFmpeg"],
     image: "/projects/GoldenPour.png",
     color: "#FF6B35",
@@ -36,7 +36,7 @@ const projects = [
     id: 3,
     title: "Nike (E-Commerce)",
     description:
-      "Interactive data visualization dashboard for analytics and business intelligence.",
+      "A full-stack Nike-inspired e-commerce app with backend, admin portal, and complete shopping workflows.",
     tags: [
       "React",
       "Tailwind CSS",
@@ -57,7 +57,7 @@ const projects = [
     id: 4,
     title: "Iphone 15 Pro",
     description:
-      "Mobile-first progressive web app with offline capabilities and push notifications.",
+      "A GSAP and Three.js powered product showcase with interactive 3D models and smooth scroll animations.",
     tags: ["React", "Tailwind CSS", "GSAP", "Three.js"],
     image: "/projects/Iphone15pro.png",
     color: "#FF6B35",
@@ -67,7 +67,7 @@ const projects = [
     id: 5,
     title: "Expense Tracker",
     description:
-      "AI-powered content management system with natural language processing features.",
+      "A modern Next.js application for managing budgets and expenses with a clean, aesthetic UI.",
     tags: ["Next.js", "Clerk", "Neon DB", "Tailwind CSS", "Drizzle ORM"],
     image: "/projects/Expense.png",
     color: "#FF6B35",
@@ -77,7 +77,7 @@ const projects = [
     id: 6,
     title: "Three T-Shirt",
     description:
-      "Real-time collaboration tool for remote teams with video conferencing integration.",
+      "An interactive 3D website built using Three.js and Framer Motion for animated product visualization.",
     tags: ["React", "Framer-motion", "Three.js", "Tailwind CSS", "Vercel"],
     image: "/projects/tshirt.png",
     color: "#FF6B35",
@@ -469,7 +469,7 @@ export function ProjectsSection() {
             My Work
           </span>
           <h2 ref={headingRef} className={styles.heading}>
-            Featured <span className={styles.accent}>Projects</span>
+            Featured <span>Projects</span>
           </h2>
         </div>
 

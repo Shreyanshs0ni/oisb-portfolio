@@ -331,14 +331,6 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* Decorative element */}
-            <div className={styles.decorativePattern}>
-              <div className={styles.patternGrid}>
-                {[...Array(16)].map((_, i) => (
-                  <span key={i} className={styles.patternDot} />
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
