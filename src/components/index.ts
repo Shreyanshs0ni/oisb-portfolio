@@ -17,6 +17,9 @@ export { CuteRobot } from "./CuteRobot";
 // Custom Cursor
 export { CustomCursor } from "./CustomCursor";
 
+// Preloader
+export { Preloader } from "./Preloader";
+
 // Music Player
 export { MusicPlayer } from "./MusicPlayer";
 

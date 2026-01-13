@@ -1,8 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import {
   Navbar,
   CustomCursor,
   MusicPlayer,
   HoverSoundProvider,
+  Preloader,
   HeroSection,
   AboutSection,
   ProjectsSection,
@@ -13,8 +17,13 @@ import {
 } from "@/components";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <>
+      {/* Preloader */}
+      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+
       {/* Custom Cursor */}
       <CustomCursor />
 
@@ -27,23 +36,26 @@ export default function Home() {
       {/* Navigation */}
       <Navbar />
 
-      {/* Hero Section */}
-      <HeroSection />
+      {/* Main Content */}
+      <main>
+        {/* Hero Section */}
+        <HeroSection />
 
-      {/* About Section */}
-      <AboutSection />
+        {/* About Section */}
+        <AboutSection />
 
-      {/* Projects Section */}
-      <ProjectsSection />
+        {/* Projects Section */}
+        <ProjectsSection />
 
-      {/* Skills Section */}
-      <SkillsSection />
+        {/* Skills Section */}
+        <SkillsSection />
 
-      {/* OisB Apps Section */}
-      <OisbAppsSection />
+        {/* OisB Apps Section */}
+        <OisbAppsSection />
 
-      {/* Contact Section */}
-      <ContactSection />
+        {/* Contact Section */}
+        <ContactSection />
+      </main>
 
       {/* Footer */}
       <Footer />

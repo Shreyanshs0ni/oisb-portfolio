@@ -17,8 +17,24 @@ const bodoniModa = Bodoni_Moda({
 });
 
 export const metadata: Metadata = {
-  title: "OISB Portfolio",
-  description: "Ultra-minimal portfolio with black, white, and orange theme",
+  title: "Shreyansh Soni | Full Stack Developer & UI/UX Designer",
+  description:
+    "Portfolio of Shreyansh Soni - Full Stack Developer and UI/UX Designer specializing in React, Next.js, and modern web technologies.",
+  keywords: [
+    "Shreyansh Soni",
+    "Full Stack Developer",
+    "UI/UX Designer",
+    "React",
+    "Next.js",
+    "Portfolio",
+  ],
+  authors: [{ name: "Shreyansh Soni" }],
+  openGraph: {
+    title: "Shreyansh Soni | Full Stack Developer & UI/UX Designer",
+    description:
+      "Portfolio of Shreyansh Soni - Full Stack Developer and UI/UX Designer",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -28,9 +44,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jost.variable} ${bodoniModa.variable}`}>
-      <body className="antialiased">
-        {children}
-      </body>
+      <head>
+        {/* Preload critical assets */}
+        <link rel="preload" href="/fluid.mp4" as="video" type="video/mp4" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

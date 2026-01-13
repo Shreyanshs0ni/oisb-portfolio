@@ -1,0 +1,149 @@
+/* Preloader Styles */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Logo */
+.logo {
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* Progress bar container */
+.progressContainer {
+  width: clamp(200px, 40vw, 300px);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  transform-origin: center;
+}
+
+/* Progress bar fill */
+.progressBar {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.1s ease-out;
+  position: relative;
+}
+
+/* Shimmer effect on progress bar */
+.progressBar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Progress text */
+.progressText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+}
+
+/* Decorative corners */
+.cornerTL,
+.cornerBR {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cornerTL {
+  top: 2rem;
+  left: 2rem;
+  border-right: none;
+  border-bottom: none;
+}
+
+.cornerBR {
+  bottom: 2rem;
+  right: 2rem;
+  border-left: none;
+  border-top: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .content {
+    gap: 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.75rem;
+  }
+
+  .progressContainer {
+    width: 180px;
+  }
+
+  .progressText {
+    font-size: 0.75rem;
+  }
+
+  .cornerTL,
+  .cornerBR {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cornerTL {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .cornerBR {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .progressBar::after {
+    animation: none;
+  }
+}
+
