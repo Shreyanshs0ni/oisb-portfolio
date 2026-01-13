@@ -51,7 +51,16 @@ const socialLinks = [
     name: "Email",
     url: "mailto:shreyanshsoni07@gmail.com",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        width="24"
+        height="24"
+      >
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
         <polyline points="22,6 12,13 2,6" />
       </svg>
@@ -82,6 +91,9 @@ export function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
   const socialsRef = useRef<HTMLDivElement>(null);
 
+  // Web3Forms Access Key - Get yours free at https://web3forms.com
+  const WEB3FORMS_ACCESS_KEY = "9903edbe-4f37-4e61-a111-659b185120bc"; // Replace with your access key
+
   // Form state
   const [formData, setFormData] = useState({
     name: "",
@@ -90,10 +102,15 @@ export function ContactSection() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -102,16 +119,49 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission (replace with actual API call)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setSubmitStatus("success");
-    setFormData({ name: "", email: "", message: "" });
-    
-    // Reset status after 3 seconds
-    setTimeout(() => setSubmitStatus("idle"), 3000);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `New message from ${formData.name} via Portfolio`,
+          from_name: "Portfolio Contact Form",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+        setErrorMessage(
+          result.message || "Something went wrong. Please try again."
+        );
+      }
+    } catch {
+      setSubmitStatus("error");
+      setErrorMessage(
+        "Network error. Please check your connection and try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+      // Reset status after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus("idle");
+        setErrorMessage("");
+      }, 5000);
+    }
   };
 
   useGSAP(
@@ -138,8 +188,10 @@ export function ContactSection() {
 
       // === Form Animation ===
       if (formRef.current) {
-        const formElements = formRef.current.querySelectorAll(`.${styles.formGroup}, .${styles.submitBtn}`);
-        
+        const formElements = formRef.current.querySelectorAll(
+          `.${styles.formGroup}, .${styles.submitBtn}`
+        );
+
         gsap.fromTo(
           formElements,
           {
@@ -163,8 +215,10 @@ export function ContactSection() {
 
       // === Social Links Animation ===
       if (socialsRef.current) {
-        const socialLinks = socialsRef.current.querySelectorAll(`.${styles.socialLink}`);
-        
+        const socialLinks = socialsRef.current.querySelectorAll(
+          `.${styles.socialLink}`
+        );
+
         gsap.fromTo(
           socialLinks,
           {
@@ -205,7 +259,8 @@ export function ContactSection() {
             Get In Touch
           </h2>
           <p className={styles.subtitle}>
-            Have a project in mind or just want to say hello? I&apos;d love to hear from you!
+            Have a project in mind or just want to say hello? I&apos;d love to
+            hear from you!
           </p>
         </div>
 
@@ -273,7 +328,11 @@ export function ContactSection() {
 
             <button
               type="submit"
-              className={`${styles.submitBtn} ${isSubmitting ? styles.submitting : ""} ${submitStatus === "success" ? styles.success : ""}`}
+              className={`${styles.submitBtn} ${
+                isSubmitting ? styles.submitting : ""
+              } ${submitStatus === "success" ? styles.success : ""} ${
+                submitStatus === "error" ? styles.error : ""
+              }`}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -283,10 +342,37 @@ export function ContactSection() {
                 </>
               ) : submitStatus === "success" ? (
                 <>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                   <span>Message Sent!</span>
+                </>
+              ) : submitStatus === "error" ? (
+                <>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                  <span>Try Again</span>
                 </>
               ) : (
                 <>
@@ -295,6 +381,11 @@ export function ContactSection() {
                 </>
               )}
             </button>
+
+            {/* Error message */}
+            {errorMessage && (
+              <p className={styles.errorMessage}>{errorMessage}</p>
+            )}
           </form>
 
           {/* Social Links & Info */}
@@ -302,10 +393,11 @@ export function ContactSection() {
             <div className={styles.infoCard}>
               <h3 className={styles.infoTitle}>Let&apos;s Talk</h3>
               <p className={styles.infoText}>
-                Whether you have a question, a project idea, or just want to connect — 
-                my inbox is always open. I&apos;ll get back to you as soon as possible!
+                Whether you have a question, a project idea, or just want to
+                connect — my inbox is always open. I&apos;ll get back to you as
+                soon as possible!
               </p>
-              
+
               <div className={styles.availabilityBadge}>
                 <span className={styles.statusDot} />
                 <span>Available for new projects</span>
@@ -330,7 +422,6 @@ export function ContactSection() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -339,4 +430,3 @@ export function ContactSection() {
 }
 
 export default ContactSection;
-

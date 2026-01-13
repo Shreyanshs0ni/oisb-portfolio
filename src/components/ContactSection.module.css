@@ -211,6 +211,19 @@
   border-color: #22c55e;
 }
 
+.submitBtn.error {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Error message */
+.errorMessage {
+  font-size: 0.875rem;
+  color: #ef4444;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
 /* Spinner animation */
 .spinner {
   width: 20px;
