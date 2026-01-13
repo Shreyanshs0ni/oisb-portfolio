@@ -90,7 +90,7 @@ export function HeroSection() {
       {/* Content */}
       <div className={styles.content}>
         <span ref={greetingRef} className={styles.greeting}>
-          Hey! I&apos;m Shreyansh
+          I&apos;m Shreyansh
         </span>
 
         <h1 className={styles.heading}>

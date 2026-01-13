@@ -35,7 +35,7 @@ export function Navbar() {
       // Check if navbar is over the projects section
       const navbarBottom = scrollY + navbarHeight;
       const isOver = navbarBottom > projectsTop && scrollY < projectsBottom;
-      
+
       setIsOverWhiteSection(isOver);
     };
 
@@ -53,17 +53,17 @@ export function Navbar() {
   };
 
   return (
-    <nav ref={navRef} className={`${styles.navbar} ${isOverWhiteSection ? styles.dark : ""}`}>
+    <nav
+      ref={navRef}
+      className={`${styles.navbar} ${isOverWhiteSection ? styles.dark : ""}`}
+    >
       <div className={styles.container}>
-        <button 
-          onClick={() => scrollToSection("hero")} 
-          className={styles.logo}
-        >
+        <button onClick={() => scrollToSection("hero")} className={styles.logo}>
           Shreyansh S.
         </button>
         <div className={styles.links}>
           <a
-            href="https://drive.google.com/file/d/18gCydAj32rNdYRmljCgtuEbsPsV3hlI0/view?usp=sharing"
+            href="https://docs.google.com/document/d/1Vw8o7sdbFUlLboA60-7G1vXnr9KwLxfz/edit?usp=sharing&ouid=108657753575809953552&rtpof=true&sd=true"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}

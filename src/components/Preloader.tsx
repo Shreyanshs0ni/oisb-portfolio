@@ -34,14 +34,14 @@ export function Preloader({ onComplete }: PreloaderProps) {
     // Simulate loading progress
     const startTime = Date.now();
     const minDuration = 2000; // Minimum 2 seconds for aesthetics
-    
+
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
       const naturalProgress = Math.min((elapsed / minDuration) * 100, 100);
-      
+
       // Check if document is ready
       const documentReady = document.readyState === "complete";
-      
+
       if (naturalProgress < 100) {
         setProgress(Math.floor(naturalProgress));
         requestAnimationFrame(updateProgress);
@@ -122,7 +122,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
       <div className={styles.content}>
         {/* Logo */}
         <div ref={logoRef} className={styles.logo}>
-          Shreyansh S.
+          Hello!
         </div>
 
         {/* Progress bar */}
@@ -148,4 +148,3 @@ export function Preloader({ onComplete }: PreloaderProps) {
 }
 
 export default Preloader;
-
