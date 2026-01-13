@@ -96,17 +96,13 @@ export function OisbAppsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const headingLineRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       // Set initial states
-      gsap.set(
-        [labelRef.current, headingRef.current, headingLineRef.current],
-        { opacity: 0 }
-      );
+      gsap.set([labelRef.current, headingRef.current], { opacity: 0 });
 
       // === Heading Timeline ===
       const headingTl = gsap.timeline({
@@ -128,12 +124,6 @@ export function OisbAppsSection() {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
           "-=0.2"
-        )
-        .fromTo(
-          headingLineRef.current,
-          { opacity: 0, scaleX: 0 },
-          { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.inOut" },
-          "-=0.3"
         );
 
       // === App Cards Pop-In ===
@@ -230,7 +220,6 @@ export function OisbAppsSection() {
           <h2 ref={headingRef} className={styles.heading}>
             <span className={styles.accent}>OisB</span> Apps
           </h2>
-          <div ref={headingLineRef} className={styles.headingLine} />
           <p className={styles.subtitle}>
             A collection of minimal, beautifully designed apps for your daily needs
           </p>

@@ -32,6 +32,14 @@ export function Navbar() {
       <div className={styles.container}>
         <div></div>
         <div className={styles.links}>
+          <a
+            href="https://drive.google.com/file/d/18gCydAj32rNdYRmljCgtuEbsPsV3hlI0/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+          >
+            Resume
+          </a>
           <button
             onClick={() => scrollToSection("hero")}
             className={styles.link}

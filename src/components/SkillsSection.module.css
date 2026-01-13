@@ -1,131 +1,201 @@
 /**
  * SkillsSection Styles
- * Minimal responsive grid with animated skill bars
- * Colors: Black background, White text, Orange accents
+ * Moving tapes + Interactive 3D background + Glassmorphism cards
  */
 
 /* === Section Container === */
 .skills {
-  min-height: 100vh;
-  padding: 6rem 1.5rem;
-  background: transparent; /* Transparent to show Three.js */
+  background: #000;
   position: relative;
+  overflow: hidden;
 }
 
-/* Bottom orange line */
-.skills::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0.5px;
-  background: var(--accent);
-  opacity: 50%;
+/* === Tape Area === */
+.tapeArea {
+  min-height: 40vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0 2rem;
   z-index: 2;
 }
 
+/* === Tape Wrapper === */
+.tapeWrapper {
+  position: absolute;
+  width: 200%;
+  left: -50%;
+  transform: rotate(-8deg);
+  overflow: visible;
+}
+
+.tapeWrapperReverse {
+  transform: rotate(8deg);
+}
+
+/* === Tape Base === */
+.tape {
+  display: flex;
+  background: #fff;
+  padding: 1rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* === Tape Content === */
+.tapeContent {
+  display: flex;
+  align-items: center;
+  will-change: transform;
+}
+
+/* === Tape Item === */
+.tapeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 2.5rem;
+  flex-shrink: 0;
+}
+
+/* === Star Icon === */
+.starIcon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: #000;
+}
+
+/* === Tape Text === */
+.tapeText {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-bodoni), Georgia, serif;
+}
+
+/* === Skills Content Section === */
+.skillsContent {
+  position: relative;
+  padding: 2rem 1.5rem 6rem;
+  z-index: 1;
+  margin-top: -2rem;
+}
+
 .container {
-  max-width: 72rem; /* 1152px */
-  width: 100%;
+  max-width: 72rem;
   margin: 0 auto;
 }
 
-/* === Section Heading === */
+/* === Heading Wrapper === */
 .headingWrapper {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .label {
   display: inline-block;
   font-size: 0.875rem;
-  color: var(--accent);
+  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
   font-weight: 500;
 }
 
+/* === Heading === */
 .heading {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
-  color: var(--foreground);
-  margin-bottom: 1rem;
+  color: #fff;
+  text-align: center;
+  margin: 0;
   letter-spacing: -0.02em;
 }
 
-.accent {
-  color: var(--accent);
-}
-
-.headingLine {
-  width: 4rem;
-  height: 2px;
-  background: var(--accent);
-  margin: 0 auto;
-  transform-origin: center;
-}
-
-/* === Responsive Categories Grid === */
+/* === Categories Grid === */
 .categoriesGrid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
+  perspective: 1000px;
 }
 
-/* 2 columns on tablet */
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .categoriesGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* 3 columns on desktop */
 @media (min-width: 1024px) {
   .categoriesGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
   }
 }
 
-/* === Category Card === */
+/* === Category Card - Glassmorphism === */
 .categoryCard {
   position: relative;
-  background: var(--card-bg);
-  border: 1px solid var(--border-subtle);
-  border-radius: 1rem;
-  padding: 1.75rem;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 1.5rem;
   overflow: hidden;
+  transform-style: preserve-3d;
+  cursor: none;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Subtle glow on hover */
 .categoryCard::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at 50% 0%,
-    var(--card-overlay) 0%,
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.categoryCard:hover {
-  border-color: var(--border-strong);
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px var(--shadow-color), 0 0 30px var(--glow-color);
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  z-index: 0;
+  transition: all 0.4s ease;
 }
 
 .categoryCard:hover::before {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 95, 31, 0.3);
+}
+
+.categoryCard:hover {
+  transform: none;
+}
+
+/* Card glow effect */
+.cardGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 95, 31, 0.15) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.categoryCard:hover .cardGlow {
   opacity: 1;
+}
+
+/* Card content */
+.cardContent {
+  position: relative;
+  padding: 2rem;
+  z-index: 1;
 }
 
 /* === Category Header === */
@@ -135,368 +205,183 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-subtle);
-  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Animated underline on header */
-.categoryHeader::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--accent);
-  transition: width 0.4s ease;
-}
-
-.categoryCard:hover .categoryHeader::after {
-  width: 100%;
-}
-
-/* === Category Icon === */
 .categoryIcon {
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--card-overlay);
-  border: 1px solid var(--border-visible);
-  border-radius: 0.75rem;
-  color: var(--accent);
-  transition: all 0.3s ease;
-}
-
-.categoryIcon svg {
-  width: 22px;
-  height: 22px;
-  transition: transform 0.3s ease;
+  font-size: 2rem;
+  filter: grayscale(1) brightness(2);
+  transition: filter 0.3s ease;
 }
 
 .categoryCard:hover .categoryIcon {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--background);
-  transform: rotate(-5deg) scale(1.05);
+  filter: grayscale(0) brightness(1);
 }
 
-.categoryCard:hover .categoryIcon svg {
-  transform: scale(1.1);
-}
-
+/* === Category Title === */
 .categoryTitle {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--foreground);
-  margin: 0;
-  transition: color 0.3s ease;
+  color: #fff;
+  letter-spacing: -0.01em;
 }
 
-.categoryCard:hover .categoryTitle {
-  color: var(--accent);
-}
-
-/* === Skills List === */
-.skillsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.125rem;
-}
-
-/* === Individual Skill Item === */
-.skillItem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  margin: -0.5rem;
-  border-radius: 0.5rem;
-  transition: background 0.2s ease;
-}
-
-.skillItem:hover {
-  background: var(--card-bg-hover);
-}
-
-.skillInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.skillName {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--foreground);
-  transition: color 0.2s ease;
-}
-
-.skillItem:hover .skillName {
-  color: var(--accent);
-}
-
-.skillLevel {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-.skillItem:hover .skillLevel {
-  opacity: 1;
-}
-
-/* === Skill Progress Bar === */
-.skillBar {
-  height: 6px;
-  background: var(--border-subtle);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Track highlight on hover */
-.skillItem:hover .skillBar {
-  background: var(--border-visible);
-}
-
-.skillProgress {
-  height: 100%;
-  width: 0; /* Animated by GSAP */
-  background: var(--accent);
-  border-radius: 3px;
-  position: relative;
-  box-shadow: 0 0 10px var(--accent-dim);
-}
-
-/* Shimmer effect on progress bar */
-.skillProgress::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--shimmer-color) 50%,
-    transparent 100%
-  );
-  animation: shimmer 2.5s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(200%);
-  }
-}
-
-/* Pulse glow on bar hover */
-.skillItem:hover .skillProgress {
-  box-shadow: 0 0 15px var(--accent-dim);
-}
-
-/* === Quick Skills Section === */
-.quickSkills {
-  margin-top: 5rem;
-  text-align: center;
-  padding-top: 3rem;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.quickSkillsTitle {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-bottom: 1.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.quickSkillsTags {
+/* === Skill Tags === */
+.skillTags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 0.75rem;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
-.quickTag {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.625rem 1.25rem;
-  font-size: 0.8125rem;
+.skillTag {
+  font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-muted);
-  background: transparent;
-  border: 1px solid var(--border-subtle);
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
   border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  cursor: default;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.quickTag:hover {
-  color: var(--accent);
+.skillTag:hover {
+  background: var(--accent);
+  color: #000;
   border-color: var(--accent);
-  background: var(--card-overlay);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 5px 20px var(--glow-color);
+  box-shadow: 0 10px 25px rgba(255, 95, 31, 0.3);
 }
 
 /* === Responsive Adjustments === */
-@media (max-width: 767px) {
-  .skills {
-    padding: 5rem 1rem;
+@media (max-width: 768px) {
+  .tapeArea {
+    min-height: 35vh;
+    padding: 3rem 0 1.5rem;
+  }
+
+  .tapeWrapper {
+    transform: rotate(-10deg);
+  }
+
+  .tapeWrapperReverse {
+    transform: rotate(10deg);
+  }
+
+  .tape {
+    padding: 0.875rem 0;
+  }
+
+  .tapeItem {
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  .starIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tapeText {
+    font-size: 1.25rem;
+  }
+
+  .skillsContent {
+    padding: 1.5rem 1rem 4rem;
+    margin-top: -1rem;
   }
 
   .headingWrapper {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
-  .categoryCard {
+  .cardContent {
     padding: 1.5rem;
   }
 
-  .categoryHeader {
-    margin-bottom: 1.25rem;
+  .categoryTitle {
+    font-size: 1.25rem;
   }
 
   .categoryIcon {
-    /* Minimum touch target */
-    width: 44px;
-    height: 44px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tapeArea {
+    min-height: 30vh;
+    padding: 2rem 0 1rem;
   }
 
-  .categoryIcon svg {
-    width: 20px;
-    height: 20px;
+  .tapeWrapper {
+    transform: rotate(-12deg);
+  }
+
+  .tapeWrapperReverse {
+    transform: rotate(12deg);
+  }
+
+  .tape {
+    padding: 0.75rem 0;
+  }
+
+  .tapeItem {
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+
+  .starIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .tapeText {
+    font-size: 1rem;
+  }
+
+  .skillsContent {
+    padding: 1rem 1rem 3rem;
+    margin-top: -0.5rem;
+  }
+
+  .headingWrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+  }
+
+  .cardContent {
+    padding: 1.25rem;
   }
 
   .categoryTitle {
     font-size: 1.125rem;
   }
 
-  .skillsList {
-    gap: 1rem;
-  }
-
-  .quickSkills {
-    margin-top: 3rem;
-    padding-top: 2rem;
-  }
-
-  .quickSkillsTags {
-    gap: 0.5rem;
-  }
-
-  .quickTag {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
-    /* Minimum touch target */
-    min-height: 40px;
-  }
-}
-
-/* Small phones (480px and below) */
-@media (max-width: 480px) {
-  .skills {
-    padding: 4rem 1rem;
-  }
-
-  .heading {
-    font-size: 1.75rem;
-  }
-
-  .categoriesGrid {
-    gap: 1.5rem;
-  }
-
-  .categoryCard {
-    padding: 1.25rem;
-  }
-
-  .categoryHeader {
-    gap: 0.75rem;
-  }
-
-  .categoryTitle {
-    font-size: 1rem;
-  }
-
-  .skillName {
-    font-size: 0.875rem;
-  }
-
-  .skillLevel {
-    font-size: 0.75rem;
-  }
-
-  .skillBar {
-    height: 5px;
-  }
-
-  .quickSkillsTitle {
+  .skillTag {
     font-size: 0.8125rem;
-  }
-}
-
-/* === Large Screens === */
-@media (min-width: 1280px) {
-  .categoriesGrid {
-    gap: 3rem;
-  }
-
-  .categoryCard {
-    padding: 2rem;
+    padding: 0.375rem 0.75rem;
   }
 }
 
 /* === Reduced Motion === */
 @media (prefers-reduced-motion: reduce) {
-  .skillProgress::after {
-    animation: none;
-  }
-
   .categoryCard,
-  .categoryIcon,
-  .skillItem,
-  .quickTag {
+  .skillTag,
+  .cardGlow {
     transition: none;
   }
 
-  .categoryCard:hover {
-    transform: none;
+  .accent::after {
+    animation: none;
+    transform: scaleX(1);
   }
-
-  .categoryCard:hover .categoryIcon {
-    transform: none;
-  }
-
-  .quickTag:hover {
-    transform: none;
-  }
-}
-
-/* === Focus States === */
-.categoryCard:focus-within {
-  border-color: var(--border-strong);
-  outline: none;
-}
-
-.quickTag:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
 }

@@ -11,6 +11,9 @@ export { Navbar } from "./Navbar";
 // 3D Background
 export { ThreeBackground } from "./ThreeBackground";
 
+// Cute Robot
+export { CuteRobot } from "./CuteRobot";
+
 // Custom Cursor
 export { CustomCursor } from "./CustomCursor";
 

@@ -1,20 +1,44 @@
 /**
  * OisbAppsSection Styles
- * App showcase with download buttons - matches Projects styling
- * Colors: Black background, White text, Orange accents
+ * App showcase with download buttons
+ * Colors: Orange background, Black text, White accents
  */
 
 /* === Section Container === */
 .oisbApps {
   min-height: 100vh;
   padding: 6rem 1.5rem;
-  background: transparent; /* Transparent to show Three.js */
+  background: var(--accent);
   position: relative;
 }
 
+/* Top and bottom black lines */
+.oisbApps::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: #000;
+  opacity: 0.3;
+  z-index: 2;
+}
+
+.oisbApps::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.5px;
+  background: #000;
+  opacity: 0.3;
+  z-index: 2;
+}
 
 .container {
-  max-width: 72rem; /* 1152px */
+  max-width: 72rem;
   width: 100%;
   margin: 0 auto;
 }
@@ -28,38 +52,30 @@
 .label {
   display: inline-block;
   font-size: 0.875rem;
-  color: var(--accent);
+  color: #000;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
   font-weight: 500;
+  opacity: 0.7;
 }
 
 .heading {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--foreground);
-  margin-bottom: 1rem;
+  color: #000;
   letter-spacing: -0.02em;
 }
 
 .accent {
-  color: var(--accent);
-}
-
-.headingLine {
-  width: 4rem;
-  height: 2px;
-  background: var(--accent);
-  margin: 0 auto 1.5rem;
-  transform-origin: center;
+  color: #000;
 }
 
 .subtitle {
   font-size: 1.125rem;
-  color: var(--text-muted);
+  color: rgba(0, 0, 0, 0.7);
   max-width: 500px;
-  margin: 0 auto;
+  margin: 1rem auto 0;
   line-height: 1.6;
 }
 
@@ -70,7 +86,6 @@
   gap: 2rem;
 }
 
-/* 2 columns on tablet+ */
 @media (min-width: 640px) {
   .appsGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -86,8 +101,8 @@
 /* === App Card === */
 .appCard {
   position: relative;
-  background: var(--card-bg);
-  border: 1px solid var(--border-subtle);
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.25rem;
   padding: 2rem;
   display: flex;
@@ -95,24 +110,6 @@
   gap: 1.25rem;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
-}
-
-/* Top glow on hover */
-.appCard::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    ellipse at 50% -20%,
-    var(--card-overlay) 0%,
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
 }
 
 /* Side accent line */
@@ -128,15 +125,9 @@
 }
 
 .appCard:hover {
-  border-color: var(--border-strong);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 
-    0 25px 50px var(--shadow-color),
-    0 0 40px var(--glow-color);
-}
-
-.appCard:hover::before {
-  opacity: 1;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
 .appCard:hover::after {
@@ -145,11 +136,11 @@
 
 /* Coming soon state */
 .appCard.comingSoon {
-  opacity: 0.65;
+  opacity: 0.75;
 }
 
 .appCard.comingSoon:hover {
-  opacity: 0.8;
+  opacity: 0.9;
   transform: translateY(-5px);
 }
 
@@ -163,28 +154,23 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--background);
+  color: #000;
   background: var(--accent);
   border-radius: 9999px;
-  box-shadow: 0 2px 10px var(--accent-dim);
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 2px 10px var(--accent-dim); }
-  50% { box-shadow: 0 2px 20px var(--accent-dim); }
+  0%, 100% { box-shadow: 0 2px 10px rgba(255, 95, 31, 0.3); }
+  50% { box-shadow: 0 2px 20px rgba(255, 95, 31, 0.5); }
 }
 
 /* === App Icon === */
 .appIconWrapper {
   width: 80px;
   height: 80px;
-  background: linear-gradient(
-    135deg,
-    var(--glow-color) 0%,
-    var(--card-bg-hover) 100%
-  );
-  border: 1px solid var(--border-visible);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1.25rem;
   display: flex;
   align-items: center;
@@ -205,7 +191,7 @@
   background: linear-gradient(
     45deg,
     transparent 40%,
-    var(--shimmer-color) 50%,
+    rgba(255, 255, 255, 0.1) 50%,
     transparent 60%
   );
   transform: translateX(-100%);
@@ -215,9 +201,7 @@
 .appCard:hover .appIconWrapper {
   transform: scale(1.08) rotate(-5deg);
   border-color: var(--accent);
-  box-shadow: 
-    0 0 25px var(--accent-dim),
-    inset 0 0 15px var(--card-overlay);
+  box-shadow: 0 0 25px rgba(255, 95, 31, 0.3);
 }
 
 .appCard:hover .appIconWrapper::before {
@@ -239,7 +223,7 @@
 .appName {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--foreground);
+  color: #fff;
   margin: 0 0 0.625rem;
   transition: color 0.3s ease;
   letter-spacing: -0.01em;
@@ -251,7 +235,7 @@
 
 .appDescription {
   font-size: 0.9375rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
   margin: 0 0 1.25rem;
 }
@@ -263,7 +247,7 @@
   gap: 1rem;
   font-size: 0.8125rem;
   padding-top: 0.75rem;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .appVersion {
@@ -272,13 +256,13 @@
   color: var(--accent);
   font-weight: 600;
   font-family: var(--font-mono);
-  background: var(--card-overlay);
+  background: rgba(255, 95, 31, 0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 }
 
 .appDownloads {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
@@ -301,7 +285,7 @@
   padding: 0.875rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--background);
+  color: #000;
   background: var(--accent);
   border: 2px solid var(--accent);
   border-radius: 0.75rem;
@@ -322,19 +306,18 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--shimmer-color),
+    rgba(255, 255, 255, 0.3),
     transparent
   );
   transition: left 0.5s ease;
 }
 
 .downloadBtn:hover {
-  background: transparent;
-  color: var(--accent);
+  background: #fff;
+  border-color: #fff;
+  color: #000;
   transform: translateY(-3px);
-  box-shadow: 
-    0 8px 25px var(--accent-dim),
-    0 0 15px var(--accent-glow);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .downloadBtn:hover::before {
@@ -362,9 +345,9 @@
   padding: 0.875rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--foreground);
+  color: #fff;
   background: transparent;
-  border: 1px solid var(--border-visible);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 0.75rem;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -372,9 +355,9 @@
 }
 
 .storeBtn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--card-overlay);
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-3px);
 }
 
@@ -391,9 +374,9 @@
   padding: 0.875rem 1.75rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-subtle);
-  background: var(--card-bg-hover);
-  border: 1px dashed var(--border-visible);
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
   border-radius: 0.75rem;
   cursor: not-allowed;
   transition: all 0.3s ease;
@@ -401,9 +384,9 @@
 
 .appCard.comingSoon:hover .notifyBtn {
   color: var(--accent);
-  border-color: var(--border-strong);
+  border-color: var(--accent);
   border-style: solid;
-  background: var(--card-overlay);
+  background: rgba(255, 95, 31, 0.1);
 }
 
 /* === CTA Section === */
@@ -411,13 +394,8 @@
   margin-top: 5rem;
   text-align: center;
   padding: 3.5rem;
-  background: linear-gradient(
-    180deg,
-    var(--card-overlay) 0%,
-    var(--card-bg-hover) 50%,
-    transparent 100%
-  );
-  border: 1px solid var(--border-visible);
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1.5rem;
   position: relative;
   overflow: hidden;
@@ -430,7 +408,7 @@
   position: absolute;
   width: 60px;
   height: 60px;
-  border: 2px solid var(--accent);
+  border: 2px solid #000;
   opacity: 0.3;
 }
 
@@ -452,7 +430,7 @@
 
 .ctaText {
   font-size: 1.25rem;
-  color: var(--text-muted);
+  color: rgba(0, 0, 0, 0.7);
   margin: 0 0 1.75rem;
 }
 
@@ -464,9 +442,9 @@
   padding: 1rem 2.5rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--accent);
+  color: #000;
   background: transparent;
-  border: 2px solid var(--accent);
+  border: 2px solid #000;
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.4s ease;
@@ -481,7 +459,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--accent);
+  background: #000;
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -489,11 +467,9 @@
 }
 
 .ctaButton:hover {
-  color: var(--background);
+  color: var(--accent);
   transform: translateY(-3px);
-  box-shadow: 
-    0 15px 40px var(--accent-dim),
-    0 0 25px var(--accent-glow);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 .ctaButton:hover::before {
@@ -550,7 +526,6 @@
   .notifyBtn {
     width: 100%;
     justify-content: center;
-    /* Adequate touch target */
     min-height: 48px;
   }
 
@@ -573,7 +548,6 @@
     width: 100%;
     max-width: 280px;
     justify-content: center;
-    /* Adequate touch target */
     min-height: 48px;
   }
 }
@@ -637,12 +611,12 @@
 .downloadBtn:focus-visible,
 .storeBtn:focus-visible,
 .ctaButton:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid #000;
   outline-offset: 3px;
 }
 
 .appCard:focus-within {
-  border-color: var(--border-strong);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* === Reduced Motion === */

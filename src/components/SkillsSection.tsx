@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./SkillsSection.module.css";
@@ -9,350 +8,242 @@ import styles from "./SkillsSection.module.css";
 // Register ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
+// Skills for the marquee tapes
+const tapeSkills = [
+  "Frontend Development",
+  "Backend Development",
+  "UI/UX Designer",
+  "iOS Development",
+  "Android Development",
+];
+
 // Skills data organized by category
 const skillCategories = [
   {
     id: "frontend",
     title: "Frontend",
+    icon: "⚡",
     skills: [
-      { name: "React", level: 95 },
-      { name: "Next.js", level: 90 },
-      { name: "TypeScript", level: 88 },
-      { name: "JavaScript", level: 95 },
-      { name: "HTML5", level: 98 },
-      { name: "CSS3", level: 92 },
-      { name: "Tailwind", level: 90 },
-      { name: "GSAP", level: 85 },
+      "HTML5",
+      "CSS3",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "React.js",
+      "Next.js (App Router)",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "React Hooks & Context API",
+      "Responsive Design",
+      "Component-Based Architecture",
     ],
   },
   {
     id: "backend",
     title: "Backend",
+    icon: "🔧",
     skills: [
-      { name: "Node.js", level: 85 },
-      { name: "Python", level: 80 },
-      { name: "PostgreSQL", level: 78 },
-      { name: "MongoDB", level: 82 },
-      { name: "REST APIs", level: 90 },
-      { name: "GraphQL", level: 75 },
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "tRPC",
+      "MongoDB",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Authentication & Authorization",
+      "Role-Based Access Control",
+      "Payment Integration (Stripe, Razorpay)",
+    ],
+  },
+  {
+    id: "ai",
+    title: "AI / Applied ML",
+    icon: "🤖",
+    skills: [
+      "OpenAI API",
+      "LangChain",
+      "Retrieval-Augmented Generation (RAG)",
+      "Prompt Engineering",
+      "Embeddings & Vector Search",
     ],
   },
   {
     id: "tools",
-    title: "Tools & Others",
+    title: "Tools & Platforms",
+    icon: "🛠",
     skills: [
-      { name: "Git", level: 92 },
-      { name: "Docker", level: 75 },
-      { name: "Figma", level: 85 },
-      { name: "Three.js", level: 70 },
-      { name: "AWS", level: 72 },
-      { name: "Vercel", level: 88 },
+      "Git & GitHub",
+      "Vercel",
+      "Docker",
+      "Clerk (Auth)",
+      "Mux (Video Streaming)",
+      "Upstash (Redis)",
+      "Photoshop",
+      "Canva",
+      "AstraDB",
+      "Neon (Postgres)",
+      "Postman",
+      "Figma",
+    ],
+  },
+  {
+    id: "cs",
+    title: "Computer Science",
+    icon: "💻",
+    skills: [
+      "Data Structures & Algorithms",
+      "Problem Solving (LeetCode)",
+      "OOP Fundamentals",
+      "DBMS",
+    ],
+  },
+  {
+    id: "professional",
+    title: "Professional & Personal",
+    icon: "✨",
+    skills: [
+      "Full-Stack Development",
+      "Team Collaboration",
+      "Client-Focused Development",
+      "Rapid Prototyping",
+      "Debugging",
+      "Guitar & Music",
+      "Visual / Product Sense",
+      "Discipline & Consistency",
     ],
   },
 ];
 
-// Quick skills list
-const quickSkills = [
-  "Redux",
-  "Zustand",
-  "Framer Motion",
-  "Sass",
-  "Webpack",
-  "Jest",
-  "Cypress",
-  "Firebase",
-  "Supabase",
-  "Linux",
-];
+// Star icon for tapes
+const StarIcon = () => (
+  <svg
+    className={styles.starIcon}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+  >
+    <circle cx="12" cy="12" r="3" />
+    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+  </svg>
+);
 
-// Simple icon components for visual interest
-const CategoryIcon = ({ category }: { category: string }) => {
-  switch (category) {
-    case "frontend":
-      return (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
-          <rect x="3" y="3" width="18" height="18" rx="2" />
-          <path d="M9 9l3 3-3 3M15 15h3" />
-        </svg>
-      );
-    case "backend":
-      return (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
-          <path d="M4 6h16M4 12h16M4 18h16" />
-          <circle cx="8" cy="6" r="1" fill="currentColor" />
-          <circle cx="8" cy="12" r="1" fill="currentColor" />
-          <circle cx="8" cy="18" r="1" fill="currentColor" />
-        </svg>
-      );
-    case "tools":
-      return (
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        >
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-};
+// Tape content component
+const TapeItems = ({ prefix }: { prefix: string }) => (
+  <>
+    {tapeSkills.map((skill, index) => (
+      <span key={`${prefix}-${index}`} className={styles.tapeItem}>
+        <StarIcon />
+        <span className={styles.tapeText}>{skill}</span>
+      </span>
+    ))}
+  </>
+);
 
 export function SkillsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const labelRef = useRef<HTMLSpanElement>(null);
+  const tape1Ref = useRef<HTMLDivElement>(null);
+  const tape2Ref = useRef<HTMLDivElement>(null);
+  const skillsGridRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const headingLineRef = useRef<HTMLDivElement>(null);
-  const categoriesRef = useRef<HTMLDivElement>(null);
-  const quickSkillsRef = useRef<HTMLDivElement>(null);
-  const quickTagsRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      // Set initial states for all elements
-      gsap.set(
-        [labelRef.current, headingRef.current, headingLineRef.current],
-        { opacity: 0 }
+  // Tape animations
+  useEffect(() => {
+    if (tape1Ref.current) {
+      const tape1Width = tape1Ref.current.scrollWidth / 2;
+      gsap.to(tape1Ref.current, {
+        x: -tape1Width,
+        duration: 60,
+        ease: "none",
+        repeat: -1,
+      });
+    }
+
+    if (tape2Ref.current) {
+      const tape2Width = tape2Ref.current.scrollWidth / 2;
+      gsap.fromTo(
+        tape2Ref.current,
+        { x: -tape2Width },
+        {
+          x: 0,
+          duration: 60,
+          ease: "none",
+          repeat: -1,
+        }
       );
+    }
+  }, []);
 
-      // === Heading Timeline ===
-      const headingTl = gsap.timeline({
+  // Card animations
+  useEffect(() => {
+    if (!headingRef.current || !skillsGridRef.current) return;
+
+    // Heading animation
+    gsap.fromTo(
+      headingRef.current,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
         scrollTrigger: {
-          trigger: labelRef.current,
+          trigger: headingRef.current,
           start: "top 85%",
           toggleActions: "play none none reverse",
         },
-      });
-
-      headingTl
-        .fromTo(
-          labelRef.current,
-          { opacity: 0, y: -20 },
-          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
-        )
-        .fromTo(
-          headingRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
-          "-=0.2"
-        )
-        .fromTo(
-          headingLineRef.current,
-          { opacity: 0, scaleX: 0 },
-          { opacity: 1, scaleX: 1, duration: 0.6, ease: "power2.inOut" },
-          "-=0.3"
-        );
-
-      // === Category Cards Pop-In Animation ===
-      const categoryCards = categoriesRef.current?.querySelectorAll(
-        `.${styles.categoryCard}`
-      );
-
-      if (categoryCards && categoryCards.length > 0) {
-        // Set initial state
-        gsap.set(categoryCards, {
-          opacity: 0,
-          scale: 0.5,
-          y: 60,
-          rotateX: -15,
-        });
-
-        gsap.to(categoryCards, {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "back.out(1.7)", // Bouncy pop-in effect
-          scrollTrigger: {
-            trigger: categoriesRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        });
       }
+    );
 
-      // === Category Icons Spin-In ===
-      const categoryIcons = categoriesRef.current?.querySelectorAll(
-        `.${styles.categoryIcon}`
-      );
+    // Cards stagger animation
+    const cards = skillsGridRef.current.querySelectorAll(
+      `.${styles.categoryCard}`
+    );
 
-      if (categoryIcons && categoryIcons.length > 0) {
-        gsap.fromTo(
-          categoryIcons,
-          {
-            opacity: 0,
-            scale: 0,
-            rotation: -180,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            rotation: 0,
-            duration: 0.6,
-            stagger: 0.2,
-            ease: "back.out(2)",
-            scrollTrigger: {
-              trigger: categoriesRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+    gsap.fromTo(
+      cards,
+      {
+        opacity: 0,
+        y: 80,
+        scale: 0.9,
+        rotateX: -15,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotateX: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: skillsGridRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
       }
+    );
 
-      // === Skill Items Pop-In with Stagger ===
-      const skillItems = categoriesRef.current?.querySelectorAll(
-        `.${styles.skillItem}`
-      );
+    // Skill tags stagger
+    const tags = skillsGridRef.current.querySelectorAll(`.${styles.skillTag}`);
 
-      if (skillItems && skillItems.length > 0) {
-        gsap.fromTo(
-          skillItems,
-          {
-            opacity: 0,
-            scale: 0.8,
-            x: -30,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: 0.04, // Fast stagger for many items
-            ease: "back.out(1.4)",
-            scrollTrigger: {
-              trigger: categoriesRef.current,
-              start: "top 70%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
+    gsap.fromTo(
+      tags,
+      { opacity: 0, scale: 0.5, y: 20 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.4,
+        stagger: 0.03,
+        ease: "back.out(2)",
+        scrollTrigger: {
+          trigger: skillsGridRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse",
+        },
       }
-
-      // === Skill Progress Bars Animation ===
-      const skillBars = categoriesRef.current?.querySelectorAll(
-        `.${styles.skillProgress}`
-      );
-
-      if (skillBars && skillBars.length > 0) {
-        skillBars.forEach((bar, index) => {
-          const level = bar.getAttribute("data-level") || "0";
-
-          gsap.fromTo(
-            bar,
-            { width: "0%", opacity: 0 },
-            {
-              width: `${level}%`,
-              opacity: 1,
-              duration: 1.5,
-              delay: index * 0.03, // Slight delay between bars
-              ease: "power4.out",
-              scrollTrigger: {
-                trigger: bar,
-                start: "top 90%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          );
-        });
-      }
-
-      // === Skill Level Counter Animation ===
-      const skillLevels = categoriesRef.current?.querySelectorAll(
-        `.${styles.skillLevel}`
-      );
-
-      if (skillLevels && skillLevels.length > 0) {
-        skillLevels.forEach((levelEl) => {
-          const text = levelEl.textContent || "0%";
-          const targetNum = parseInt(text.replace("%", ""), 10);
-          const counter = { value: 0 };
-
-          ScrollTrigger.create({
-            trigger: levelEl,
-            start: "top 90%",
-            onEnter: () => {
-              gsap.to(counter, {
-                value: targetNum,
-                duration: 1.5,
-                ease: "power2.out",
-                onUpdate: () => {
-                  levelEl.textContent = `${Math.round(counter.value)}%`;
-                },
-              });
-            },
-            onLeaveBack: () => {
-              counter.value = 0;
-              levelEl.textContent = "0%";
-            },
-          });
-        });
-      }
-
-      // === Quick Skills Section Animation ===
-      if (quickSkillsRef.current) {
-        gsap.fromTo(
-          quickSkillsRef.current,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: quickSkillsRef.current,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
-      // === Quick Tags Pop-In Animation ===
-      const quickTags = quickTagsRef.current?.querySelectorAll(
-        `.${styles.quickTag}`
-      );
-
-      if (quickTags && quickTags.length > 0) {
-        gsap.fromTo(
-          quickTags,
-          {
-            opacity: 0,
-            scale: 0.5,
-            y: 20,
-          },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.4,
-            stagger: 0.06,
-            ease: "back.out(2)",
-            scrollTrigger: {
-              trigger: quickTagsRef.current,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-    },
-    { scope: sectionRef }
-  );
+    );
+  }, []);
 
   return (
     <section
@@ -361,64 +252,66 @@ export function SkillsSection() {
       className={styles.skills}
       aria-label="Skills section"
     >
-      <div className={styles.container}>
-        {/* Section heading */}
-        <div className={styles.headingWrapper}>
-          <span ref={labelRef} className={styles.label}>
-            What I Know
-          </span>
-          <h2 ref={headingRef} className={styles.heading}>
-            My <span className={styles.accent}>Skills</span>
-          </h2>
-          <div ref={headingLineRef} className={styles.headingLine} />
-        </div>
-
-        {/* Skills categories grid */}
-        <div ref={categoriesRef} className={styles.categoriesGrid}>
-          {skillCategories.map((category) => (
-            <div key={category.id} className={styles.categoryCard}>
-              {/* Category header */}
-              <div className={styles.categoryHeader}>
-                <div className={styles.categoryIcon}>
-                  <CategoryIcon category={category.id} />
-                </div>
-                <h3 className={styles.categoryTitle}>{category.title}</h3>
-              </div>
-
-              {/* Skills list */}
-              <ul className={styles.skillsList}>
-                {category.skills.map((skill) => (
-                  <li key={skill.name} className={styles.skillItem}>
-                    <div className={styles.skillInfo}>
-                      <span className={styles.skillName}>{skill.name}</span>
-                      <span className={styles.skillLevel}>{skill.level}%</span>
-                    </div>
-                    <div className={styles.skillBar}>
-                      <div
-                        className={styles.skillProgress}
-                        data-level={skill.level}
-                        style={
-                          {
-                            "--skill-level": `${skill.level}%`,
-                          } as React.CSSProperties
-                        }
-                      />
-                    </div>
-                  </li>
-                ))}
-              </ul>
+      {/* Tape Marquee Area */}
+      <div className={styles.tapeArea}>
+        <div className={styles.tapeWrapper}>
+          <div className={styles.tape}>
+            <div ref={tape1Ref} className={styles.tapeContent}>
+              <TapeItems prefix="t1a" />
+              <TapeItems prefix="t1b" />
+              <TapeItems prefix="t1c" />
+              <TapeItems prefix="t1d" />
+              <TapeItems prefix="t1e" />
+              <TapeItems prefix="t1f" />
+              <TapeItems prefix="t1g" />
+              <TapeItems prefix="t1h" />
             </div>
-          ))}
+          </div>
         </div>
 
-        {/* Quick skills tags */}
-        <div ref={quickSkillsRef} className={styles.quickSkills}>
-          <h4 className={styles.quickSkillsTitle}>Also familiar with</h4>
-          <div ref={quickTagsRef} className={styles.quickSkillsTags}>
-            {quickSkills.map((skill) => (
-              <span key={skill} className={styles.quickTag}>
-                {skill}
-              </span>
+        <div className={`${styles.tapeWrapper} ${styles.tapeWrapperReverse}`}>
+          <div className={styles.tape}>
+            <div ref={tape2Ref} className={styles.tapeContent}>
+              <TapeItems prefix="t2a" />
+              <TapeItems prefix="t2b" />
+              <TapeItems prefix="t2c" />
+              <TapeItems prefix="t2d" />
+              <TapeItems prefix="t2e" />
+              <TapeItems prefix="t2f" />
+              <TapeItems prefix="t2g" />
+              <TapeItems prefix="t2h" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Skills Grid Section */}
+      <div className={styles.skillsContent}>
+        <div className={styles.container}>
+          <div className={styles.headingWrapper}>
+            <span className={styles.label}>What I Know</span>
+            <h2 ref={headingRef} className={styles.heading}>
+              My Skills
+            </h2>
+          </div>
+
+          <div ref={skillsGridRef} className={styles.categoriesGrid}>
+            {skillCategories.map((category) => (
+              <div key={category.id} className={styles.categoryCard}>
+                <div className={styles.cardGlow} />
+                <div className={styles.cardContent}>
+                  <div className={styles.categoryHeader}>
+                    <h3 className={styles.categoryTitle}>{category.title}</h3>
+                  </div>
+                  <div className={styles.skillTags}>
+                    {category.skills.map((skill) => (
+                      <span key={skill} className={styles.skillTag}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
