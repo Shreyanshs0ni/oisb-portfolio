@@ -148,40 +148,6 @@
   font-weight: 600;
 }
 
-/* Wave emoji animation */
-.wave {
-  display: inline-block;
-  font-size: 1.2em;
-  animation: wave 2.5s ease-in-out infinite;
-  transform-origin: 70% 70%;
-}
-
-@keyframes wave {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(14deg);
-  }
-  20% {
-    transform: rotate(-8deg);
-  }
-  30% {
-    transform: rotate(14deg);
-  }
-  40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  60%,
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
 /* === Skills Tags === */
 .tags {
   display: flex;
@@ -344,10 +310,6 @@
 
 /* === Reduced Motion === */
 @media (prefers-reduced-motion: reduce) {
-  .wave {
-    animation: none;
-  }
-
   .tag {
     transition: none;
   }

@@ -17,15 +17,27 @@
 }
 
 .logo {
-  font-size: 1.25rem;
+  font-family: var(--font-bodoni), Georgia, serif;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: var(--foreground);
-  text-decoration: none;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: none;
   letter-spacing: -0.02em;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
 }
 
 .logo:hover {
+  color: var(--accent);
+}
+
+/* Dark mode for logo */
+.navbar.dark .logo {
+  color: #000;
+}
+
+.navbar.dark .logo:hover {
   color: var(--accent);
 }
 
@@ -79,9 +91,19 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1.25rem;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar {
     padding: 1rem 1.25rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
   }
 
   .links {
@@ -90,10 +112,6 @@
 
   .link {
     font-size: 0.85rem;
-  }
-
-  .logo {
-    font-size: 1.1rem;
   }
 }
 

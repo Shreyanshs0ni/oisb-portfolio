@@ -16,7 +16,6 @@ export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const headingLineRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const bioRef = useRef<HTMLDivElement>(null);
   const tagsRef = useRef<HTMLDivElement>(null);
@@ -25,7 +24,7 @@ export function AboutSection() {
   useGSAP(
     () => {
       // Set initial states
-      gsap.set([labelRef.current, headingRef.current, headingLineRef.current], {
+      gsap.set([labelRef.current, headingRef.current], {
         opacity: 0,
       });
       gsap.set(imageRef.current, { opacity: 0 });
@@ -53,18 +52,6 @@ export function AboutSection() {
           { opacity: 0, y: 30 },
           { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" },
           "-=0.2"
-        )
-        // Line draws in from center
-        .fromTo(
-          headingLineRef.current,
-          { opacity: 0, scaleX: 0 },
-          {
-            opacity: 1,
-            scaleX: 1,
-            duration: 0.6,
-            ease: "power2.inOut",
-          },
-          "-=0.3"
         );
 
       // === Image Animation ===

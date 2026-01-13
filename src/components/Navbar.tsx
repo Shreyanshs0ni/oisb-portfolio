@@ -55,7 +55,12 @@ export function Navbar() {
   return (
     <nav ref={navRef} className={`${styles.navbar} ${isOverWhiteSection ? styles.dark : ""}`}>
       <div className={styles.container}>
-        <div></div>
+        <button 
+          onClick={() => scrollToSection("hero")} 
+          className={styles.logo}
+        >
+          Shreyansh S.
+        </button>
         <div className={styles.links}>
           <a
             href="https://drive.google.com/file/d/18gCydAj32rNdYRmljCgtuEbsPsV3hlI0/view?usp=sharing"

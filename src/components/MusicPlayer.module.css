@@ -42,23 +42,6 @@
   transition: all 0.3s ease;
 }
 
-/* Pause icon - two bars */
-.pauseIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  height: 14px;
-}
-
-.pauseBar {
-  width: 3px;
-  height: 12px;
-  background: var(--accent);
-  border-radius: 1px;
-  transition: all 0.3s ease;
-}
-
 /* Animated equalizer when playing */
 .equalizer {
   display: flex;

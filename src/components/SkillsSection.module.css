@@ -208,16 +208,6 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.categoryIcon {
-  font-size: 2rem;
-  filter: grayscale(1) brightness(2);
-  transition: filter 0.3s ease;
-}
-
-.categoryCard:hover .categoryIcon {
-  filter: grayscale(0) brightness(1);
-}
-
 /* === Category Title === */
 .categoryTitle {
   font-size: 1.5rem;
@@ -303,10 +293,6 @@
   .categoryTitle {
     font-size: 1.25rem;
   }
-
-  .categoryIcon {
-    font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -378,10 +364,5 @@
   .skillTag,
   .cardGlow {
     transition: none;
-  }
-
-  .accent::after {
-    animation: none;
-    transform: scaleX(1);
   }
 }

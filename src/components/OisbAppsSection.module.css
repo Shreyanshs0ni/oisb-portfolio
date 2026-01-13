@@ -237,156 +237,7 @@
   font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
-  margin: 0 0 1.25rem;
-}
-
-/* === App Meta === */
-.appMeta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.8125rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.appVersion {
-  display: inline-flex;
-  align-items: center;
-  color: var(--accent);
-  font-weight: 600;
-  font-family: var(--font-mono);
-  background: rgba(255, 95, 31, 0.1);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-}
-
-.appDownloads {
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 500;
-}
-
-/* === App Actions === */
-.appActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: auto;
-  padding-top: 0.5rem;
-}
-
-/* Download APK Button - Primary Orange */
-.downloadBtn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #000;
-  background: var(--accent);
-  border: 2px solid var(--accent);
-  border-radius: 0.75rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-/* Shine effect on button */
-.downloadBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.downloadBtn:hover {
-  background: #fff;
-  border-color: #fff;
-  color: #000;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.downloadBtn:hover::before {
-  left: 100%;
-}
-
-.downloadBtn:active {
-  transform: translateY(-1px);
-}
-
-.downloadBtn svg {
-  transition: transform 0.3s ease;
-}
-
-.downloadBtn:hover svg {
-  transform: translateY(2px);
-}
-
-/* Play Store Button - Secondary Outline */
-.storeBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #fff;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0.75rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.storeBtn:hover {
-  border-color: #fff;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-3px);
-}
-
-.storeBtn:active {
-  transform: translateY(-1px);
-}
-
-/* Notify Me Button (Coming Soon) */
-.notifyBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  border-radius: 0.75rem;
-  cursor: not-allowed;
-  transition: all 0.3s ease;
-}
-
-.appCard.comingSoon:hover .notifyBtn {
-  color: var(--accent);
-  border-color: var(--accent);
-  border-style: solid;
-  background: rgba(255, 95, 31, 0.1);
+  margin: 0;
 }
 
 /* === CTA Section === */
@@ -516,18 +367,6 @@
     font-size: 0.875rem;
   }
 
-  .appActions {
-    flex-direction: column;
-  }
-
-  .downloadBtn,
-  .storeBtn,
-  .notifyBtn {
-    width: 100%;
-    justify-content: center;
-    min-height: 48px;
-  }
-
   .cta {
     padding: 2rem 1.5rem;
     margin-top: 3rem;
@@ -585,13 +424,7 @@
   .appDescription {
     font-size: 0.8125rem;
   }
-  
-  .appMeta {
-    font-size: 0.75rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
+
   .statusBadge {
     font-size: 0.625rem;
     padding: 0.25rem 0.625rem;
@@ -607,8 +440,6 @@
 }
 
 /* === Focus States === */
-.downloadBtn:focus-visible,
-.storeBtn:focus-visible,
 .ctaButton:focus-visible {
   outline: 2px solid #000;
   outline-offset: 3px;
@@ -622,18 +453,13 @@
 @media (prefers-reduced-motion: reduce) {
   .appCard,
   .appIconWrapper,
-  .downloadBtn,
-  .storeBtn,
   .ctaButton,
   .ctaButton::before,
-  .downloadBtn::before,
   .appIconWrapper::before {
     transition: none;
   }
 
   .appCard:hover,
-  .downloadBtn:hover,
-  .storeBtn:hover,
   .ctaButton:hover {
     transform: none;
   }

@@ -6,12 +6,10 @@ import styles from "./CustomCursor.module.css";
 
 export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorDotRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    const dot = cursorDotRef.current;
-    if (!cursor || !dot) return;
+    if (!cursor) return;
 
     // Mouse move handler
     const onMouseMove = (e: MouseEvent) => {
@@ -21,12 +19,6 @@ export function CustomCursor() {
         y: e.clientY,
         duration: 0.15,
         ease: "power2.out",
-      });
-
-      // Dot follows instantly
-      gsap.set(dot, {
-        x: e.clientX,
-        y: e.clientY,
       });
     };
 
@@ -68,15 +60,7 @@ export function CustomCursor() {
     };
   }, []);
 
-  return (
-    <>
-      {/* Main cursor circle with invert effect */}
-      <div ref={cursorRef} className={styles.cursor} />
-
-      {/* Small dot in center */}
-      <div ref={cursorDotRef} className={styles.dot} />
-    </>
-  );
+  return <div ref={cursorRef} className={styles.cursor} />;
 }
 
 export default CustomCursor;
