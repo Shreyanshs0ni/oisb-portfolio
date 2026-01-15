@@ -36,7 +36,7 @@ const projects = [
     id: 3,
     title: "Nike (E-Commerce)",
     description:
-      "A full-stack Nike-inspired e-commerce app with backend, admin portal, and complete shopping workflows.",
+      "A full-stack Nike-inspired e-commerce app with backend, admin portal, and complete shopping workflows.(Contact me for the admin portal)",
     tags: [
       "React",
       "Tailwind CSS",
