@@ -8,6 +8,11 @@ export function Footer() {
 
   return (
     <footer className={styles.footer}>
+      {/* 3D Robot - positioned absolutely */}
+      <div className={styles.robotWrapper}>
+        <CuteRobot />
+      </div>
+
       <div className={styles.container}>
         <div className={styles.footerContent}>
           {/* Left side - Brand and copyright */}
@@ -28,11 +33,6 @@ export function Footer() {
               <span className={styles.accent}>Shreyansh Soni</span>. All rights
               reserved.
             </p>
-          </div>
-
-          {/* Right side - 3D Robot */}
-          <div className={styles.robotWrapper}>
-            <CuteRobot />
           </div>
         </div>
       </div>

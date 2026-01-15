@@ -9,14 +9,16 @@
   position: relative;
   font-size: 0.9em;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
+  overflow: visible;
   max-width: 100vw;
+  z-index: 10;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  z-index: 1;
 }
 
 /* --- Footer Content Layout --- */
@@ -37,9 +39,10 @@
 .robotWrapper {
   width: 280px;
   height: 280px;
-  flex-shrink: 0;
-  margin-top: -140px;
-  margin-bottom: -40px;
+  position: absolute;
+  right: 10%;
+  top: -140px;
+  z-index: 20;
 }
 
 .brand {
