@@ -26,6 +26,7 @@
   cursor: none;
   letter-spacing: -0.02em;
   transition: color 0.3s ease;
+  z-index: 102;
 }
 
 .logo:hover {
@@ -90,8 +91,115 @@
   background: #000;
 }
 
-/* Responsive */
+/* === Hamburger Button === */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: none;
+  z-index: 102;
+  gap: 6px;
+  padding: 8px;
+}
+
+.hamburgerLine {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger active state (X) */
+.hamburger.active .hamburgerLine:first-child {
+  transform: rotate(45deg) translate(3px, 3px);
+}
+
+.hamburger.active .hamburgerLine:last-child {
+  transform: rotate(-45deg) translate(3px, -3px);
+}
+
+/* Dark mode hamburger */
+.navbar.dark .hamburgerLine {
+  background: #000;
+}
+
+/* === Mobile Menu === */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 300px;
+  height: 100vh;
+  height: 100dvh;
+  background: #0a0a0a;
+  z-index: 101;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileMenu.open {
+  transform: translateX(0);
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobileLink {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 1rem 0;
+  text-align: left;
+  cursor: none;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileLink:hover {
+  color: var(--accent);
+}
+
+.mobileLink:last-child {
+  border-bottom: none;
+  margin-top: 1rem;
+  color: var(--accent);
+}
+
+/* === Overlay === */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  backdrop-filter: blur(4px);
+}
+
+/* === Responsive === */
 @media (max-width: 768px) {
+  .links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
   .logo {
     font-size: 1.25rem;
   }
@@ -106,12 +214,13 @@
     font-size: 1.1rem;
   }
 
-  .links {
-    gap: 1.25rem;
+  .mobileMenu {
+    max-width: 100%;
+    padding: 5rem 1.5rem 2rem;
   }
 
-  .link {
-    font-size: 0.85rem;
+  .mobileLink {
+    font-size: 1.1rem;
+    padding: 0.875rem 0;
   }
 }
-

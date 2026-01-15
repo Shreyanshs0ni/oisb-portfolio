@@ -9,6 +9,8 @@
   position: relative;
   font-size: 0.9em;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  max-width: 100vw;
 }
 
 .container {
@@ -86,10 +88,7 @@
   }
 
   .robotWrapper {
-    width: 200px;
-    height: 200px;
-    margin-top: -80px;
-    margin-bottom: -20px;
+    display: none;
   }
 
   .brand {

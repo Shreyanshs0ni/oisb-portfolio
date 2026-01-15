@@ -8,6 +8,7 @@ import styles from "./Navbar.module.css";
 export function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const [isOverWhiteSection, setIsOverWhiteSection] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useGSAP(
     () => {
@@ -45,11 +46,38 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isMenuOpen) setIsMenuOpen(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMenuOpen]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
   const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleLinkClick = (url: string) => {
+    setIsMenuOpen(false);
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -61,6 +89,8 @@ export function Navbar() {
         <button onClick={() => scrollToSection("hero")} className={styles.logo}>
           Shreyansh S.
         </button>
+
+        {/* Desktop Links */}
         <div className={styles.links}>
           <a
             href="https://docs.google.com/document/d/1Vw8o7sdbFUlLboA60-7G1vXnr9KwLxfz/edit?usp=sharing&ouid=108657753575809953552&rtpof=true&sd=true"
@@ -95,7 +125,62 @@ export function Navbar() {
             Contact
           </button>
         </div>
+
+        {/* Hamburger Button */}
+        <button
+          className={`${styles.hamburger} ${isMenuOpen ? styles.active : ""}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={styles.hamburgerLine} />
+          <span className={styles.hamburgerLine} />
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ""}`}>
+        <div className={styles.mobileLinks}>
+          <button
+            onClick={() => scrollToSection("hero")}
+            className={styles.mobileLink}
+          >
+            Home
+          </button>
+          <button
+            onClick={() => scrollToSection("about")}
+            className={styles.mobileLink}
+          >
+            About
+          </button>
+          <button
+            onClick={() => scrollToSection("projects")}
+            className={styles.mobileLink}
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className={styles.mobileLink}
+          >
+            Contact
+          </button>
+          <button
+            onClick={() =>
+              handleLinkClick(
+                "https://docs.google.com/document/d/1Vw8o7sdbFUlLboA60-7G1vXnr9KwLxfz/edit?usp=sharing&ouid=108657753575809953552&rtpof=true&sd=true"
+              )
+            }
+            className={styles.mobileLink}
+          >
+            Resume
+          </button>
+        </div>
+      </div>
+
+      {/* Overlay */}
+      {isMenuOpen && (
+        <div className={styles.overlay} onClick={() => setIsMenuOpen(false)} />
+      )}
     </nav>
   );
 }

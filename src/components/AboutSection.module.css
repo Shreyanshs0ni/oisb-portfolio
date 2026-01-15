@@ -13,9 +13,10 @@
   padding: 5rem 1.5rem 5rem;
   background: #000000;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   border-radius: 0 0 100% 100% / 0 0 120px 120px;
   z-index: 2;
+  max-width: 100vw;
 }
 
 /* Three.js Background Wrapper - positioned right, half visible */
@@ -28,6 +29,12 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .threeWrapper {
+    display: none;
+  }
 }
 
 .container {

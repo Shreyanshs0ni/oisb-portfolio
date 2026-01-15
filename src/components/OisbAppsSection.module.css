@@ -10,6 +10,8 @@
   padding: 6rem 1.5rem;
   background: var(--accent);
   position: relative;
+  overflow: hidden;
+  max-width: 100vw;
 }
 
 /* Top and bottom black lines */

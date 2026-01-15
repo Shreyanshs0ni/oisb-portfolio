@@ -7,6 +7,8 @@
   padding: 4rem 2rem 3rem;
   position: relative;
   background: transparent; /* Transparent to show Three.js */
+  overflow: hidden;
+  max-width: 100vw;
 }
 
 .container {
